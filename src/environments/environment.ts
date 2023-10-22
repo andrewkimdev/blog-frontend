@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  atlas: {
+    publicKey: 'btqicxhz',
+    privateKey: '61688d63-6060-40ae-9af1-056d0e687dbe',
+  }
 };
 
 /*
