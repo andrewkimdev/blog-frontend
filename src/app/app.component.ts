@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import '@cds/core/icon/register.js';
 import { ClarityIcons, cloudIcon, cogIcon } from '@cds/core/icon';
-import { userIcon, boltIcon, sadFaceIcon, bugIcon, shieldIcon, certificateIcon } from '@cds/core/icon';
+import { vmBugIcon, userIcon, boltIcon, sadFaceIcon, bugIcon, shieldIcon, certificateIcon } from '@cds/core/icon';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     ClarityIcons.addIcons(cloudIcon, cogIcon);
-    ClarityIcons.addIcons(userIcon, boltIcon, sadFaceIcon, bugIcon, shieldIcon, certificateIcon)
+    ClarityIcons.addIcons(userIcon, boltIcon, sadFaceIcon, bugIcon, shieldIcon, certificateIcon, vmBugIcon)
   }
 }

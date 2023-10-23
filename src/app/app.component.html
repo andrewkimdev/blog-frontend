@@ -1,49 +1,69 @@
-<header class="header-6">
-  <div class="branding">
-    <a href="..." class="nav-link">
-      <cds-icon shape="cloud" solid="true" badge="success"></cds-icon>
-      <span class="title">Clarity Design</span>
-    </a>
-  </div>
-  <div class="header-nav">
-    <a href="..." class="active nav-link" aria-current="page"><span class="nav-text">Dashboard</span></a>
-    <a href="..." class="nav-link"><span class="nav-text">Interactive Analytics</span></a>
-  </div>
-  <div class="header-actions">
-    <a href="..." class="nav-link nav-icon" aria-label="settings">
-      <cds-icon shape="cog"></cds-icon>
-    </a>
-  </div>
-</header>
-
-<div class="content-container nav-trigger--bottom">
-  <clr-vertical-nav [clrVerticalNavCollapsible]="true" [clrVerticalNavCollapsed]="collapsed" (click)="toggleCollapse()">
-    <a clrVerticalNavLink routerLink="./normal" routerLinkActive="active">
-      <cds-icon clrVerticalNavIcon shape="user"></cds-icon>
-      Normal
-    </a>
-    <a clrVerticalNavLink routerLink="./electric" routerLinkActive="active">
-      <cds-icon clrVerticalNavIcon shape="bolt"></cds-icon>
-      Electric
-    </a>
-    <a clrVerticalNavLink routerLink="./poison" routerLinkActive="active">
-      <cds-icon clrVerticalNavIcon shape="sad-face"></cds-icon>
-      Poison
-    </a>
-    <a clrVerticalNavLink routerLink="./grass" routerLinkActive="active">
-      <cds-icon clrVerticalNavIcon shape="bug"></cds-icon>
-      Grass
-    </a>
-    <a clrVerticalNavLink routerLink="./fighting" routerLinkActive="active">
-      <cds-icon clrVerticalNavIcon shape="shield"></cds-icon>
-      Fighting
-    </a>
-    <a clrVerticalNavLink routerLink="./credit" routerLinkActive="active">
-      <cds-icon clrVerticalNavIcon shape="certificate"></cds-icon>
-      Credit
-    </a>
-  </clr-vertical-nav>
-  <div class="content-area">
-    <router-outlet></router-outlet>
+<div class="main-container">
+  <div class="alert alert-app-level">App Level Alert</div>
+  <header class="header-6">
+    <div class="branding">
+      <a href="..." class="nav-link">
+        <cds-icon shape="vm-bug"></cds-icon>
+        <span class="title">Clarity Design</span>
+      </a>
+    </div>
+    <form class="search">
+      <label for="search_input">
+        <input id="search_input" type="text" placeholder="Search for keywords..." />
+      </label>
+    </form>
+    <div class="header-actions">
+      <a href="..." class="nav-link nav-icon" aria-label="settings">
+        <cds-icon shape="cog"></cds-icon>
+      </a>
+    </div>
+  </header>
+  <nav class="subnav">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="javascript://">Subnav Link 1</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript://">Subnav Link 2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript://">Subnav Link 3</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript://">Subnav Link 4</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript://">Subnav Link 5</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content-container">
+    <div class="content-area">ContentArea</div>
+    <clr-vertical-nav [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed">
+      <a clrVerticalNavLink routerLink="./normal" routerLinkActive="active">
+        <cds-icon clrVerticalNavIcon shape="user"></cds-icon>
+        Normal
+      </a>
+      <a clrVerticalNavLink routerLink="./electric" routerLinkActive="active">
+        <cds-icon clrVerticalNavIcon shape="bolt"></cds-icon>
+        Electric
+      </a>
+      <a clrVerticalNavLink routerLink="./poison" routerLinkActive="active">
+        <cds-icon clrVerticalNavIcon shape="sad-face"></cds-icon>
+        Poison
+      </a>
+      <a clrVerticalNavLink routerLink="./grass" routerLinkActive="active">
+        <cds-icon clrVerticalNavIcon shape="bug"></cds-icon>
+        Grass
+      </a>
+      <a clrVerticalNavLink routerLink="./fighting" routerLinkActive="active">
+        <cds-icon clrVerticalNavIcon shape="shield"></cds-icon>
+        Fighting
+      </a>
+      <a clrVerticalNavLink routerLink="./credit" routerLinkActive="active">
+        <cds-icon clrVerticalNavIcon shape="certificate"></cds-icon>
+        Credit
+      </a>
+    </clr-vertical-nav>
   </div>
 </div>
