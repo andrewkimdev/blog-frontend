@@ -5,10 +5,11 @@ import { ClarityModule } from '@clr/angular';
 import { CoreModule } from 'src/app/core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PostsModule } from './posts/posts.module';
 import { AdminModule } from './admin/admin.module';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PostsModule } from './contents/posts/posts.module';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserAnimationsModule,
     CoreModule,
     ClarityModule,
-    AppRoutingModule,
     PostsModule,
     AdminModule,
+    LayoutModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
