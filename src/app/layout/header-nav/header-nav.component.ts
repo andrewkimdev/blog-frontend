@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderNavComponent {
   links = [
-    { title: 'Posts', path: '/contents/posts' },
-    { title: 'About Me', path: '/contents/about-me' },
+    { title: 'Posts', path: '/posts' },
+    { title: 'About Me', path: '/about-me' },
   ];
 }

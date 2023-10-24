@@ -4,9 +4,10 @@ import { HomeComponent } from 'src/app/home/home.component';
 import { PageNotFoundComponent } from 'src/app/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent },
-  { path: 'contents', loadChildren: () => import('./contents/contents.module').then(m => m.ContentsModule) },
+  { path: 'posts', loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule) },
+  { path: 'about-me', loadComponent: () => import('./about-me/about-me.component').then(c => c.AboutMeComponent)},
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: '**', component: PageNotFoundComponent },
 ];

@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PostsHomeComponent } from './posts-home/posts-home.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: PostsHomeComponent },
+  { path: '', pathMatch: 'full', component: PostsHomeComponent },
 ];
 
 @NgModule({
