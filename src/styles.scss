@@ -13,3 +13,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .flex-spacer {
   flex: 1 1 auto;
 }
+
+// Rotate Infinitely
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-infinite:hover {
+  cursor: pointer;
+  animation: rotate360 2s linear infinite;
+}
