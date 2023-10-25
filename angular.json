@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "personal-blog-kbi:build:production"
+              "browserTarget": "personal-blog-kbi:build:production"
             },
             "development": {
-              "buildTarget": "personal-blog-kbi:build:development"
+              "browserTarget": "personal-blog-kbi:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "personal-blog-kbi:build"
+            "browserTarget": "personal-blog-kbi:build"
           }
         },
         "test": {
