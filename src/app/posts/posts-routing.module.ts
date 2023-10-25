@@ -5,14 +5,14 @@ import { PostComponent } from './widgets/post/post.component';
 
 const postsRoutes: Routes = [
   {
-    path: '',
+    path: 'posts',
     component: PostsHomeComponent,
-    title: 'Posts Home Component',
+    title: 'Posts',
     children: [
       {
-        path: 'posts/:id',
+        path: ':id',
         component: PostComponent,
-        title: 'Post Component',
+        title: 'Post Individual',
       },
     ],
   },
