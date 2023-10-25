@@ -13,13 +13,11 @@ import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
