@@ -1,0 +1,35 @@
+<form clrForm class="post-input-wrapper" [formGroup]="form">
+  <section class="buttons">
+    <div class="input-group">
+      <div class="btn-group">
+        <button class="btn">Save</button>
+        <button class="btn btn-success-outline">Cancel</button>
+      </div>
+      <clr-checkbox-wrapper>
+        <input type="checkbox" clrToggle="null" formControlName="publish" id="publish">
+        <label for="publish">Publish</label>
+      </clr-checkbox-wrapper>
+    </div>
+  </section>
+  <section class="text">
+    <div class="title-wrapper" [ngClass]="{'clr-error': inputControlError('title')}">
+      <cds-icon class="clr-validate-icon" shape="exclamation-circle"></cds-icon>
+      <input id="title" class="clr-input" formControlName="title" placeholder="Title...">
+      <app-error-message [error]="inputControlError('title')"></app-error-message>
+    </div>
+    <div class="markdown-wrapper">
+    <textarea id="markdown-input"
+              class="clr-textarea"
+              required
+              formControlName="markdown"
+              placeholder="Enter blog text here..."
+    ></textarea>
+      <markdown
+        class="markdown-viewer"
+        [data]="(markdownData$ | async)"
+        clipboard
+      ></markdown>
+    </div>
+  </section>
+</form>
+

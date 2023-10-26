@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ClarityModule } from '@clr/angular';
+import { ClipboardButtonComponent, ClipboardOptions, MarkdownModule } from 'ngx-markdown';
 
 import { CoreModule } from 'src/app/core/core.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserAnimationsModule,
     CoreModule,
     ClarityModule,
+    MarkdownModule.forRoot({
+      clipboardOptions: {
+        provide: ClipboardOptions,
+        useValue: {
+          buttonComponent: ClipboardButtonComponent,
+        }
+      }
+    }),
     PostsModule,
     AdminModule,
     LayoutModule,
