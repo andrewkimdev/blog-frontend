@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClarityModule } from '@clr/angular';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 @NgModule({
   imports: [
@@ -9,7 +10,10 @@ import { ClarityModule } from '@clr/angular';
   ],
   exports: [
     ClarityModule,
+    ErrorMessageComponent,
   ],
-  declarations: [],
+  declarations: [
+    ErrorMessageComponent
+  ],
 })
 export class CoreModule { }
