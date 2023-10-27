@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-posts-home',
@@ -7,14 +8,18 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./posts-home.component.scss']
 })
 export class PostsHomeComponent implements OnInit {
-  posts: any[] = [];
+  posts$ = this.postsService.posts$;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private router: Router,
+    private postsService: PostsService,
+  ) { }
 
   ngOnInit(): void {
-    this.http.get<any[]>('api/posts').subscribe(data => {
-      this.posts = data;
-      console.log(data)
-    });
+    this.postsService.refreshList();
+  }
+
+  showPost(p: any) {
+    this.router.navigate(['posts', p.id]);
   }
 }

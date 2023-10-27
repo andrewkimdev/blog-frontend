@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Dev Only
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { PostService } from './posts/services/post.service';
+import { PostMockService } from './posts/services/post-mock.service';
 
 // 3rd Party Vendor Module
 import { CoreModule } from 'src/app/core/core.module';
@@ -33,7 +33,7 @@ import { HomeComponent } from './home/home.component';
     CoreModule,
     ClarityDesignSystemModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(PostService),
+    HttpClientInMemoryWebApiModule.forRoot(PostMockService),
     PostsModule,
     AdminModule,
     LayoutModule,

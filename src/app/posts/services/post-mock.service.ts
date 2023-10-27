@@ -7,7 +7,7 @@ import { POSTS as posts } from 'src/assets/mock-data/mock-posts';
 @Injectable({
   providedIn: 'root'
 })
-export class PostService implements InMemoryDbService {
+export class PostMockService implements InMemoryDbService {
 
   createDb(): {} | Observable<{}> | Promise<{}> {
     return of({ posts });

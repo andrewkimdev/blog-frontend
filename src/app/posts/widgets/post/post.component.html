@@ -1,21 +1,36 @@
-<div class="clr-row">
-    <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-        <div class="card">
-            <div class="card-header">
-                Header
-            </div>
-            <div class="card-block">
-                <div class="card-title">
-                    Block
-                </div>
-                <div class="card-text">
-                    ...
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-sm btn-link">Footer Action 1</button>
-                <button class="btn btn-sm btn-link">Footer Action 2</button>
-            </div>
-        </div>
+<div *ngIf="post$ | async as post; else loading" class="post-container">
+    <h1>{{ post.title }}</h1>
+    <img class="main-image" [src]="post.mainImage" [alt]="'Main image of ' + post.title"/>
+
+    <div
+        *ngIf="post.updatedAt && post.updatedAt !== post.createdAt"
+        class="updated-at"
+    >
+        Updated at: {{ post.updatedAt * 1000 | date:'yyyy/MM/dd' }}
     </div>
+    <div *ngIf="post.author as author">
+        Written by {{ author.name }}
+        <img
+            [src]="author.profileImage"
+            [alt]="'Profile image of ' + author.name"
+            class="user-profile-image"
+        />
+    </div>
+    <div *ngIf="post.createdAt" class="created-at">Created at: {{ post.createdAt * 1000 | date:'yyyy/MM/dd' }}</div>
+    <h6 *ngIf="post.category">Category: {{ post.category }}</h6>
+    <div *ngIf="post.tags.length > 0" class="tag-container">
+        <span *ngFor="let tag of post.tags" class="label label-info">{{ tag }}</span>
+    </div>
+
+    <markdown
+            class="markdown-viewer"
+            [data]="post.body"
+            clipboard
+    ></markdown>
+    <hr/>
+    <pre> {{ post | json }}</pre>
 </div>
+<ng-template #loading>
+    <span class="spinner spinner-inline">Loading...</span>
+    <span>Loading...</span>
+</ng-template>

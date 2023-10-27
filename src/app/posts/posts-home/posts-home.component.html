@@ -1,2 +1,18 @@
-<a routerLink="/posts/1">test 12</a>
-<router-outlet></router-outlet>
+<clr-datagrid *ngIf="posts$ | async as ps">
+    <clr-dg-column>Post ID</clr-dg-column>
+    <clr-dg-column>Title</clr-dg-column>
+    <clr-dg-column>Author</clr-dg-column>
+    <clr-dg-column>Updated At</clr-dg-column>
+    <clr-dg-column>Created At</clr-dg-column>
+
+    <clr-dg-row *ngFor="let p of ps" (click)="showPost(p)">
+        <clr-dg-cell>{{ p.id }}</clr-dg-cell>
+        <clr-dg-cell>{{ p.title }}</clr-dg-cell>
+        <clr-dg-cell>{{ p.author.name }}</clr-dg-cell>
+        <clr-dg-cell>{{ p.updatedAt * 1000 | date }}</clr-dg-cell>
+        <clr-dg-cell>{{ p.createdAt * 1000 | date }}</clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>{{ ps.length }} posts</clr-dg-footer>
+</clr-datagrid>
+<pre *ngIf="posts$ | async as ps">{{ ps | json }}</pre>

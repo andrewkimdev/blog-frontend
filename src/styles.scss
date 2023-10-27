@@ -28,3 +28,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   cursor: pointer;
   animation: rotate360 2s linear infinite;
 }
+
+// Global Markdown Image Styling
+.markdown-viewer {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
