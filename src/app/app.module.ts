@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Dev Only
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { PostService } from './posts/widgets/post/post.service';
+import { PostService } from './posts/services/post.service';
 
 // 3rd Party Vendor Module
 import { CoreModule } from 'src/app/core/core.module';
@@ -15,6 +15,7 @@ import { ClarityDesignSystemModule } from './lib';
 import { AppRoutingModule } from './app-routing.module';
 
 import { PostsModule } from './posts/posts.module';
+
 import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';
 
