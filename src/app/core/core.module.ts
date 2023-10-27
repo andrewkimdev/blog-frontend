@@ -1,39 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import {
-  ClarityModule,
-  ClrCheckboxModule,
-  ClrCommonFormsModule,
-  ClrIconModule,
-  ClrInputModule,
-  ClrTextareaModule
-} from '@clr/angular';
-import { MarkdownModule } from 'ngx-markdown';
 
-import { MarkdownEditorComponent } from '../core/markdown-editor/markdown-editor.component';
+import { ClarityDesignSystemModule, NgxMarkdownModule } from '../lib';
+
+import { MarkdownEditorComponent } from './markdown-editor/markdown-editor.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { TopAlertComponent } from './top-alert/top-alert.component';
 
 @NgModule({
+  declarations: [
+    ErrorMessageComponent,
+    MarkdownEditorComponent,
+    PageNotFoundComponent,
+    TopAlertComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ClarityModule,
-    MarkdownModule,
-    ClrCommonFormsModule,
-    ClrTextareaModule,
-    ClrInputModule,
-    ClrCheckboxModule,
-    ClrIconModule,
+    ClarityDesignSystemModule,
+    NgxMarkdownModule,
   ],
   exports: [
-    ClarityModule,
-    MarkdownEditorComponent,
     ErrorMessageComponent,
-  ],
-  declarations: [
     MarkdownEditorComponent,
-    ErrorMessageComponent
+    PageNotFoundComponent,
+    TopAlertComponent,
   ],
 })
 export class CoreModule { }

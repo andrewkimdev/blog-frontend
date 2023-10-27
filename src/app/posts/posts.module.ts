@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
-import { PostsHomeComponent } from 'src/app/posts/posts-home/posts-home.component';
-import { PostComponent } from 'src/app/posts/widgets/post/post.component';
+import { PostsHomeComponent } from './posts-home/posts-home.component';
+import { PostComponent } from './widgets/post/post.component';
 
 import { PostsRoutingModule } from './posts-routing.module';
-
 
 @NgModule({
   declarations: [
@@ -14,6 +14,7 @@ import { PostsRoutingModule } from './posts-routing.module';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     PostsRoutingModule,
   ],
 })
