@@ -9,10 +9,10 @@ import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 // Dev Only
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { PostMockService } from './posts/services/post-mock.service';
 
 // 3rd Party Vendor Module
 import { CoreModule } from 'src/app/core/core.module';
+import { MockDataService } from 'src/app/mock-services/mock-data.service';
 import { ClarityDesignSystemModule } from './lib';
 
 // Routing Module
@@ -37,7 +37,7 @@ import { HomeComponent } from './home/home.component';
     CoreModule,
     ClarityDesignSystemModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(PostMockService),
+    HttpClientInMemoryWebApiModule.forRoot(MockDataService),
     PostsModule,
     AdminModule,
     LayoutModule,

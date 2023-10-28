@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
 import { AdminPostService } from 'src/app/admin/post-editor/services/admin-post.service';
-import { Author, Post } from 'src/app/shared/types';
+import { User, Post } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-post-editor',
@@ -40,8 +40,8 @@ export class PostEditorComponent implements OnInit {
   }
 
   onSaveClicked(): void {
-    const author: Author =      {
-      "userId": 5,
+    const author: User =      {
+      "id": 5,
         "name": "Eva",
         "email": "eva@example.com",
         "profileImage": "assets/images/user-profile/user_profile_female_2.jpg",

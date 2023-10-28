@@ -3,8 +3,8 @@ export interface SocialMedia {
   url: string;
 }
 
-export interface Author {
-  userId: number;
+export interface User {
+  id: number;
   name: string;
   email: string;
   profileImage: string;

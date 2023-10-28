@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { map, Observable, switchMap, tap } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
+import { Post } from 'src/app/shared/types';
 
 import { PostsService } from '../../services/posts.service';
 
@@ -11,6 +12,10 @@ import { PostsService } from '../../services/posts.service';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent {
+
+  private blankPost: Post = {
+    title: '', body: '', tags: [], isDraft: true,
+  }
 
   constructor(
     private route: ActivatedRoute,

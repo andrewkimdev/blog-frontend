@@ -1,4 +1,4 @@
-import { Author } from 'src/app/shared/types/author.interface';
+import { User } from 'src/app/shared/types/author.interface';
 
 export interface Post {
   id?: number;
@@ -10,5 +10,6 @@ export interface Post {
   updatedAt?: number;
   mainImage?: string;
   category?: string;
-  author?: Author;
+  author?: User;
+  authorId?: number;
 }

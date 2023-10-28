@@ -1,22 +1,11 @@
-export const POSTS = [
+import { Post } from 'src/app/shared/types';
+
+export const MockPosts: Post[] = [
   {
     "id": 1,
     "title": "Understanding the Basics of Machine Learning",
     "isDraft": false,
-    "author": {
-      "userId": 1,
-      "name": "Alice",
-      "email": "alice@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_female_1.jpg",
-      "bio": "Software Engineer passionate about clean code.",
-      "role": "Staff Writer",
-      "socialMedia": [
-        {
-          "platform": "Twitter",
-          "url": "https://twitter.com/alice"
-        }
-      ]
-    },
+    "authorId": 1,
     "createdAt": 1672444800, // 01-Jan-2023
     "updatedAt": 1672444800,
     "mainImage": "assets/images/hero/photo-1.jpg",
@@ -57,20 +46,7 @@ Machine learning is revolutionizing the way we interact with the world. From hea
     "id": 2,
     "title": "How to Stay Healthy",
     "isDraft": false,
-    "author": {
-      "userId": 2,
-      "name": "Bob",
-      "email": "bob@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_male_1.jpg",
-      "bio": "Health and wellness enthusiast.",
-      "role": "Contributor",
-      "socialMedia": [
-        {
-          "platform": "Instagram",
-          "url": "https://instagram.com/bob"
-        }
-      ]
-    },
+    "authorId": 2,
     "createdAt": 1675036800, // 01-Feb-2023
     "updatedAt": 1675036800,
     "mainImage": "assets/images/hero/photo-2.jpg",
@@ -142,20 +118,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "id": 3,
     "title": "Effective Communication",
     "isDraft": false,
-    "author": {
-      "userId": 3,
-      "name": "Charlie",
-      "email": "charlie@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_male_2.jpg",
-      "bio": "Expert in personal development and effective communication.",
-      "role": "Guest Contributor",
-      "socialMedia": [
-        {
-          "platform": "LinkedIn",
-          "url": "https://linkedin.com/in/charlie"
-        }
-      ]
-    },
+    "authorId": 3,
     "createdAt": 1677628800, // 01-Mar-2023
     "updatedAt": 1677628800,
     "mainImage": "assets/images/hero/photo-3.jpg",
@@ -167,20 +130,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "id": 4,
     "title": "Why Open Source Matters",
     "isDraft": false,
-    "author": {
-      "userId": 4,
-      "name": "David",
-      "email": "david@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_male_3.jpg",
-      "bio": "Open source advocate and tech enthusiast.",
-      "role": "Staff Writer",
-      "socialMedia": [
-        {
-          "platform": "GitHub",
-          "url": "https://github.com/david"
-        }
-      ]
-    },
+    "authorId": 4,
     "createdAt": 1680217200, // 31-Mar-2023
     "updatedAt": 1680217200,
     "mainImage": "assets/images/hero/photo-4.jpg",
@@ -192,24 +142,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "id": 5,
     "title": "Tips for Remote Work",
     "isDraft": false,
-    "author": {
-      "userId": 5,
-      "name": "Eva",
-      "email": "eva@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_female_2.jpg",
-      "bio": "Remote work specialist and time management guru.",
-      "role": "Editor",
-      "socialMedia": [
-        {
-          "platform": "Twitter",
-          "url": "https://twitter.com/eva"
-        },
-        {
-          "platform": "LinkedIn",
-          "url": "https://linkedin.com/in/eva"
-        }
-      ]
-    },
+    "authorId": 5,
     "createdAt": 1682809200, // 30-Apr-2023
     "updatedAt": 1682809200,
     "mainImage": "assets/images/hero/photo-1.jpg",
@@ -221,20 +154,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "id": 6,
     "title": "Cooking Healthy Meals",
     "isDraft": false,
-    "author": {
-      "userId": 6,
-      "name": "Frank",
-      "email": "frank@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_male_4.jpg",
-      "bio": "Lifestyle blogger focusing on healthy living.",
-      "role": "Contributor",
-      "socialMedia": [
-        {
-          "platform": "Instagram",
-          "url": "https://instagram.com/frank"
-        }
-      ]
-    },
+    "authorId": 6,
     "createdAt": 1685401200, // 30-May-2023
     "updatedAt": 1685401200,
     "mainImage": "assets/images/hero/photo-2.jpg",
@@ -246,20 +166,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "id": 7,
     "title": "Building Resilience",
     "isDraft": false,
-    "author": {
-      "userId": 7,
-      "name": "Grace",
-      "email": "grace@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_female_3.jpg",
-      "bio": "Mental health advocate and motivational speaker.",
-      "role": "Staff Writer",
-      "socialMedia": [
-        {
-          "platform": "YouTube",
-          "url": "https://youtube.com/user/grace"
-        }
-      ]
-    },
+    "authorId": 7,
     "createdAt": 1687993200, // 29-Jun-2023
     "updatedAt": 1687993200,
     "mainImage": "assets/images/hero/photo-3.jpg",
@@ -271,20 +178,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "id": 8,
     "title": "Learning to Code",
     "isDraft": true,
-    "author": {
-      "userId": 2,
-      "name": "Bob",
-      "email": "bob@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_male_1.jpg",
-      "bio": "Health and wellness enthusiast.",
-      "role": "Contributor",
-      "socialMedia": [
-        {
-          "platform": "Instagram",
-          "url": "https://instagram.com/bob"
-        }
-      ]
-    },
+    "authorId": 2,
     "createdAt": 1690585200, // 29-Jul-2023
     "updatedAt": 1690585200,
     "mainImage": "assets/images/hero/photo-4.jpg",
@@ -296,20 +190,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "id": 9,
     "title": "Investing 101",
     "isDraft": false,
-    "author": {
-      "userId": 1,
-      "name": "Alice",
-      "email": "alice@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_female_1.jpg",
-      "bio": "Software Engineer passionate about clean code.",
-      "role": "Staff Writer",
-      "socialMedia": [
-        {
-          "platform": "Twitter",
-          "url": "https://twitter.com/alice"
-        }
-      ]
-    },
+    "authorId": 1,
     "createdAt": 1693177200, // 28-Aug-2023
     "updatedAt": 1693177200,
     "mainImage": "assets/images/hero/photo-1.jpg",
@@ -321,24 +202,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "id": 10,
     "title": "The Art of Storytelling",
     "isDraft": true,
-    "author": {
-      "userId": 5,
-      "name": "Eva",
-      "email": "eva@example.com",
-      "profileImage": "assets/images/user-profile/user_profile_female_2.jpg",
-      "bio": "Remote work specialist and time management guru.",
-      "role": "Editor",
-      "socialMedia": [
-        {
-          "platform": "Twitter",
-          "url": "https://twitter.com/eva"
-        },
-        {
-          "platform": "LinkedIn",
-          "url": "https://linkedin.com/in/eva"
-        }
-      ]
-    },
+    "authorId": 5,
     "createdAt": 1695769200, // 27-Sep-2023
     "updatedAt": 1695769200,
     "mainImage": "assets/images/hero/photo-2.jpg",

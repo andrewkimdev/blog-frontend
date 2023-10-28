@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { POSTS as posts } from 'src/assets/mock-data/mock-posts';
+import { MockPosts } from 'src/assets/mock-data/mock-posts';
+import { MockUsers } from 'src/assets/mock-data/mock-users';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostMockService implements InMemoryDbService {
+export class MockDataService implements InMemoryDbService {
 
   createDb(): {} | Observable<{}> | Promise<{}> {
-    return of({ posts });
+    return of({ posts: MockPosts, users: MockUsers });
   }
 }
