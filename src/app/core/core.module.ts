@@ -9,6 +9,7 @@ import { MarkdownEditorComponent } from './markdown-editor/markdown-editor.compo
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TopAlertComponent } from './top-alert/top-alert.component';
+import { TagsComponent } from './markdown-editor/tags/tags.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TopAlertComponent } from './top-alert/top-alert.component';
     MarkdownEditorComponent,
     PageNotFoundComponent,
     TopAlertComponent,
+    TagsComponent,
   ],
   imports: [
     CommonModule,

@@ -17,13 +17,14 @@
       <input id="title" class="clr-input" formControlName="title" placeholder="Title...">
       <app-error-message [error]="inputControlError('title')"></app-error-message>
     </div>
+    <app-tags (tags)="getTags($event)" [tagDelimiters]="[',', ';']"></app-tags>
     <div class="markdown-wrapper">
-    <textarea id="markdown-input"
-              class="clr-textarea"
-              required
-              formControlName="markdown"
-              placeholder="Enter blog text here..."
-    ></textarea>
+      <textarea id="markdown-input"
+                class="clr-textarea"
+                required
+                formControlName="markdown"
+                placeholder="Enter blog text here..."
+      ></textarea>
       <markdown
         class="markdown-viewer"
         [data]="(markdownData$ | async)"

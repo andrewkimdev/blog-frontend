@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-markdown-editor',
   templateUrl: './markdown-editor.component.html',
-  styleUrls: ['./markdown-editor.component.scss']
+  styleUrls: ['./markdown-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MarkdownEditorComponent {
-  constructor(private fb: FormBuilder) { }
+export class MarkdownEditorComponent implements OnInit {
+  constructor(private fb: FormBuilder) {
+  }
+
+  getTags(tags: any) {
+    console.log(tags);
+  }
 
   private defaultValidators = [Validators.required, Validators.minLength(6)];
+
   form = this.fb.group({
     publish: [false],
     title: ['', [...this.defaultValidators, Validators.maxLength(50)]],
@@ -31,4 +38,6 @@ export class MarkdownEditorComponent {
     return null;
   }
 
+  ngOnInit(): void {
+  }
 }
