@@ -1,7 +1,7 @@
 // Angular Core Modules
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { BehaviorSubject, debounceTime, filter, map, merge, Subject, takeUntil, tap } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, filter, map, merge, Subject, takeUntil, tap } from 'rxjs';
 
 // 3rd Party Vendor Modules
 import '@cds/core/icon/register.js';
@@ -33,8 +33,10 @@ export class TagsComponent implements OnInit, OnDestroy {
     ClarityIcons.addIcons(timesIcon);
   }
 
-  onEnterKeyPressed(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
+  onSpecialKeyPressed(event: KeyboardEvent): void {
+    if (['Enter', 'Tab'].includes(event.key)) {
+      event.preventDefault();
+      event.stopPropagation();
       this.enterKeyPressed$.next();
     }
   }

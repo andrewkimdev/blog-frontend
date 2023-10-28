@@ -1,0 +1,23 @@
+<div class="post-input-wrapper">
+  <section class="buttons">
+    <app-buttons
+      (isDraft)="setDraft($event)"
+      (save)="onSaveClicked()"
+      (cancel)="onCancelClicked()">
+    </app-buttons>
+  </section>
+
+  <section class="text">
+    <app-title (title)="onTitleUpdated($event)"></app-title>
+    <app-tags (tags)="onTagsUpdated($event)" [tagDelimiters]="[',', ';']"></app-tags>
+    <div class="markdown-wrapper">
+      <app-editor (text)="onBodyUpdated($event)"></app-editor>
+      <markdown
+        class="markdown-viewer"
+        [data]="(markdownData$ | async)"
+        clipboard
+      ></markdown>
+    </div>
+  </section>
+<!--  <pre>{{ post$ | async | json}}</pre>-->
+</div>

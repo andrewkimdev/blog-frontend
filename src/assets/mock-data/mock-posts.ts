@@ -2,6 +2,7 @@ export const POSTS = [
   {
     "id": 1,
     "title": "Understanding the Basics of Machine Learning",
+    "isDraft": false,
     "author": {
       "userId": 1,
       "name": "Alice",
@@ -46,7 +47,7 @@ Machine learning is revolutionizing the way we interact with the world. From hea
 
 ---
 
-**Author**: John Doe  
+**Author**: John Doe
 **Date**: October 27, 2023
 `,
     "category": "Programming",
@@ -55,6 +56,7 @@ Machine learning is revolutionizing the way we interact with the world. From hea
   {
     "id": 2,
     "title": "How to Stay Healthy",
+    "isDraft": false,
     "author": {
       "userId": 2,
       "name": "Bob",
@@ -129,7 +131,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
 
 ---
 
-**Author**: Jane Smith  
+**Author**: Jane Smith
 **Date**: October 27, 2023
 
     `,
@@ -139,6 +141,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
   {
     "id": 3,
     "title": "Effective Communication",
+    "isDraft": false,
     "author": {
       "userId": 3,
       "name": "Charlie",
@@ -163,6 +166,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
   {
     "id": 4,
     "title": "Why Open Source Matters",
+    "isDraft": false,
     "author": {
       "userId": 4,
       "name": "David",
@@ -187,6 +191,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
   {
     "id": 5,
     "title": "Tips for Remote Work",
+    "isDraft": false,
     "author": {
       "userId": 5,
       "name": "Eva",
@@ -215,6 +220,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
   {
     "id": 6,
     "title": "Cooking Healthy Meals",
+    "isDraft": false,
     "author": {
       "userId": 6,
       "name": "Frank",
@@ -239,6 +245,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
   {
     "id": 7,
     "title": "Building Resilience",
+    "isDraft": false,
     "author": {
       "userId": 7,
       "name": "Grace",
@@ -263,6 +270,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
   {
     "id": 8,
     "title": "Learning to Code",
+    "isDraft": true,
     "author": {
       "userId": 2,
       "name": "Bob",
@@ -287,6 +295,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
   {
     "id": 9,
     "title": "Investing 101",
+    "isDraft": false,
     "author": {
       "userId": 1,
       "name": "Alice",
@@ -311,6 +320,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
   {
     "id": 10,
     "title": "The Art of Storytelling",
+    "isDraft": true,
     "author": {
       "userId": 5,
       "name": "Eva",

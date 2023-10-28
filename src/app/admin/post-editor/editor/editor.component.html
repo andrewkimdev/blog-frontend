@@ -1,0 +1,15 @@
+<div class="hint-container">
+        <textarea id="markdown-input"
+                  class="clr-textarea"
+                  required
+                  [formControl]="textInputFormControl"
+                  placeholder="Enter blog text here... (markdown)"
+        ></textarea>
+  <app-error-message [error]="inputControlError()"></app-error-message>
+  <div class="hint-button-right">
+    <span>
+      <a class="hint label clickable label-orange" href="https://www.markdownguide.org/cheat-sheet/"
+         target="_blank">Markdown Cheatsheet</a>
+    </span>
+  </div>
+</div>
