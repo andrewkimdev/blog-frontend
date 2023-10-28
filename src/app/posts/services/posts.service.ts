@@ -51,7 +51,7 @@ export class PostsService implements OnInit {
 
   getById(id: number): Observable<Post> {
     const p = this.postsSubject.value.find((post) => post.id === id);
-    return p ? of(p) : of(this.createBlankPost());
+    return p ? of(p) : of({ ...this.createBlankPost() });
   }
 
   getNextId(): Observable<number> {

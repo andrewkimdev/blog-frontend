@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { take, tap } from 'rxjs';
 import { PostsService } from 'src/app/posts/services/posts.service';
 
 @Component({
@@ -18,7 +19,10 @@ export class DashboardComponent implements OnInit {
   }
 
   createPost() {
-
+    this.postService.getNextId().pipe(
+      take(1),
+      tap((id) => this.router.navigate(['admin', 'posts', id, 'edit'])),
+    ).subscribe();
   }
 }
 
