@@ -19,12 +19,17 @@
     </div>
     <app-tags (tags)="getTags($event)" [tagDelimiters]="[',', ';']"></app-tags>
     <div class="markdown-wrapper">
-      <textarea id="markdown-input"
-                class="clr-textarea"
-                required
-                formControlName="markdown"
-                placeholder="Enter blog text here..."
-      ></textarea>
+      <div class="hint-container">
+        <textarea id="markdown-input"
+                  class="clr-textarea"
+                  required
+                  formControlName="markdown"
+                  placeholder="Enter blog text here... (markdown)"
+        ></textarea>
+        <div class="hint-button-right">
+          <span><a class="hint label clickable label-orange" href="https://www.markdownguide.org/cheat-sheet/" target="_blank">Markdown Cheatsheet</a></span>
+        </div>
+      </div>
       <markdown
         class="markdown-viewer"
         [data]="(markdownData$ | async)"
