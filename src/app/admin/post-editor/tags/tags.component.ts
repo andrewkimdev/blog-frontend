@@ -80,6 +80,7 @@ export class TagsComponent implements OnInit, OnDestroy {
 
     merge(commaSeparated$, enterKeyPressed$).pipe(
       takeUntil(this.destroy$),
+      debounceTime(0), // Needed to fix Hangul input error - last character is appended without this hack.
       tap(() => this.addTag()),
       tap(() => this.tagsInputControl.setValue('')),
     ).subscribe();

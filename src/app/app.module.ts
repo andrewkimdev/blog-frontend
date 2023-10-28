@@ -1,7 +1,11 @@
+// Angular Core Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+
+// 한글 입력 마지막 획 잘리는 이슈 대응
+import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 // Dev Only
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -39,7 +43,12 @@ import { HomeComponent } from './home/home.component';
     LayoutModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: COMPOSITION_BUFFER_MODE,
+      useValue: false,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
