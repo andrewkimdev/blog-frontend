@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { map, Subject, takeUntil, tap } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './buttons.component.html',
   styleUrls: ['./buttons.component.scss']
 })
-export class ButtonsComponent implements OnInit, OnDestroy {
+export class ButtonsComponent implements OnInit, OnChanges, OnDestroy {
   @Output('isDraft')
   isDraftEventEmitter = new EventEmitter<boolean>();
 
@@ -44,5 +44,12 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const isSaveEnabled = changes['isSaveEnabled'].currentValue;
+    if (changes['isSaveEnabled']) {
+      console.log('isSaveEnabled: ' + isSaveEnabled);
+    }
   }
 }

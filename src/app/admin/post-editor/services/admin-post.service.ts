@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, switchMap, take, tap } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -17,18 +17,25 @@ export class AdminPostService {
     private postsService: PostsService
   ){}
 
-  createOne(post: Post) {
-    this.postsService.getNextId().pipe(
-      map((id: number): Post => {
-        return {
-          title: '', body: '', tags: [], isDraft: true, id,
-        }
-      }),
+  createNewPost(post: Post) {
+    return this.postsService.getNextId().pipe(
+      map((id: number): Post => this.createBlankPost(id)),
+      map((p) => ({...p, ...post}) as Post),
+      switchMap((post) => this.http.post<any>(`${environment.baseUrl}/posts`, post))
     );
-    return this.http.post<any>(`${environment.baseUrl}/posts`, post);
   }
 
-  createBlankPost() {
+  updatePost(post: Post) {
+    return this.http.put<any>(`${environment.baseUrl}/posts/${post.id}`, post).pipe(
+      take(1),
+      tap((res) => console.log(res)),
+    ).subscribe();
+  }
 
+  createBlankPost(id: number) {
+    const createdAt = Math.floor(Date.now() / 1000);
+    return {
+      title: '', body: '', tags: [], isDraft: true, id, category: '', createdAt
+    }
   }
 }
