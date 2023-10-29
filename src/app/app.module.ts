@@ -7,12 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 // 한글 입력 마지막 획 잘리는 이슈 대응
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
-// Dev Only
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-
 // 3rd Party Vendor Module
 import { CoreModule } from 'src/app/core/core.module';
-import { MockDataService } from 'src/app/mock-services/mock-data.service';
 import { ClarityDesignSystemModule } from './lib';
 
 // Routing Module
@@ -37,7 +33,6 @@ import { HomeComponent } from './home/home.component';
     CoreModule,
     ClarityDesignSystemModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(MockDataService),
     PostsModule,
     AdminModule,
     LayoutModule,

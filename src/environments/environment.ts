@@ -8,7 +8,7 @@ export const environment = {
     publicKey: 'btqicxhz',
     privateKey: '61688d63-6060-40ae-9af1-056d0e687dbe',
   },
-  baseUrl:'api',
+  baseUrl:'http://localhost:3000/api/v1',
 };
 
 /*

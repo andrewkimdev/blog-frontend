@@ -1,6 +1,4 @@
-import { Post } from 'src/app/shared/types';
-
-export const MockPosts: Post[] = [
+const MockPosts = [
   {
     "id": 1,
     "title": "Understanding the Basics of Machine Learning",
@@ -211,3 +209,5 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "tags": ["storytelling", "art"]
   }
 ];
+
+module.exports = MockPosts;

@@ -1,4 +1,4 @@
-export const MockUsers = [
+const MockUsers = [
   {
     'author': {
       'id': 1,
@@ -103,4 +103,6 @@ export const MockUsers = [
       }
     ]
   },
-]
+];
+
+module.exports = MockUsers;
