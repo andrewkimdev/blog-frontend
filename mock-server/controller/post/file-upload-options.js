@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
-const uploadDirectory = './uploads';
+const uploadDirectory = __dirname + '/../../uploads';
 
 if (!fs.existsSync(uploadDirectory)) {
     fs.mkdirSync(uploadDirectory);
