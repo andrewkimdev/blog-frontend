@@ -12,8 +12,6 @@ export class UploadService {
     const fd = new FormData();
     fd.append('image', selectedFile, selectedFile.name);
 
-    this.http.post(`${environment.baseUrl}/posts/${postId}/image`, fd).subscribe((res) => {
-      console.log(res);
-    });
+    return this.http.post(`${environment.baseUrl}/posts/${postId}/image`, fd);
   }
 }

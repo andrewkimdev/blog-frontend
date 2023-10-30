@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
+
 import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
 import { UploadService } from '../services/upload.service';
 
@@ -14,7 +16,16 @@ export class UploadComponent implements OnInit {
   selectedFile!: File;
   isDragOver: boolean = false;
 
-  constructor(private uploadService: UploadService) {}
+  thumbnailUrl: string | ArrayBuffer | null = null;
+
+  showEnlarged: boolean = false;
+  cursorX: number = 0;
+  cursorY: number = 0;
+
+  constructor(
+    private uploadService: UploadService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     ClarityIcons.addIcons(uploadCloudIcon);
@@ -59,6 +70,35 @@ export class UploadComponent implements OnInit {
     if (!postId || !selectedFile) {
       return;
     }
-    this.uploadService.uploadImage(postId, selectedFile);
+    this.uploadService.uploadImage(postId, selectedFile).pipe(
+      tap((res) => console.log(res)),
+    ).subscribe((res) => {
+      console.log(res);
+
+      // Create thumbnail after successful upload.
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        // @ts-ignore
+        this.thumbnailUrl = event.target?.result;
+        this.cdr.detectChanges();
+      }
+      reader.readAsDataURL(this.selectedFile);
+    });
+  }
+
+  // Enlarged Thumbnail-related
+  // Function to track cursor position
+  trackCursor(event: MouseEvent) {
+    const offsetWidth = 150;
+    const offsetHeight = 150;
+
+    this.cursorX = event.clientX - offsetWidth;
+    this.cursorY = event.clientY - offsetHeight;
+    this.showEnlarged = true;
+  }
+
+  // Function to hide the enlarged thumbnail
+  hideEnlargedThumbnail() {
+    this.showEnlarged = false;
   }
 }

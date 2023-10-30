@@ -9,3 +9,19 @@
     <span>Drag and drop an image.</span>
     <button class="btn btn-outline" (click)="triggerFileInput()">Browse File</button>
 </div>
+
+<img *ngIf="thumbnailUrl"
+     [src]="thumbnailUrl"
+     alt="Uploaded thumbnail"
+     class="thumbnail"
+     (mousemove)="trackCursor($event)"
+     (mouseleave)="hideEnlargedThumbnail()"
+>
+
+<!--Enlarged thumbnail-->
+<div *ngIf="showEnlarged"
+     [ngStyle]="{'left.px': cursorX, 'top.px': cursorY }"
+     class="enlarged-thumbnail"
+>
+    <img [src]="thumbnailUrl" alt="Enlarged Thumbnail">
+</div>

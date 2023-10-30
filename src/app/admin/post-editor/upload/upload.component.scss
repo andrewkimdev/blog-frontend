@@ -23,3 +23,25 @@ cds-icon[shape="upload-cloud"] {
   height: 32px;
   width: 32px;
 }
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-top: 10px;
+  cursor: none;
+}
+
+.enlarged-thumbnail {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  z-index: 1000;
+  pointer-events: none;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
