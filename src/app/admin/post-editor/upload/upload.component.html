@@ -1,0 +1,10 @@
+<input type="file" id="fileInput" style="display:none;" (change)="handleFileInput($event)">
+<div class="dropzone text-no-select"
+     [ngClass]="{'dragover': isDragOver }"
+     (dragover)="onDragOver($event)"
+     (dragleave)="onDragLeave($event)"
+     (drop)="onDrop($event)"
+     (click)="triggerFileInput()"
+>
+    Drag and drop an image here.
+</div>

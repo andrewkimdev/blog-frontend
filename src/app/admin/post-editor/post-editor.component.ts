@@ -8,8 +8,6 @@ import { CategoryService } from 'src/app/admin/post-editor/services/category.ser
 
 import { getCurrentUnixTimeInSeconds, getRandomNumberBetween } from 'src/app/shared/functions';
 import { Post, Category } from 'src/app/shared/types';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-post-editor',
@@ -39,7 +37,6 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     tap((res) => console.log('error: ' + res))
   );
 
-  selectedFile!: File;
 
   private destroy$ = new Subject<void>();
 
@@ -47,27 +44,12 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     private adminPostService: AdminPostService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-    private http: HttpClient, // For File Upload Testing Only... Delegate to Service after testing.
   ) {
   }
 
   ngOnInit(): void {
     this.refreshCategories();
     this.initNewPost();
-  }
-
-  onFileSelected(event: any) {
-    this.selectedFile = <File>event.target.files[0];
-  }
-
-  upUploadButtonClicked() {
-    const fd = new FormData();
-    fd.append('image', this.selectedFile, this.selectedFile.name);
-    const postId = this.getCurrentPostId();
-    this.http.post(environment.baseUrl + '/posts/' + postId + '/image', fd)
-      .subscribe((res) => {
-        console.log(res);
-      });
   }
 
   setDraft(isDraft: boolean) {
@@ -158,7 +140,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     return getRandomNumberBetween(1, 8)
   }
 
-  private getCurrentPostId(): number {
+  getCurrentPostId(): number {
     return this.route.snapshot.params['id'];
   }
 }

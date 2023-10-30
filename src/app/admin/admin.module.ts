@@ -18,6 +18,7 @@ import { TitleComponent } from './post-editor/title/title.component';
 import { EditorComponent } from './post-editor/editor/editor.component';
 import { ButtonsComponent } from 'src/app/admin/post-editor/buttons/buttons.component';
 import { CategoriesComponent } from './post-editor/categories/categories.component';
+import { UploadComponent } from './post-editor/upload/upload.component';
 
 // Routing Module
 import { AdminRoutingModule } from './admin-routing.module';
@@ -31,6 +32,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     EditorComponent,
     ButtonsComponent,
     CategoriesComponent,
+    UploadComponent,
   ],
   imports: [
     CommonModule,
