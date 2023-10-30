@@ -1,6 +1,25 @@
 const express = require('express');
+const multer = require('multer');
+const fs = require('fs');
+
 const router = express.Router();
 let posts = require('../mock-data/posts');
+
+const uploadDirectory = './uploads';
+if (!fs.existsSync(uploadDirectory)) {
+  fs.mkdirSync(uploadDirectory);
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+
+const upload = multer({ storage });
 
 const getTimeStamp = () => Math.floor(Date.now() / 1000);
 
@@ -23,6 +42,10 @@ router.post('/posts', (req, res) => {
   posts.push(req.body);
   res.status(201).json(posts);
 });
+
+router.post('/posts/:id/image', upload.single('image'), (req, res) => {
+  res.json({ message: 'File uploaded successfully', file: req.file })
+})
 
 router.put('/posts/:id', (req, res) => {
   const targetIndex = posts.findIndex((p) => +p.id === +req.params.id)

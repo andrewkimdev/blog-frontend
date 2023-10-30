@@ -1,6 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 /mock-server/node_modules
+/mock-server/uploads
 
 # Compiled output
 /dist
