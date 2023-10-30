@@ -5,6 +5,7 @@ const multer = require('multer');
 const fileUploadOptions = require('./file-upload-options');
 const storage = multer.diskStorage(fileUploadOptions);
 const upload = multer({ storage });
+const updateFileDatabase = require('./fileinfo-db');
 
 let posts = require('../../mock-data/posts');
 
@@ -32,6 +33,22 @@ router.post('/posts', (req, res) => {
 });
 
 router.post('/posts/:id/image', upload.single('image'), (req, res) => {
+  const file = req.file;
+  const uploaderUserId = req.body.userId || null;
+
+  console.log("Received filename: ", req.file.originalname);
+  console.log(req.file.name);
+
+  const record = {
+    originalFileName: file.originalname,
+    savedFileName: file.filename,
+    size: file.size,
+    uploadedTime: new Date(),
+    uploaderUserId,
+  };
+
+  updateFileDatabase(record);
+
   res.json({ message: 'File uploaded successfully', file: req.file })
 })
 

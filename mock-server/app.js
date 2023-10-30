@@ -17,6 +17,10 @@ const port = 3000;
 
 const router = express.Router();
 app.use('/api/v1', router);
+app.use((req, res, next) => {
+  req.setEncoding('utf-8');
+  next();
+})
 
 router.use(postRouter);
 router.use(userRouter);

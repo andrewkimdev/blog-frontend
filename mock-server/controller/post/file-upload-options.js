@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
 const uploadDirectory = './uploads';
 
@@ -11,7 +12,8 @@ const fileUploadOptions = {
         cb(null, uploadDirectory);
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
+        const uniqueName = uuidv4();
+        cb(null, `${uniqueName}-${Date.now()}`);
     },
 };
 
