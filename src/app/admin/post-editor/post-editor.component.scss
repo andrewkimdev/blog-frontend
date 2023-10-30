@@ -29,11 +29,11 @@
   & > * {
     width: 100%;
   }
+  margin-top: 10px;
+
   :not(:last-child) {
     margin-right: 10px;
   }
-
-
 }
 .markdown-viewer {
   //background-color: #ffffff10;

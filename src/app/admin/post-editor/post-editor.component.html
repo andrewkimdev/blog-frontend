@@ -10,8 +10,8 @@
   <section class="text">
     <app-title (title)="onTitleUpdated($event)"></app-title>
     <app-categories (category)="onCategorySelected($event)" [categories]="categories$ | async"></app-categories>
-    <app-upload [postId]="getCurrentPostId()"></app-upload>
     <app-tags (tags)="onTagsUpdated($event)" [tagDelimiters]="[',', ';']"></app-tags>
+    <app-upload [postId]="getCurrentPostId()"></app-upload>
     <div class="markdown-wrapper">
       <app-editor (text)="onBodyUpdated($event)"></app-editor>
       <markdown

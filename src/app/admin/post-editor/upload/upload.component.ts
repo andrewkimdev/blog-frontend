@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
 import { UploadService } from '../services/upload.service';
 
 @Component({
@@ -6,7 +7,7 @@ import { UploadService } from '../services/upload.service';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
-export class UploadComponent {
+export class UploadComponent implements OnInit {
   @Input('postId')
   postId: number | null = null;
 
@@ -14,6 +15,10 @@ export class UploadComponent {
   isDragOver: boolean = false;
 
   constructor(private uploadService: UploadService) {}
+
+  ngOnInit(): void {
+    ClarityIcons.addIcons(uploadCloudIcon);
+  }
 
   // File Upload - Drag-and-Drop
   onDragOver(event: Event) {
