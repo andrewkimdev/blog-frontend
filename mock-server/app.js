@@ -9,9 +9,9 @@ const cors = require('cors');
 app.use(cors(corsOptions));
 app.use(express.json());
 
-const postRouter = require('./controller/post.controller');
-const userRouter = require('./controller/user.controller');
-const categoryRouter = require('./controller/category.controller');
+const postRouter = require('./controller/post/post.controller');
+const userRouter = require('./controller/user/user.controller');
+const categoryRouter = require('./controller/category/category.controller');
 
 const port = 3000;
 

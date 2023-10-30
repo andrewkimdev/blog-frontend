@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-let data = require('../mock-data/categories');
+let data = require('../../mock-data/categories');
 
 router.get('/categories', (req, res) => {
   res.json(data);

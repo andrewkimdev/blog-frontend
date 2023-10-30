@@ -1,26 +1,12 @@
 const express = require('express');
-const multer = require('multer');
-const fs = require('fs');
-
 const router = express.Router();
-let posts = require('../mock-data/posts');
 
-const uploadDirectory = './uploads';
-
-if (!fs.existsSync(uploadDirectory)) {
-  fs.mkdirSync(uploadDirectory);
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDirectory);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
-  },
-});
-
+const multer = require('multer');
+const fileUploadOptions = require('./file-upload-options');
+const storage = multer.diskStorage(fileUploadOptions);
 const upload = multer({ storage });
+
+let posts = require('../../mock-data/posts');
 
 const getTimeStamp = () => Math.floor(Date.now() / 1000);
 
@@ -34,6 +20,7 @@ router.get('/posts/:id', (req, res) => {
   if (!post) {
     res.status(404).json({ message: "Post not found with id: " + req.params.id});
   } else {
+
     res.json(post);
   }
 });
