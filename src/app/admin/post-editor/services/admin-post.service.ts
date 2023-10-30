@@ -1,11 +1,15 @@
+// Angular Core Modules
 import { Injectable } from '@angular/core';
-import { map, switchMap, take, tap } from 'rxjs';
-
+import { take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { PostsService } from 'src/app/posts/services/posts.service';
+// Helper Functions
+import { getCurrentUnixTimeInSeconds } from 'src/app/shared/functions';
+
+// Custom Data Types
 import { Post } from 'src/app/shared/types';
 
+// Environment Variables
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,15 +18,10 @@ import { environment } from 'src/environments/environment';
 export class AdminPostService {
   constructor(
     private http: HttpClient,
-    private postsService: PostsService
   ){}
 
   createNewPost(post: Post) {
-    return this.postsService.getNextId().pipe(
-      map((id: number): Post => this.createBlankPost(id)),
-      map((p) => ({...p, ...post}) as Post),
-      switchMap((post) => this.http.post<any>(`${environment.baseUrl}/posts`, post))
-    );
+    return this.http.post<any>(`${environment.baseUrl}/posts`, post);
   }
 
   updatePost(post: Post) {
@@ -32,10 +31,18 @@ export class AdminPostService {
     ).subscribe();
   }
 
-  createBlankPost(id: number) {
-    const createdAt = Math.floor(Date.now() / 1000);
+  createBlankPost(postId: number, authorId: number) {
     return {
-      title: '', body: '', tags: [], isDraft: true, id, category: '', createdAt
-    }
+      id: postId,
+      authorId,
+      title: '',
+      body: '',
+      category: '',
+      tags: [],
+      isDraft: true,
+      createdAt: getCurrentUnixTimeInSeconds(),
+      updatedAt: undefined,
+      mainImage: undefined,
+    };
   }
 }

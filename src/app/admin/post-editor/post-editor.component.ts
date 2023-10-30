@@ -6,6 +6,7 @@ import { BehaviorSubject, distinctUntilChanged, map, Observable, Subject, take, 
 import { AdminPostService } from 'src/app/admin/post-editor/services/admin-post.service';
 import { CategoryService } from 'src/app/admin/post-editor/services/category.service';
 
+import { getCurrentUnixTimeInSeconds, getRandomNumberBetween } from 'src/app/shared/functions';
 import { Post, Category } from 'src/app/shared/types';
 
 @Component({
@@ -15,10 +16,10 @@ import { Post, Category } from 'src/app/shared/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostEditorComponent implements OnInit, OnDestroy {
-  private postSubject: BehaviorSubject<Post> = new BehaviorSubject<Post>({ title: '', body: '', tags: [], isDraft: false, category: '' });
+  private postSubject: BehaviorSubject<Post> = new BehaviorSubject<Post>(this.getBlankPost());
   post$: Observable<Post> = this.postSubject.asObservable();
 
-  categories$ : Observable<Category[]> = this.categoryService.categories$;
+  categories$: Observable<Category[]> = this.categoryService.categories$;
 
   markdownData$: Observable<string | null> = this.post$.pipe(
     map((p) => p.body),
@@ -29,7 +30,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     map((value) => !value),
   );
 
-  private controlValidationErrorsSubject = new BehaviorSubject<ValidationErrors|null>(null);
+  private controlValidationErrorsSubject = new BehaviorSubject<ValidationErrors | null>(null);
   controlHasErrors$ = this.controlValidationErrorsSubject.asObservable().pipe(
     map((error) => !!error),
     distinctUntilChanged(),
@@ -42,14 +43,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     private adminPostService: AdminPostService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-  ) {}
-
-  private setPostPristine(): void {
-    this.isPostPristineSubject.next(true);
-  }
-
-  private setPostDirty(): void {
-    this.isPostPristineSubject.next(false);
+  ) {
   }
 
   ngOnInit(): void {
@@ -57,81 +51,95 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     this.initNewPost();
   }
 
-  private refreshCategories(): void {
-    this.categoryService.refreshList();
-  }
-
   setDraft(isDraft: boolean) {
-    const post: Post = { ...this.postSubject.value, tags: [...this.postSubject.value.tags], isDraft };
+    const post: Post = { ...this.duplicatePost(), isDraft };
     this.postSubject.next(post);
-    this.setPostDirty();
+    this.markPostAsDirty();
   }
 
   onBodyUpdated(body: string) {
-    const post: Post = { ...this.postSubject.value, tags: [...this.postSubject.value.tags], body };
+    const post: Post = { ...this.duplicatePost(), body };
     this.postSubject.next(post);
-    this.setPostDirty();
+    this.markPostAsDirty();
   }
 
   onCategorySelected(category: Category) {
-    const post: Post = { ...this.postSubject.value, tags: [...this.postSubject.value.tags], category: category.name };
+    const post: Post = { ...this.duplicatePost(), category: category.name };
     this.postSubject.next(post);
-    this.setPostDirty();
+    this.markPostAsDirty();
   }
 
   onTitleUpdated(title: string): void {
-    const post: Post = { ...this.postSubject.value, tags: [...this.postSubject.value.tags], title };
+    const post: Post = { ...this.duplicatePost(), title };
     this.postSubject.next(post);
-    this.setPostDirty();
+    this.markPostAsDirty();
   }
 
   onTagsUpdated(tags: string[]): void {
-    const post: Post = { ...this.postSubject.value, tags: [...tags] };
+    const post: Post = { ...this.duplicatePost(), tags: [...tags] };
     this.postSubject.next(post);
-    this.setPostDirty();
+    this.markPostAsDirty();
   }
 
   onSaveClicked() {
-    this.setPostPristine();
-    const updatedAt = Math.floor(Date.now() / 1000);
-    const post = { ...this.postSubject.value, tags: [...this.postSubject.value.tags], updatedAt };
+    this.markPostAsPristine();
+    const updatedAt = getCurrentUnixTimeInSeconds();
+    const post = { ...this.duplicatePost(), updatedAt };
     console.log('Saving post... ');
     console.dir(post);
     this.adminPostService.updatePost(this.postSubject.value);
   }
 
+  private duplicatePost(): Post {
+    return { ...this.postSubject.value, tags: [...this.postSubject.value.tags]};
+  }
 
   onCancelClicked(): void {
     console.log('cancel clicked');
   }
 
-  private setId(): void {
-    const id = this.getCurrentPostId();
-    const post: Post = { ...this.postSubject.value, tags: [...this.postSubject.value.tags], id };
-    this.postSubject.next(post);
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private getBlankPost(): Post {
+    const postId = this.getCurrentPostId();
+    const authorId = this.getCurrentAuthorId();
+    return this.adminPostService.createBlankPost(postId, authorId);
+  }
+
+  private markPostAsPristine(): void {
+    this.isPostPristineSubject.next(true);
+  }
+
+  private markPostAsDirty(): void {
+    this.isPostPristineSubject.next(false);
+  }
+
+  private refreshCategories(): void {
+    this.categoryService.refreshList();
   }
 
   private initNewPost(): void {
-    const authorId: number = this.getCurrentAuthorId();
-    this.setId();
+    // 1. Create a sensible blank post with post id and author id
+    const post = this.getBlankPost();
+    // 2. Update post state
+    this.postSubject.next(post);
+    // 3. Mark the post as pristine
+    this.markPostAsPristine();
 
-    this.adminPostService.createNewPost({...this.postSubject.value, authorId }).pipe(
+    // 4. Let the server know a post has been created.
+    this.adminPostService.createNewPost(post).pipe(
       take(1),
-      tap(() => this.setPostPristine()),
     ).subscribe();
   }
 
   private getCurrentAuthorId(): number {
-    const getRandomNumber = (upperBound: number) => Math.floor(Math.random() * upperBound) + 1;
-    return getRandomNumber(7);
+    return getRandomNumberBetween(1, 8)
   }
 
   private getCurrentPostId(): number {
     return this.route.snapshot.params['id'];
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
