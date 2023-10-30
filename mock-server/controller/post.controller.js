@@ -10,13 +10,18 @@ router.get('/posts', (req, res) => {
 
 router.get('/posts/:id', (req, res) => {
   const post = posts.find((p) => +p.id === +req.params.id);
-  res.json(post);
+
+  if (!post) {
+    res.status(404).json({ message: "Post not found with id: " + req.params.id});
+  } else {
+    res.json(post);
+  }
 });
 
 router.post('/posts', (req, res) => {
   req.body.createdAt = getTimeStamp();
   posts.push(req.body);
-  res.json(posts);
+  res.status(201).json(posts);
 });
 
 router.put('/posts/:id', (req, res) => {
@@ -24,13 +29,13 @@ router.put('/posts/:id', (req, res) => {
   req.body.id = +req.params.id;
   req.body.updatedAt = getTimeStamp();
   posts[targetIndex] = req.body;
-  res.json(posts);
+  res.status(200).json(posts);
 });
 
 router.delete('/posts/:id', (req, res) => {
   const id = req.params.id;
   posts = posts.filter((post) => post.id !== id);
-  res.json(posts);
+  res.status(204);
 });
 
 module.exports = router;
