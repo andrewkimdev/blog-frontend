@@ -10,6 +10,11 @@
   <section class="text">
     <app-title (title)="onTitleUpdated($event)"></app-title>
     <app-categories (category)="onCategorySelected($event)" [categories]="categories$ | async"></app-categories>
+    <div>
+      <p>Image upload</p>
+      <input type="file" (change)="onFileSelected($event)">
+      <button (click)="upUploadButtonClicked()">Upload</button>
+    </div>
     <app-tags (tags)="onTagsUpdated($event)" [tagDelimiters]="[',', ';']"></app-tags>
     <div class="markdown-wrapper">
       <app-editor (text)="onBodyUpdated($event)"></app-editor>
