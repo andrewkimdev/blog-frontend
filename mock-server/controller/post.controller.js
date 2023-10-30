@@ -6,13 +6,14 @@ const router = express.Router();
 let posts = require('../mock-data/posts');
 
 const uploadDirectory = './uploads';
+
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory);
 }
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, uploadDirectory);
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname);
