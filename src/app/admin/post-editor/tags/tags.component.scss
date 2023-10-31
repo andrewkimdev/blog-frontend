@@ -1,6 +1,12 @@
 .container {
   width: 100%;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.tag-label-group {
+  height: 100%;
 }
 
 span:hover {

@@ -9,8 +9,10 @@
 
   <section class="text">
     <app-title (title)="onTitleUpdated($event)"></app-title>
-    <app-categories (category)="onCategorySelected($event)" [categories]="categories$ | async"></app-categories>
-    <app-tags (tags)="onTagsUpdated($event)" [tagDelimiters]="[',', ';']"></app-tags>
+    <div class="post-organization">
+      <app-categories (category)="onCategorySelected($event)" [categories]="categories$ | async"></app-categories>
+      <app-tags (tags)="onTagsUpdated($event)" [tagDelimiters]="[',', ';']"></app-tags>
+    </div>
     <app-upload [postId]="getCurrentPostId()"></app-upload>
     <div class="markdown-wrapper">
       <app-editor (text)="onBodyUpdated($event)"></app-editor>
