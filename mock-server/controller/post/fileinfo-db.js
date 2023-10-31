@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function updateFileDatabase(record) {
-    const dbPath = path.join(__dirname, 'uploaded-file.json');
+    const dbPath = path.join(__basedir, 'uploads', 'uploaded-file.json');
 
     // Reading existing records
     let data;

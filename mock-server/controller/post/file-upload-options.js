@@ -3,7 +3,7 @@ const path = require('path');
 
 const { v4: uuidv4 } = require('uuid');
 
-const uploadDirectory = path.join(__dirname , '../../uploads');
+const uploadDirectory = path.join(__basedir , 'uploads', 'files');
 
 if (!fs.existsSync(uploadDirectory)) {
     fs.mkdirSync(uploadDirectory);
@@ -15,7 +15,7 @@ const fileUploadOptions = {
     },
     filename: (req, file, cb) => {
         const uniqueName = uuidv4();
-        cb(null, `${uniqueName}-${Date.now()}`);
+        cb(null, `${uniqueName}`);
     },
 };
 

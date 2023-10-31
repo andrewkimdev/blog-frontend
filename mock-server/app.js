@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+global.__basedir = __dirname;
+
 const morgan = require('morgan');
 morgan('tiny');
 
