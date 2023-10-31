@@ -1,7 +1,26 @@
 .image-container {
+  position: relative;
   max-height: 120px;
   max-width: 120px;
 
+  &:hover {
+    cds-icon {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+
+  cds-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &:active {
+      translate: 1px 1px;
+    }
+  }
 }
 
 .thumbnail {

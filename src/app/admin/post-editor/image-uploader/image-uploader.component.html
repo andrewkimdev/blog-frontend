@@ -4,7 +4,8 @@
         <app-thumbnail
             *ngFor="let thumbnailUrl of thumbnailUrlList; index as i"
             [imageUrl]="thumbnailUrl"
-            (click)="onThumbnailClicked(i)"
+            (remove)="onRemovalTriggered(i)"
+            (openModal)="onThumbnailClicked(i)"
         >
         </app-thumbnail>
     </div>

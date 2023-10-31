@@ -31,4 +31,8 @@ export class ImageUploaderComponent {
   onThumbnailClicked(i: number) {
     this.openModal(i);
   }
+
+  onRemovalTriggered(i: number) {
+    this.thumbnailUrlList.splice(i, 1);
+  }
 }
