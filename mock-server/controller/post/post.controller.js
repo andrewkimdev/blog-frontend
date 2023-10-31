@@ -43,12 +43,14 @@ router.post('/posts/:id/image', upload.single('image'), (req, res) => {
     size: file.size,
     uploadedTime: new Date(),
     uploaderUserId,
+    contentType: file.mimetype,
+    postId: +req.params.id,
   };
 
   updateFileDatabase(record);
 
   res.json({ message: 'File uploaded successfully', file: req.file })
-})
+});
 
 router.put('/posts/:id', (req, res) => {
   const targetIndex = posts.findIndex((p) => +p.id === +req.params.id)
