@@ -1,4 +1,3 @@
-<section (keydown)="handleKeyOnModal($event)">
     <input type="file" id="fileInput" #fileInput style="display:none;" (change)="onFileSelected($event)">
     <div class="dropzone text-no-select cursor-pointer"
          [ngClass]="{'dragover': isDragOver }"
@@ -10,5 +9,3 @@
         <span>Drag and drop an image.</span>
         <button class="btn btn-outline" (click)="triggerFileInput()">Browse File</button>
     </div>
-    <app-thumbnail [imageUrl]="thumbnailUrl" [open]="isModalOpen"></app-thumbnail>
-</section>

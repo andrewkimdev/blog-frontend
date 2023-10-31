@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
 
 import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
@@ -13,13 +22,14 @@ export class UploadComponent implements OnInit {
   @Input('postId')
   postId: number | null = null;
 
+  @Output('fileUpload')
+  thumbnailUrl = new EventEmitter<ArrayBuffer>();
+
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
   selectedFile!: File;
-  thumbnailUrl: string = '';
 
   isDragOver: boolean = false;
-  isModalOpen: boolean = false;
 
   constructor(
     private uploadService: UploadService,
@@ -29,12 +39,6 @@ export class UploadComponent implements OnInit {
 
   ngOnInit(): void {
     ClarityIcons.addIcons(uploadCloudIcon);
-  }
-
-  handleKeyOnModal(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      this.isModalOpen = false;
-    }
   }
 
   // File Upload - Drag-and-Drop
@@ -87,9 +91,11 @@ export class UploadComponent implements OnInit {
       // Create thumbnail after successful upload.
       const reader = new FileReader();
       reader.onload = (event) => {
-        // @ts-ignore
-        this.thumbnailUrl = event.target?.result;
-        this.cdr.detectChanges();
+        const data = event.target?.result as ArrayBuffer;
+        if (!!data) {
+          this.thumbnailUrl.emit(data);
+          this.cdr.detectChanges();
+        }
       }
       reader.readAsDataURL(this.selectedFile);
     });

@@ -1,0 +1,14 @@
+<section (keydown)="handleKeyOnModal($event)">
+    <app-upload [postId]="postId" (fileUpload)="onFileUploaded($event)"></app-upload>
+    <app-thumbnail
+        *ngFor="let thumbnailUrl of thumbnailUrlList; index as i"
+        [imageUrl]="thumbnailUrl"
+        (click)="onThumbnailClicked(i)"
+    >
+    </app-thumbnail>
+
+    <app-thumbnail-modal
+        [thumbnailUrl]="thumbnailUrl"
+        [(open)]="isModalOpen"
+    ></app-thumbnail-modal>
+</section>

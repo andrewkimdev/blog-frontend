@@ -13,7 +13,7 @@
       <app-categories (category)="onCategorySelected($event)" [categories]="categories$ | async"></app-categories>
       <app-tags (tags)="onTagsUpdated($event)" [tagDelimiters]="[',', ';']"></app-tags>
     </div>
-    <app-upload [postId]="getCurrentPostId()"></app-upload>
+    <app-image-uploader [postId]="getCurrentPostId()"></app-image-uploader>
 
     <div class="markdown-wrapper">
       <app-editor (text)="onBodyUpdated($event)"></app-editor>
