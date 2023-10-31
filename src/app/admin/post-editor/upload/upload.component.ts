@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { catchError, of, tap } from 'rxjs';
 
 import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
 import { UploadService } from '../services/upload.service';
@@ -7,28 +7,34 @@ import { UploadService } from '../services/upload.service';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss']
+  styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent implements OnInit {
   @Input('postId')
   postId: number | null = null;
 
+  @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
+
   selectedFile!: File;
+  thumbnailUrl: string = '';
+
   isDragOver: boolean = false;
-
-  thumbnailUrl: string | ArrayBuffer | null = null;
-
-  showEnlarged: boolean = false;
-  cursorX: number = 0;
-  cursorY: number = 0;
+  isModalOpen: boolean = false;
 
   constructor(
     private uploadService: UploadService,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     ClarityIcons.addIcons(uploadCloudIcon);
+  }
+
+  handleKeyOnModal(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.isModalOpen = false;
+    }
   }
 
   // File Upload - Drag-and-Drop
@@ -44,22 +50,21 @@ export class UploadComponent implements OnInit {
 
   // Upload component click
   triggerFileInput() {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    fileInput.click();
+    this.fileInput.nativeElement.click();
   }
 
-  handleFileInput(event: Event) {
+  onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-      this.uploadFile(this.postId, this.selectedFile);
-    }
+    this.handleSelectedFiles(input.files);
   }
 
   onDrop(event: DragEvent) {
     event.preventDefault();
     this.isDragOver = false;
-    const files = event.dataTransfer?.files;
+    this.handleSelectedFiles(event.dataTransfer?.files);
+  }
+
+  private handleSelectedFiles(files?: FileList | null) {
     if (files && files.length > 0) {
       this.selectedFile = files[0];
       this.uploadFile(this.postId, this.selectedFile);
@@ -72,6 +77,10 @@ export class UploadComponent implements OnInit {
     }
     this.uploadService.uploadImage(postId, selectedFile).pipe(
       tap((res) => console.log(res)),
+      catchError((err) => {
+        console.error('An error occurred', err);
+        return of(null);
+      })
     ).subscribe((res) => {
       console.log(res);
 
@@ -84,21 +93,5 @@ export class UploadComponent implements OnInit {
       }
       reader.readAsDataURL(this.selectedFile);
     });
-  }
-
-  // Enlarged Thumbnail-related
-  // Function to track cursor position
-  trackCursor(event: MouseEvent) {
-    const offsetWidth = 150;
-    const offsetHeight = 150;
-
-    this.cursorX = event.clientX - offsetWidth;
-    this.cursorY = event.clientY - offsetHeight;
-    this.showEnlarged = true;
-  }
-
-  // Function to hide the enlarged thumbnail
-  hideEnlargedThumbnail() {
-    this.showEnlarged = false;
   }
 }

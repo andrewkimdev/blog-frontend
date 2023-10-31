@@ -22,6 +22,7 @@ import { UploadComponent } from './post-editor/upload/upload.component';
 
 // Routing Module
 import { AdminRoutingModule } from './admin-routing.module';
+import { ThumbnailComponent } from './post-editor/thumbnail/thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     ButtonsComponent,
     CategoriesComponent,
     UploadComponent,
+    ThumbnailComponent,
   ],
   imports: [
     CommonModule,

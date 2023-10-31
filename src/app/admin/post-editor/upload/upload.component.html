@@ -1,27 +1,14 @@
-<input type="file" id="fileInput" style="display:none;" (change)="handleFileInput($event)">
-<div class="dropzone text-no-select cursor-pointer"
-     [ngClass]="{'dragover': isDragOver }"
-     (dragover)="onDragOver($event)"
-     (dragleave)="onDragLeave($event)"
-     (drop)="onDrop($event)"
->
-    <cds-icon shape="upload-cloud"></cds-icon>
-    <span>Drag and drop an image.</span>
-    <button class="btn btn-outline" (click)="triggerFileInput()">Browse File</button>
-</div>
-
-<img *ngIf="thumbnailUrl"
-     [src]="thumbnailUrl"
-     alt="Uploaded thumbnail"
-     class="thumbnail"
-     (mousemove)="trackCursor($event)"
-     (mouseleave)="hideEnlargedThumbnail()"
->
-
-<!--Enlarged thumbnail-->
-<div *ngIf="showEnlarged"
-     [ngStyle]="{'left.px': cursorX, 'top.px': cursorY }"
-     class="enlarged-thumbnail"
->
-    <img [src]="thumbnailUrl" alt="Enlarged Thumbnail">
-</div>
+<section (keydown)="handleKeyOnModal($event)">
+    <input type="file" id="fileInput" #fileInput style="display:none;" (change)="onFileSelected($event)">
+    <div class="dropzone text-no-select cursor-pointer"
+         [ngClass]="{'dragover': isDragOver }"
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)"
+         (drop)="onDrop($event)"
+    >
+        <cds-icon shape="upload-cloud"></cds-icon>
+        <span>Drag and drop an image.</span>
+        <button class="btn btn-outline" (click)="triggerFileInput()">Browse File</button>
+    </div>
+    <app-thumbnail [imageUrl]="thumbnailUrl" [open]="isModalOpen"></app-thumbnail>
+</section>

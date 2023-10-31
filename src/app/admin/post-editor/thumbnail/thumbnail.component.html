@@ -1,0 +1,27 @@
+<img *ngIf="thumbnailUrl"
+     [src]="thumbnailUrl"
+     alt="Uploaded thumbnail"
+     class="thumbnail"
+     (mousemove)="trackCursor($event)"
+     (mouseleave)="hideEnlargedThumbnail()"
+     (click)="openModal()"
+>
+
+<!--Enlarged thumbnail-->
+<div *ngIf="showEnlarged"
+     [ngStyle]="{'left.px': cursorX, 'top.px': cursorY }"
+     class="enlarged-thumbnail"
+>
+    <img [src]="thumbnailUrl" alt="Enlarged Thumbnail">
+</div>
+
+<!-- Image Modal -->
+<clr-modal [(clrModalOpen)]="isModalOpen" clrModalSize="lg">
+    <h3 class="modal-title">Enlarged Image</h3>
+    <div class="modal-body">
+        <img [src]="thumbnailUrl" style="max-width: 100%; max-height: 100%;" alt="Enlarged Image">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="isModalOpen = false">Close</button>
+    </div>
+</clr-modal>

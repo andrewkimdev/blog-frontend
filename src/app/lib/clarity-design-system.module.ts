@@ -6,17 +6,19 @@ import {
   ClrCommonFormsModule,
   ClrIconModule,
   ClrInputModule,
+  ClrModalModule,
   ClrTextareaModule,
   ClrVerticalNavModule
 } from '@clr/angular';
 
 const modules = [
   ClarityModule,
-  ClrCommonFormsModule,
-  ClrTextareaModule,
-  ClrInputModule,
   ClrCheckboxModule,
+  ClrCommonFormsModule,
   ClrIconModule,
+  ClrInputModule,
+  ClrModalModule,
+  ClrTextareaModule,
   ClrVerticalNavModule,
 ]
 
