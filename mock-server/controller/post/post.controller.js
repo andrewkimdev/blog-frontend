@@ -35,12 +35,10 @@ router.post('/posts', (req, res) => {
 router.post('/posts/:id/image', upload.single('image'), (req, res) => {
   const file = req.file;
   const uploaderUserId = req.body.userId || null;
-
-  console.log("Received filename: ", req.file.originalname);
-  console.log(req.file.name);
+  const decodedFileName = decodeURIComponent(req.file.originalname);
 
   const record = {
-    originalFileName: file.originalname,
+    originalFileName: decodedFileName,
     savedFileName: file.filename,
     size: file.size,
     uploadedTime: new Date(),
