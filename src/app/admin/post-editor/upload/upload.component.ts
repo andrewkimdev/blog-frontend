@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } fr
 import { catchError, of, tap } from 'rxjs';
 
 import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
-import { UploadService } from '../services/upload.service';
+import { UploadService } from './upload.service';
 
 @Component({
   selector: 'app-upload',

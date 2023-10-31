@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { ValidationErrors } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, distinctUntilChanged, map, Observable, Subject, take, tap } from 'rxjs';
 
-import { AdminPostService } from 'src/app/admin/post-editor/services/admin-post.service';
-import { CategoryService } from 'src/app/admin/post-editor/services/category.service';
+import { ValidationErrors } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+import { AdminPostService } from './admin-post.service';
+import { CategoryService } from './categories/category.service';
 
 import { getCurrentUnixTimeInSeconds, getRandomNumberBetween } from 'src/app/shared/functions';
 import { Post, Category } from 'src/app/shared/types';
