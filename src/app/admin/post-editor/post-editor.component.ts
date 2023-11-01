@@ -93,7 +93,8 @@ export class PostEditorComponent implements OnInit, OnDestroy {
   }
 
   private duplicatePost(): Post {
-    return { ...this.postSubject.value, tags: [...this.postSubject.value.tags]};
+    const post = this.postSubject.value;
+    return { ...post, tags: [...post.tags], imageIdList: [...post.imageIdList]};
   }
 
   onCancelClicked(): void {

@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-// Helper Functions
-import { getCurrentUnixTimeInSeconds } from 'src/app/shared/functions';
-
 // Custom Data Types
 import { Post } from 'src/app/shared/types';
 
 // Environment Variables
 import { environment } from 'src/environments/environment';
+import { PostsService } from '../../posts/services/posts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +16,7 @@ import { environment } from 'src/environments/environment';
 export class AdminPostService {
   constructor(
     private http: HttpClient,
+    private postService: PostsService,
   ){}
 
   createNewPost(post: Post) {
@@ -31,18 +30,11 @@ export class AdminPostService {
     ).subscribe();
   }
 
-  createBlankPost(postId: number, authorId: number) {
-    return {
-      id: postId,
-      authorId,
-      title: '',
-      body: '',
-      category: '',
-      tags: [],
-      isDraft: true,
-      createdAt: getCurrentUnixTimeInSeconds(),
-      updatedAt: undefined,
-      mainImage: undefined,
-    };
+  createBlankPost(postId: number, authorId: number): Post {
+    const post = this.postService.createBlankPost();
+    post.id = postId;
+    post.authorId = authorId;
+
+    return post;
   }
 }

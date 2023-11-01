@@ -8,10 +8,12 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 
 import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
 import { UploadService } from './upload.service';
+
+import { ImageFileInfo } from '../image-file-info.interface';
 
 @Component({
   selector: 'app-upload',
@@ -23,7 +25,7 @@ export class UploadComponent implements OnInit {
   postId: number | null = null;
 
   @Output('fileUpload')
-  thumbnailUrl = new EventEmitter<ArrayBuffer>();
+  imageFile: EventEmitter<ImageFileInfo> = new EventEmitter<ImageFileInfo>();
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
@@ -75,29 +77,38 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  private uploadFile(postId: number | null, selectedFile: File) {
+  private handleUploadError(err: any): Observable<null> {
+    console.error('An error occurred', err);
+    // TODO: handle error for server down. Use Retry.
+    return of(null);
+  }
+
+  private createThumbnailAndEmit(id: string, postId: number, selectedFile: File): void {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const thumbnailUrl = event.target?.result as ArrayBuffer;
+      if (thumbnailUrl && id) {
+        const imageFileInfo: ImageFileInfo = { id, postId, imageUrl: thumbnailUrl };
+        this.imageFile.emit(imageFileInfo);
+        this.cdr.detectChanges();
+      }
+    };
+    reader.readAsDataURL(selectedFile);
+  }
+
+  private uploadFile(postId: number | null, selectedFile: File): void {
     if (!postId || !selectedFile) {
       return;
     }
+
     this.uploadService.uploadImage(postId, selectedFile).pipe(
       tap((res) => console.log(res)),
-      catchError((err) => {
-        console.error('An error occurred', err);
-        return of(null);
-      })
+      catchError(this.handleUploadError)
     ).subscribe((res) => {
-      console.log(res);
-
-      // Create thumbnail after successful upload.
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const data = event.target?.result as ArrayBuffer;
-        if (!!data) {
-          this.thumbnailUrl.emit(data);
-          this.cdr.detectChanges();
-        }
+      if (res?.id) {
+        this.createThumbnailAndEmit(res.id, postId, selectedFile);
       }
-      reader.readAsDataURL(this.selectedFile);
     });
   }
+
 }

@@ -2,8 +2,8 @@
     <app-upload [postId]="postId" (fileUpload)="onFileUploaded($event)"></app-upload>
     <div class="thumbnail-container">
         <app-thumbnail
-            *ngFor="let thumbnailUrl of thumbnailUrlList; index as i"
-            [imageUrl]="thumbnailUrl"
+            *ngFor="let imageFile of imageFileList; index as i"
+            [imageUrl]="imageFile.imageUrl"
             (remove)="onRemovalTriggered(i)"
             (openModal)="onThumbnailClicked(i)"
         >
@@ -11,7 +11,8 @@
     </div>
 
     <app-thumbnail-modal
-        [thumbnailUrl]="thumbnailUrl"
+        *ngIf="imageFile"
+        [imageFile]="imageFile"
         [(open)]="isModalOpen"
     ></app-thumbnail-modal>
 </section>

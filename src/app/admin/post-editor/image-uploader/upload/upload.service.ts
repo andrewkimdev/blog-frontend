@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+
 import { environment } from 'src/environments/environment';
+import { FileUploadResponse } from '../file-upload-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +11,9 @@ import { environment } from 'src/environments/environment';
 export class UploadService {
   constructor(private http: HttpClient) { }
 
-  uploadImage(postId: number, selectedFile: File) {
+  uploadImage(postId: number, selectedFile: File): Observable<FileUploadResponse> {
     const fd = new FormData();
     fd.append('image', selectedFile, encodeURIComponent(selectedFile.name));
-    console.log(`uploaded file name: ${selectedFile.name}`);
-
-    return this.http.post(`${environment.baseUrl}/posts/${postId}/image`, fd);
+    return this.http.post<FileUploadResponse>(`${environment.baseUrl}/posts/${postId}/image`, fd);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ImageFileInfo } from './image-file-info.interface';
 
 @Component({
   selector: 'app-image-uploader',
@@ -8,14 +9,14 @@ import { Component, Input } from '@angular/core';
 export class ImageUploaderComponent {
   @Input('postId')
   postId: number | null = null;
-  thumbnailUrlList: ArrayBuffer[] = [];
-  thumbnailUrl!: ArrayBuffer;
+  imageFileList: ImageFileInfo[] = [];
+  imageFile!: ImageFileInfo ;
 
   isModalOpen: boolean = false;
 
   openModal(i: number) {
     this.isModalOpen = true;
-    this.thumbnailUrl = this.thumbnailUrlList[i];
+    this.imageFile = this.imageFileList[i];
   }
 
   handleKeyOnModal(event: KeyboardEvent) {
@@ -24,8 +25,8 @@ export class ImageUploaderComponent {
     }
   }
 
-  onFileUploaded(thumbnailUrl: ArrayBuffer) {
-    this.thumbnailUrlList.push(thumbnailUrl);
+  onFileUploaded(fileInfo: ImageFileInfo) {
+    this.imageFileList.push(fileInfo);
   }
 
   onThumbnailClicked(i: number) {
@@ -33,6 +34,6 @@ export class ImageUploaderComponent {
   }
 
   onRemovalTriggered(i: number) {
-    this.thumbnailUrlList.splice(i, 1);
+    this.imageFileList.splice(i, 1);
   }
 }

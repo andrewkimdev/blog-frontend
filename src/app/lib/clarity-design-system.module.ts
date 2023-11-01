@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ClarityModule,
+  ClrButtonModule,
   ClrCheckboxModule,
   ClrCommonFormsModule,
   ClrIconModule,
@@ -13,6 +14,7 @@ import {
 
 const modules = [
   ClarityModule,
+  ClrButtonModule,
   ClrCheckboxModule,
   ClrCommonFormsModule,
   ClrIconModule,

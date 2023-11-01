@@ -2,6 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest, map, Observable, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+import { getCurrentUnixTimeInSeconds } from '../../shared/functions';
+
 import { Post, User } from 'src/app/shared/types';
 import { environment } from 'src/environments/environment';
 
@@ -12,10 +14,7 @@ export class PostsService implements OnInit {
   private postsSubject: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
   posts$: Observable<Post[]> = this.postsSubject.asObservable();
 
-  constructor(
-    private http: HttpClient,
-  ) {
-  }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.refreshList();
@@ -43,10 +42,20 @@ export class PostsService implements OnInit {
     ).subscribe();
   }
 
-  private createBlankPost() {
+  createBlankPost(): Post {
     return {
-      title: '', body: '', tags: [], isDraft: true,
-    }
+      id: null,
+      authorId: null,
+      title: '',
+      body: '',
+      category: '',
+      tags: [],
+      isDraft: true,
+      createdAt: getCurrentUnixTimeInSeconds(),
+      updatedAt: undefined,
+      mainImage: undefined,
+      imageIdList: [],
+    } as Post;
   }
 
   getById(id: number): Observable<Post> {
@@ -55,6 +64,7 @@ export class PostsService implements OnInit {
   }
 
   getNextId(): Observable<number> {
+    // TODO: Get this info from server
     const ids = this.postsSubject.value.map(p => p.id);
     // @ts-ignore
     const maxId = ids.length > 0 ? Math.max(...ids) : 0;
