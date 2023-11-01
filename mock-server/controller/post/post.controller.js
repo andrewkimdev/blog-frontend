@@ -53,7 +53,7 @@ router.post('/posts/:id/image', upload.single('image'), (req, res) => {
 
   updateFileDatabase(record);
 
-  res.json({ message: 'File uploaded successfully', file: req.file, fileId: file.filename })
+  res.json({ message: 'File uploaded successfully', file: req.file, id: file.filename })
 });
 
 router.get('/images/:uuid', (req, res) => {
