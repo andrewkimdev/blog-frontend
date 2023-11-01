@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ImageFileInfo } from '../image-file-info.interface';
 import { environment } from 'src/environments/environment';
 
@@ -19,19 +19,27 @@ export class ThumbnailModalComponent implements OnChanges {
 
   urlForMarkdown = '';
 
+  copyButtonText = 'Copy Link'
+
+  constructor(private cdr: ChangeDetectorRef) {
+  }
+
   copyToClipboard() {
     const str = this.urlForMarkdown;
     const clipboardItem = new ClipboardItem({ 'text/plain': new Blob([str], { type: 'text/plain' })});
 
     // Use the Clipboard API to write the item to the clipboard
     navigator.clipboard.write([clipboardItem]).then(() => {
-      console.log('Image url copied to clipboard!');
+      this.copyButtonText = 'Copied to clipboard!'
+      this.cdr.detectChanges();
     }).catch(err => {
       console.error('Could not copy text to clipboard', err);
     });
   }
 
   closeModal(): void {
+      this.copyButtonText = 'Copy Link';
+      this.cdr.detectChanges();
     this.openChange.emit(false);
   }
 
