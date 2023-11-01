@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ImageFileInfo } from '../image-file-info.interface';
-import { environment } from '../../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-thumbnail-modal',

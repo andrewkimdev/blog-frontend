@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { TopAlertService } from '../services/top-alert.service';
 
 @Component({
   selector: 'app-top-alert',
@@ -6,13 +7,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./top-alert.component.scss']
 })
 export class TopAlertComponent {
-  @Input()
-  show = true;
+  constructor(private alertService: TopAlertService) {}
 
-  @Input()
-  text = 'App Level Alert';
+  options$ = this.alertService.alertOptions$;
 
-  closeAlert(): void {
-    this.show = false;
+  closeAlert() {
+    this.alertService.closeAlert();
   }
 }
