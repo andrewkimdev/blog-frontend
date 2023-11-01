@@ -1,6 +1,8 @@
 <div class="hint-container">
         <textarea id="markdown-input"
+                  #textarea
                   class="clr-textarea"
+                  (blur)="saveCursorLocation()"
                   required
                   [formControl]="textInputFormControl"
                   placeholder="Enter blog text here... (markdown)"

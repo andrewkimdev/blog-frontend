@@ -17,20 +17,33 @@ export class ThumbnailModalComponent implements OnChanges {
   @Output()
   openChange = new EventEmitter<boolean>();
 
-  urlForMarkdown = '';
+  @Output('file-link')
+  linkEmitter = new EventEmitter<string>();
 
-  copyButtonText = 'Copy Link'
+  imageLink = '';
+
+  copyButtonText = 'Insert Link'
 
   constructor(private cdr: ChangeDetectorRef) {
   }
 
-  copyToClipboard() {
-    const str = this.urlForMarkdown;
+  onCopyClicked() {
+    this.copyLinkToClipboard(this.imageLink);
+    this.emitLink(this.imageLink);
+    this.closeModal();
+  }
+
+  emitLink(link: string) {
+    this.linkEmitter.emit(link);
+  }
+
+
+  private copyLinkToClipboard(str: string) {
     const clipboardItem = new ClipboardItem({ 'text/plain': new Blob([str], { type: 'text/plain' })});
 
     // Use the Clipboard API to write the item to the clipboard
     navigator.clipboard.write([clipboardItem]).then(() => {
-      this.copyButtonText = 'Copied to clipboard!'
+      this.copyButtonText = 'Insert Link'
       this.cdr.detectChanges();
     }).catch(err => {
       console.error('Could not copy text to clipboard', err);
@@ -38,15 +51,15 @@ export class ThumbnailModalComponent implements OnChanges {
   }
 
   closeModal(): void {
-      this.copyButtonText = 'Copy Link';
-      this.cdr.detectChanges();
+    this.copyButtonText = 'Insert Link';
+    this.cdr.detectChanges();
     this.openChange.emit(false);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const info = changes['fileInfo'];
     if (changes['fileInfo']) {
-      this.urlForMarkdown = `![image](${environment.baseUrl}/images/${info.currentValue.id})`;
+      this.imageLink = `![image](${environment.baseUrl}/images/${info.currentValue.id})`;
     }
   }
 }

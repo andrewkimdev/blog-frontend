@@ -1,11 +1,11 @@
-    <input type="file" id="fileInput" #fileInput style="display:none;" (change)="onFileSelected($event)">
-    <div class="dropzone text-no-select cursor-pointer"
-         [ngClass]="{'dragover': isDragOver }"
-         (dragover)="onDragOver($event)"
-         (dragleave)="onDragLeave($event)"
-         (drop)="onDrop($event)"
-    >
-        <cds-icon shape="upload-cloud"></cds-icon>
-        <span>Drag and drop an image.</span>
-        <button class="btn btn-outline" (click)="triggerFileInput()">Browse File</button>
-    </div>
+<input type="file" id="fileInput" #fileInput style="display:none;" (change)="onFileSelected($event)">
+<div class="dropzone text-no-select cursor-pointer"
+     [ngClass]="{'dragover': isDragOver }"
+     (dragover)="onDragOver($event)"
+     (dragleave)="onDragLeave($event)"
+     (drop)="onDrop($event)"
+>
+    <cds-icon shape="upload-cloud"></cds-icon>
+    <span>Drag and drop an image.</span>
+    <button class="btn btn-outline" (click)="triggerFileInput()">Browse File</button>
+</div>

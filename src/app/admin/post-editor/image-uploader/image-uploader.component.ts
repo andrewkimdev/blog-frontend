@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ImageFileInfo } from './image-file-info.interface';
 
 @Component({
@@ -9,6 +9,10 @@ import { ImageFileInfo } from './image-file-info.interface';
 export class ImageUploaderComponent {
   @Input('postId')
   postId: number | null = null;
+
+  @Output('file-link')
+  fileLink = new EventEmitter<string>();
+
   imageFileList: ImageFileInfo[] = [];
   imageFile!: ImageFileInfo ;
 
@@ -31,6 +35,10 @@ export class ImageUploaderComponent {
 
   onThumbnailClicked(i: number) {
     this.openModal(i);
+  }
+
+  onFileLinkUpdated(link: string) {
+    this.fileLink.emit(link);
   }
 
   onRemovalTriggered(i: number) {

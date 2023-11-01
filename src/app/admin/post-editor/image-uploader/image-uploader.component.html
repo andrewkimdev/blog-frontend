@@ -13,6 +13,7 @@
     <app-thumbnail-modal
         *ngIf="imageFile"
         [imageFile]="imageFile"
+        (file-link)="onFileLinkUpdated($event)"
         [(open)]="isModalOpen"
     ></app-thumbnail-modal>
 </section>

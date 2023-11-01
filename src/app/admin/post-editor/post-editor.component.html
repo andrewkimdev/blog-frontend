@@ -13,10 +13,10 @@
       <app-categories (category)="onCategorySelected($event)" [categories]="categories$ | async"></app-categories>
       <app-tags (tags)="onTagsUpdated($event)" [tagDelimiters]="[',', ';']"></app-tags>
     </div>
-    <app-image-uploader [postId]="getCurrentPostId()"></app-image-uploader>
+    <app-image-uploader [postId]="getCurrentPostId()" (file-link)="onFileLinkUpdated($event)"></app-image-uploader>
 
     <div class="markdown-wrapper">
-      <app-editor (text)="onBodyUpdated($event)"></app-editor>
+      <app-editor (text)="onBodyUpdated($event)" [added-text-at-cursor]="addedText$ | async"></app-editor>
       <markdown
         class="markdown-viewer"
         [data]="(markdownData$ | async)"

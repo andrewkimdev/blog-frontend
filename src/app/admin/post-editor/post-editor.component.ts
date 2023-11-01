@@ -20,6 +20,9 @@ export class PostEditorComponent implements OnInit, OnDestroy {
   private postSubject: BehaviorSubject<Post> = new BehaviorSubject<Post>(this.getBlankPost());
   post$: Observable<Post> = this.postSubject.asObservable();
 
+  private addedTextSubject = new BehaviorSubject<string>('');
+  addedText$ = this.addedTextSubject.asObservable();
+
   categories$: Observable<Category[]> = this.categoryService.categories$;
 
   markdownData$: Observable<string | null> = this.post$.pipe(
@@ -38,6 +41,9 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     tap((res) => console.log('error: ' + res))
   );
 
+  onFileLinkUpdated(link: string) {
+    this.addedTextSubject.next(link);
+  }
 
   private destroy$ = new Subject<void>();
 
