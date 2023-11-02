@@ -12,6 +12,7 @@ const updateFileDatabase = require('./update-file-db');
 const getFileInfo = require('./read-file-db');
 
 let posts = require('../../mock-data/posts');
+const MockUsers = require('../../mock-data/users');
 
 const getTimeStamp = () => Math.floor(Date.now() / 1000);
 
@@ -25,7 +26,7 @@ router.get('/posts/:id', (req, res) => {
   if (!post) {
     res.status(404).json({ message: "Post not found with id: " + req.params.id});
   } else {
-
+    post.author = MockUsers.find((u) => +u.id === +post.authorId);
     res.json(post);
   }
 });
