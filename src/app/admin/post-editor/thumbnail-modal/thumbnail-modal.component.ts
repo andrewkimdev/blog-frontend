@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { ImageFileInfo } from '../image-file-info.interface';
+import { ImageFileInfo } from '../image-uploader/image-file-info.interface';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -37,19 +37,6 @@ export class ThumbnailModalComponent implements OnChanges {
     this.linkEmitter.emit(link);
   }
 
-
-  private copyLinkToClipboard(str: string) {
-    const clipboardItem = new ClipboardItem({ 'text/plain': new Blob([str], { type: 'text/plain' })});
-
-    // Use the Clipboard API to write the item to the clipboard
-    navigator.clipboard.write([clipboardItem]).then(() => {
-      this.copyButtonText = 'Insert Link'
-      this.cdr.detectChanges();
-    }).catch(err => {
-      console.error('Could not copy text to clipboard', err);
-    });
-  }
-
   closeModal(): void {
     this.copyButtonText = 'Insert Link';
     this.cdr.detectChanges();
@@ -61,5 +48,17 @@ export class ThumbnailModalComponent implements OnChanges {
     if (changes['fileInfo']) {
       this.imageLink = `![image](${environment.baseUrl}/images/${info.currentValue.id})`;
     }
+  }
+
+  private copyLinkToClipboard(str: string) {
+    const clipboardItem = new ClipboardItem({ 'text/plain': new Blob([str], { type: 'text/plain' }) });
+
+    // Use the Clipboard API to write the item to the clipboard
+    navigator.clipboard.write([clipboardItem]).then(() => {
+      this.copyButtonText = 'Insert Link'
+      this.cdr.detectChanges();
+    }).catch(err => {
+      console.error('Could not copy text to clipboard', err);
+    });
   }
 }
