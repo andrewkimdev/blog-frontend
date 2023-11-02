@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+
+import { selectSinglePost } from 'src/app/single-post/store/post.selector';
 import * as PostAction from '../store/post.action';
 
 import { Post } from 'src/app/shared/types';
@@ -23,7 +25,7 @@ export class PostComponent implements OnInit {
     this.store.dispatch(PostAction.loadPostById({ id }));
   }
 
-  post$: Observable<Post> = this.store.select(({ posts, id}) => posts[id]);
+  post$: Observable<Post> = this.store.select(selectSinglePost);
   private getPostId(): number {
     return +this.route.snapshot.params['id'];
   }
