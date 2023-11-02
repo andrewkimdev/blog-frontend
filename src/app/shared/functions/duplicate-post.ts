@@ -1,5 +1,5 @@
 import { Post } from '../types';
 
-export const duplicatePost = (source: Post): Post => {
-  return { ...source, tags: [...source.tags], imageIdList: [...source.imageIdList]};
+export const duplicatePost = (post: Post): Post => {
+  return { ...post, tags: [...post.tags], imageIdList: [...post.imageIdList]};
 }
