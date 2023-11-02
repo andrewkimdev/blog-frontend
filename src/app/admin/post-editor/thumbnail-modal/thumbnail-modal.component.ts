@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ImageFileInfo } from '../image-uploader/image-file-info.interface';
 import { environment } from 'src/environments/environment';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-thumbnail-modal',
@@ -19,6 +20,8 @@ export class ThumbnailModalComponent implements OnChanges {
 
   @Output('file-link')
   linkEmitter = new EventEmitter<string>();
+
+  isMainImage = new FormControl(false);
 
   imageLink = '';
 
