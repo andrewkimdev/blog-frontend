@@ -1,13 +1,19 @@
+// Angular Core Modules
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, map, Observable, Subject, take, tap } from 'rxjs';
 
 import { ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+// 3rd Party Vendor Modules
+import { Store } from '@ngrx/store';
+
+// Application Services and Functions
 import { PostEditorService } from './post-editor.service';
 import { CategoryService } from './categories/category.service';
-
 import { getCurrentUnixTimeInSeconds, getRandomNumberBetween } from 'src/app/shared/functions';
+
+// Application Data Type Definitions
 import { Post, Category } from 'src/app/shared/types';
 
 @Component({
@@ -51,42 +57,16 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     private postEditorService: PostEditorService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
+    private store: Store<{post: Post}>,
   ) {
   }
 
   ngOnInit(): void {
     this.refreshCategories();
     this.initNewPost();
-  }
-
-  setDraft(isDraft: boolean) {
-    const post: Post = { ...this.duplicatePost(), isDraft };
-    this.postSubject.next(post);
-    this.markPostAsDirty();
-  }
-
-  onBodyUpdated(body: string) {
-    const post: Post = { ...this.duplicatePost(), body };
-    this.postSubject.next(post);
-    this.markPostAsDirty();
-  }
-
-  onCategorySelected(category: Category) {
-    const post: Post = { ...this.duplicatePost(), category: category.name };
-    this.postSubject.next(post);
-    this.markPostAsDirty();
-  }
-
-  onTitleUpdated(title: string): void {
-    const post: Post = { ...this.duplicatePost(), title };
-    this.postSubject.next(post);
-    this.markPostAsDirty();
-  }
-
-  onTagsUpdated(tags: string[]): void {
-    const post: Post = { ...this.duplicatePost(), tags: [...tags] };
-    this.postSubject.next(post);
-    this.markPostAsDirty();
+    this.store.select('post').subscribe(
+      res => console.dir(res)
+    )
   }
 
   onSaveClicked() {
@@ -105,6 +85,12 @@ export class PostEditorComponent implements OnInit, OnDestroy {
 
   onCancelClicked(): void {
     console.log('cancel clicked');
+  }
+
+  onTagsUpdated(tags: string[]): void {
+    const post: Post = { ...this.duplicatePost(), tags: [...tags] };
+    this.postSubject.next(post);
+    this.markPostAsDirty();
   }
 
   ngOnDestroy(): void {

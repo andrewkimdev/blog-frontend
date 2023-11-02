@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, filter, map, Subject, takeUntil, tap } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+
 import { Category } from 'src/app/shared/types';
+import { selectCategory } from '../store/post-editor.action';
 
 @Component({
   selector: 'app-categories',
@@ -11,9 +14,6 @@ import { Category } from 'src/app/shared/types';
 export class CategoriesComponent implements OnInit, OnChanges, OnDestroy {
   @Input('categories')
   availableCategories: Category[] | null = [];
-
-  @Output('category')
-  selectedCategory: EventEmitter<Category> = new EventEmitter<Category>();
 
   categoryInputControl: FormControl<string|null> = new FormControl(
     '', [Validators.required, Validators.minLength(4)]
@@ -26,12 +26,14 @@ export class CategoriesComponent implements OnInit, OnChanges, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
+  constructor(private store: Store) {}
+
   ngOnInit(): void {
     this.categoryInputControl.valueChanges.pipe(
       takeUntil(this.destroy$),
-      map((data) => data || ''),
+      map((data) => data ?? ''),
       filter((data) => !!data),
-      tap((category: string) => this.selectedCategory.emit({ name: category })),
+      tap((category: string) => this.store.dispatch(selectCategory({ category })))
     ).subscribe();
   }
 

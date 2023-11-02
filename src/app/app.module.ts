@@ -1,5 +1,5 @@
 // Angular Core Modules
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +11,10 @@ import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
 import { ClarityDesignSystemModule } from './lib';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects'
+
+// Dev Tools
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
@@ -38,7 +42,10 @@ import { HomeComponent } from './home/home.component';
     AdminModule,
     LayoutModule,
     AppRoutingModule,
+    // NgRx Modules
     StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
     {

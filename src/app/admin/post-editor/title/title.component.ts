@@ -1,6 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { map, Subject, takeUntil, tap } from 'rxjs';
+
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+
+import { updateTitle } from '../store/post-editor.action';
 
 @Component({
   selector: 'app-title',
@@ -8,21 +12,20 @@ import { FormControl, ValidationErrors, Validators } from '@angular/forms';
   styleUrls: ['./title.component.scss']
 })
 export class TitleComponent implements OnInit, OnDestroy {
-  @Output('title')
-  titleOutput = new EventEmitter<string>();
-
   titleInputControl = new FormControl(
     '',
     [Validators.required, Validators.minLength(6), Validators.maxLength(50)],
-  )
+  );
 
   private destroy$ = new Subject<void>();
+
+  constructor(private store: Store){}
 
   ngOnInit() {
     this.titleInputControl.valueChanges.pipe(
       takeUntil(this.destroy$),
-      map((value) => value || ''),
-      tap((text) => this.titleOutput.emit(text))
+      map((value) => value ?? ''),
+      tap((title) => this.store.dispatch(updateTitle({ title }))),
     ).subscribe();
   }
 

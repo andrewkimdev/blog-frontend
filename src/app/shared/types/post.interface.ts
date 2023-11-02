@@ -6,11 +6,11 @@ export interface Post {
   author?: User;
   title: string;
   body: string;
-  category?: string;
+  category: string | null;
   tags: string[];
-  mainImage?: string;
+  mainImage: string | null;
   imageIdList: string[];
   isDraft: boolean;
-  createdAt?: number;
-  updatedAt?: number;
+  createdAt: number;
+  updatedAt: number | null;
 }

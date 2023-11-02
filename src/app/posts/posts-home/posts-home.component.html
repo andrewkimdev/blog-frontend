@@ -4,6 +4,7 @@
     <clr-dg-column>Author</clr-dg-column>
     <clr-dg-column>Created At</clr-dg-column>
     <clr-dg-column>Updated At</clr-dg-column>
+    <pre>{{ ps }}</pre>
 
     <clr-dg-row *ngFor="let p of ps" (click)="showPost(p)">
         <clr-dg-cell>{{ p.id || 'n/a' }}</clr-dg-cell>
@@ -22,4 +23,4 @@
 
     <clr-dg-footer>{{ ps.length }} posts</clr-dg-footer>
 </clr-datagrid>
-<pre *ngIf="posts$ | async as ps">{{ ps | json }}</pre>
+<!--<pre *ngIf="posts$ | async as ps">{{ ps | json }}</pre>-->

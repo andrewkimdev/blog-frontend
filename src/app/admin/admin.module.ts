@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 
 // 3rd Party Vendor Modules
 import { ClarityDesignSystemModule, NgxMarkdownModule } from '../lib';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 // Custom Shared Modules
 import { CoreModule } from 'src/app/core/core.module';
@@ -22,6 +24,10 @@ import { ImageUploaderComponent } from './post-editor/image-uploader/image-uploa
 import { UploadComponent } from './post-editor/image-uploader/upload/upload.component';
 import { ThumbnailComponent } from './post-editor/thumbnail/thumbnail.component';
 import { ThumbnailModalComponent } from './post-editor/thumbnail-modal/thumbnail-modal.component';
+
+// State Management
+import { postEditorReducer } from './post-editor/store/post-editor.reducer';
+import { PostEditorEffects } from './post-editor/store/post-editor.effects';
 
 // Routing Module
 import { AdminRoutingModule } from './admin-routing.module';
@@ -45,7 +51,8 @@ import { AdminRoutingModule } from './admin-routing.module';
     CoreModule,
     NgxMarkdownModule,
     ClarityDesignSystemModule,
-
+    StoreModule.forFeature('postEditorState', postEditorReducer),
+    EffectsModule.forFeature([PostEditorEffects]),
     AdminRoutingModule,
   ]
 })

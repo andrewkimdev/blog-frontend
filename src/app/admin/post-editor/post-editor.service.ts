@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+// Custom Functions
+import { createBlankPost } from 'src/app/shared/functions';
 // Custom Data Types
 import { Post } from 'src/app/shared/types';
 
@@ -31,7 +33,7 @@ export class PostEditorService {
   }
 
   createBlankPost(postId: number, authorId: number): Post {
-    const post = this.postService.createBlankPost();
+    const post = createBlankPost();
     post.id = postId;
     post.authorId = authorId;
 

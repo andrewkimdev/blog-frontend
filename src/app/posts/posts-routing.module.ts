@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PostsHomeComponent } from './posts-home/posts-home.component';
-import { PostComponent } from './widgets/post/post.component';
 
 const postsRoutes: Routes = [
   {
@@ -11,7 +10,7 @@ const postsRoutes: Routes = [
   },
   {
     path: 'posts/:id',
-    component: PostComponent,
+    loadChildren: () => import('../single-post/single-post.module').then((m) => m.SinglePostModule),
     title: 'Post Individual',
   },
 ];

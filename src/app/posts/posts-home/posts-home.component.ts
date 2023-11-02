@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+
 import { Router } from '@angular/router';
-import { PostsService } from '../services/posts.service';
+import { select, Store } from '@ngrx/store';
+
+import { Post } from 'src/app/shared/types';
+import * as PostsAction from './../store/posts.action';
+import { PostsState } from '../store/posts.reducer';
+import { selectPosts } from '../store/posts.selector';
 
 @Component({
   selector: 'app-posts-home',
@@ -8,15 +15,17 @@ import { PostsService } from '../services/posts.service';
   styleUrls: ['./posts-home.component.scss']
 })
 export class PostsHomeComponent implements OnInit {
-  posts$ = this.postsService.posts$;
+  posts$: Observable<Post[]> = this.store.pipe(select(selectPosts)).pipe(
+    tap((res) => console.log(res)),
+  );
 
   constructor(
     private router: Router,
-    private postsService: PostsService,
+    private store: Store<PostsState>,
   ) { }
 
   ngOnInit(): void {
-    this.postsService.refreshList();
+    this.store.dispatch(PostsAction.loadPosts());
   }
 
   showPost(p: any) {

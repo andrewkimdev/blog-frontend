@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest, map, Observable, of, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { getCurrentUnixTimeInSeconds } from '../../shared/functions';
+import { getCurrentUnixTimeInSeconds, createBlankPost } from '../../shared/functions';
 
 import { Post, User } from 'src/app/shared/types';
 import { environment } from 'src/environments/environment';
@@ -17,14 +17,14 @@ export class PostsService implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.refreshList();
   }
 
-  refreshList(): void {
+  getAll(): Observable<Post[]> {
+    console.log('PostsService#getAll() called')
     const posts$: Observable<Post[]> = this.http.get<Post[]>(`${ environment.baseUrl }/posts`);
     const users$: Observable<User[]> = this.http.get<User[]>(`${ environment.baseUrl }/users`);
 
-    combineLatest([posts$, users$]).pipe(
+    return combineLatest([posts$, users$]).pipe(
       take(1),
       map(([posts, users]) => {
         const res: Post[] = posts.map((p: Post) => {
@@ -38,8 +38,7 @@ export class PostsService implements OnInit {
         });
         return res.length > 0 ? res : [] as Post[];
       }),
-      tap((posts) => this.postsSubject.next(posts)),
-    ).subscribe();
+    );
   }
 
   createBlankPost(): Post {
@@ -52,15 +51,15 @@ export class PostsService implements OnInit {
       tags: [],
       isDraft: true,
       createdAt: getCurrentUnixTimeInSeconds(),
-      updatedAt: undefined,
-      mainImage: undefined,
+      updatedAt: null,
+      mainImage: null,
       imageIdList: [],
     } as Post;
   }
 
   getById(id: number): Observable<Post> {
     const p = this.postsSubject.value.find((post) => post.id === id);
-    return p ? of(p) : of({ ...this.createBlankPost() });
+    return p ? of(p) : of({ ...createBlankPost() });
   }
 
   getNextId(): Observable<number> {
