@@ -10,6 +10,7 @@ import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 // 3rd Party Vendor Module
 import { CoreModule } from 'src/app/core/core.module';
 import { ClarityDesignSystemModule } from './lib';
+import { StoreModule } from '@ngrx/store';
 
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +38,7 @@ import { HomeComponent } from './home/home.component';
     AdminModule,
     LayoutModule,
     AppRoutingModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [
     {
