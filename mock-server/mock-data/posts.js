@@ -38,7 +38,8 @@ Machine learning is revolutionizing the way we interact with the world. From hea
 **Date**: October 27, 2023
 `,
     "category": "Programming",
-    "tags": ["code", "clean code", "programming"]
+    "tags": ["code", "clean code", "programming"],
+    "imageIdList": [],
   },
   {
     "id": 2,
@@ -110,7 +111,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
 
     `,
     "category": "Health",
-    "tags": ["health", "exercise", "diet"]
+    "tags": ["health", "exercise", "diet"],
+    "imageIdList": [],
   },
   {
     "id": 3,
@@ -122,7 +124,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "mainImage": "assets/images/hero/photo-3.jpg",
     "body": "## Communicate Effectively\n\nListen more than you speak...",
     "category": "Personal Development",
-    "tags": ["communication", "development"]
+    "tags": ["communication", "development"],
+    "imageIdList": [],
   },
   {
     "id": 4,
@@ -134,7 +137,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "mainImage": "assets/images/hero/photo-4.jpg",
     "body": "## Open Source\n\nOpen Source fosters innovation...",
     "category": "Technology",
-    "tags": ["open source", "tech"]
+    "tags": ["open source", "tech"],
+    "imageIdList": [],
   },
   {
     "id": 5,
@@ -146,7 +150,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "mainImage": "assets/images/hero/photo-1.jpg",
     "body": "## Remote Work\n\nManaging time is crucial...",
     "category": "Work",
-    "tags": ["remote work", "productivity"]
+    "tags": ["remote work", "productivity"],
+    "imageIdList": [],
   },
   {
     "id": 6,
@@ -158,7 +163,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "mainImage": "assets/images/hero/photo-2.jpg",
     "body": "## Healthy Cooking\n\nMeal prepping saves time...",
     "category": "Lifestyle",
-    "tags": ["cooking", "meal prep"]
+    "tags": ["cooking", "meal prep"],
+    "imageIdList": [],
   },
   {
     "id": 7,
@@ -170,7 +176,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "mainImage": "assets/images/hero/photo-3.jpg",
     "body": "## Resilience\n\nFacing challenges with grit...",
     "category": "Mental Health",
-    "tags": ["resilience", "mental health"]
+    "tags": ["resilience", "mental health"],
+    "imageIdList": [],
   },
   {
     "id": 8,
@@ -182,7 +189,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "mainImage": "assets/images/hero/photo-4.jpg",
     "body": "## Coding Basics\n\nStart with simple projects...",
     "category": "Education",
-    "tags": ["coding", "education"]
+    "tags": ["coding", "education"],
+    "imageIdList": [],
   },
   {
     "id": 9,
@@ -194,7 +202,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "mainImage": "assets/images/hero/photo-1.jpg",
     "body": "## Investing Wisely\n\nDiversify your portfolio...",
     "category": "Finance",
-    "tags": ["investing", "finance"]
+    "tags": ["investing", "finance"],
+    "imageIdList": [],
   },
   {
     "id": 10,
@@ -206,7 +215,8 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
     "mainImage": "assets/images/hero/photo-2.jpg",
     "body": "## Storytelling\n\nNarrative structures and plot twists...",
     "category": "Art",
-    "tags": ["storytelling", "art"]
+    "tags": ["storytelling", "art"],
+    "imageIdList": [],
   }
 ];
 
