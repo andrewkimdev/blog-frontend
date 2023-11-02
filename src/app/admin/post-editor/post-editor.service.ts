@@ -13,7 +13,7 @@ import { PostsService } from '../../posts/services/posts.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminPostService {
+export class PostEditorService {
   constructor(
     private http: HttpClient,
     private postService: PostsService,

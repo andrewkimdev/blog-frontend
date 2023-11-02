@@ -4,7 +4,7 @@ import { BehaviorSubject, distinctUntilChanged, map, Observable, Subject, take, 
 import { ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { AdminPostService } from './admin-post.service';
+import { PostEditorService } from './post-editor.service';
 import { CategoryService } from './categories/category.service';
 
 import { getCurrentUnixTimeInSeconds, getRandomNumberBetween } from 'src/app/shared/functions';
@@ -48,7 +48,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private adminPostService: AdminPostService,
+    private postEditorService: PostEditorService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
   ) {
@@ -95,7 +95,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     const post = { ...this.duplicatePost(), updatedAt };
     console.log('Saving post... ');
     console.dir(post);
-    this.adminPostService.updatePost(this.postSubject.value);
+    this.postEditorService.updatePost(this.postSubject.value);
   }
 
   private duplicatePost(): Post {
@@ -115,7 +115,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
   private getBlankPost(): Post {
     const postId = this.getCurrentPostId();
     const authorId = this.getCurrentAuthorId();
-    return this.adminPostService.createBlankPost(postId, authorId);
+    return this.postEditorService.createBlankPost(postId, authorId);
   }
 
   private markPostAsPristine(): void {
@@ -139,7 +139,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     this.markPostAsPristine();
 
     // 4. Let the server know a post has been created.
-    this.adminPostService.createNewPost(post).pipe(
+    this.postEditorService.createNewPost(post).pipe(
       take(1),
     ).subscribe();
   }
