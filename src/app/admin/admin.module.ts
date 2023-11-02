@@ -51,7 +51,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     CoreModule,
     NgxMarkdownModule,
     ClarityDesignSystemModule,
-    StoreModule.forFeature('postEditorState', postEditorReducer),
+    StoreModule.forFeature('postEditorFeatureKey', postEditorReducer),
     EffectsModule.forFeature([PostEditorEffects]),
     AdminRoutingModule,
   ]
