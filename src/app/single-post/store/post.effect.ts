@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, exhaustMap, map, of, tap, withLatestFrom } from 'rxjs';
+import { catchError, EMPTY, exhaustMap, map, withLatestFrom } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { selectPosts } from 'src/app/posts/store/posts.selector';
 

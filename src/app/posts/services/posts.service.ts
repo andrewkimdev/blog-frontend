@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, Observable, of, take, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, of, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { getCurrentUnixTimeInSeconds, createBlankPost } from '../../shared/functions';

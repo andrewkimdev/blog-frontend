@@ -29,6 +29,6 @@ export class PostsHomeComponent implements OnInit {
   }
 
   showPost(p: any) {
-    this.router.navigate(['posts', p.id]);
+    this.router.navigate(['posts', p.id]).then();
   }
 }

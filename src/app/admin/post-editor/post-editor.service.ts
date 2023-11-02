@@ -10,7 +10,6 @@ import { Post } from 'src/app/shared/types';
 
 // Environment Variables
 import { environment } from 'src/environments/environment';
-import { PostsService } from '../../posts/services/posts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,6 @@ import { PostsService } from '../../posts/services/posts.service';
 export class PostEditorService {
   constructor(
     private http: HttpClient,
-    private postService: PostsService,
   ){}
 
   createNewPost(post: Post) {
