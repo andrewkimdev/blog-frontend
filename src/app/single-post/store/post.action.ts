@@ -13,4 +13,5 @@ export const loadPostByIdSuccess = createAction(
 
 export const loadPostByIdFailure = createAction(
   '[Single Post Page] Load Post by ID Failure',
+  props<{ id: number}>(),
 );

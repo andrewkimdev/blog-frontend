@@ -16,13 +16,22 @@ export class PostViewerEffects {
     private store: Store,
   ) {}
 
-  loadPost$ = createEffect(() => this.actions$.pipe(
+  loadCachedPost$ = createEffect(() => this.actions$.pipe(
     ofType(PostAction.loadPostById),
     withLatestFrom(this.store.pipe(select(selectPosts))),
     map(([action, posts]) => {
       const post = posts.find(post => post.id === action.id);
-      return post ? PostAction.loadPostByIdSuccess({ post }) :  PostAction.loadPostByIdFailure();
+      return post ? PostAction.loadPostByIdSuccess({ post }) :  PostAction.loadPostByIdFailure({ id: action.id });
     }),
     catchError(() => EMPTY),
   ));
+
+  loadPost$ = createEffect(() => this.actions$.pipe(
+    ofType(PostAction.loadPostByIdFailure),
+    exhaustMap(({ id }) => this.postService.getOneById(id)),
+    map((post) => {
+      return PostAction.loadPostByIdSuccess({ post });
+    }),
+    catchError(() => EMPTY),
+  ))
 }
