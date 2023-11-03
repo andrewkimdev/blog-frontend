@@ -9,7 +9,7 @@ import '@cds/core/icon/register.js';
 import { ClarityIcons, timesIcon } from '@cds/core/icon';
 
 // State Management
-import { selectPostEditor, selectPostEditorTag } from '../store/post-editor.selector';
+import { selectPost, selectPostTags } from '../store/post-editor.selector';
 import * as PostEditorAction from '../store/post-editor.action';
 
 @Component({
@@ -27,8 +27,8 @@ export class TagsComponent implements OnInit, OnDestroy {
   enterKeyPressed$ = new Subject<void>();
 
   private destroy$ = new Subject<void>();
-  tagLabels$ = this.store.select(selectPostEditorTag);
-  post$ = this.store.select(selectPostEditor);
+  tagLabels$ = this.store.select(selectPostTags);
+  post$ = this.store.select(selectPost);
 
   constructor(private store: Store){}
   ngOnInit(): void {
