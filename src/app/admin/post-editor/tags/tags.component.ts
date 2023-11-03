@@ -9,8 +9,8 @@ import '@cds/core/icon/register.js';
 import { ClarityIcons, timesIcon } from '@cds/core/icon';
 
 // State Management
-import { selectPost, selectPostTags } from '../store/post-editor.selector';
 import * as PostEditorAction from '../store/post-editor.action';
+import { selectPostTags } from '../store/post-editor.selector';
 
 @Component({
   selector: 'app-tags',
@@ -28,16 +28,11 @@ export class TagsComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
   tagLabels$ = this.store.select(selectPostTags);
-  post$ = this.store.select(selectPost);
 
   constructor(private store: Store){}
   ngOnInit(): void {
     this.setupTagInput();
     ClarityIcons.addIcons(timesIcon);
-
-    this.post$.pipe(
-      tap((res) => console.log(res))
-    ).subscribe();
   }
 
   onSpecialKeyPressed(event: KeyboardEvent): void {
@@ -49,7 +44,7 @@ export class TagsComponent implements OnInit, OnDestroy {
   }
 
   removeTag(tag: string): void {
-    this.store.dispatch(PostEditorAction.removeTag({ tag }))
+    this.store.dispatch(PostEditorAction.removeTag({ tag }));
   }
 
   private addTag(): void {

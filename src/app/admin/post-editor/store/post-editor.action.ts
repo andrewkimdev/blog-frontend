@@ -45,3 +45,12 @@ export const removeTag = createAction(
   '[PostEditor Page] Remove tag',
   props<{ tag: string }>(),
 );
+
+export const setMainImage = createAction(
+  '[PostEditor Page] Set image as main image',
+  props<{ imageId: string }>(),
+);
+
+export const unsetMainImage = createAction(
+  '[PostEditor Page] Unset image main image',
+);

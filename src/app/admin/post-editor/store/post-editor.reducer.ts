@@ -48,4 +48,12 @@ export const postEditorReducer = createReducer(
     const post = duplicatePost(state.post);
     return { ...state, post, isDirty: false };
   }),
+  on(PageEditorActions.setMainImage, (state, { imageId }) => {
+    const post: Post = duplicatePost(state.post, { mainImage: imageId });
+    return { ...state, post, isDirty: true };
+  }),
+  on(PageEditorActions.unsetMainImage, (state) => {
+    const post: Post = duplicatePost(state.post, { mainImage: null });
+    return { ...state, post, isDirty: true };
+  }),
 );

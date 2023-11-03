@@ -1,14 +1,30 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { ImageFileInfo } from '../image-uploader/image-file-info.interface';
-import { environment } from 'src/environments/environment';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+import { Subject, takeUntil, tap } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { ImageFileInfo } from '../image-uploader/image-file-info.interface';
+
+import * as PageEditorActions from 'src/app/admin/post-editor/store/post-editor.action';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-thumbnail-modal',
   templateUrl: './thumbnail-modal.component.html',
   styleUrls: ['./thumbnail-modal.component.scss']
 })
-export class ThumbnailModalComponent implements OnChanges {
+export class ThumbnailModalComponent implements OnInit, OnChanges, OnDestroy {
   @Input('imageFile')
   fileInfo!: ImageFileInfo;
 
@@ -21,13 +37,29 @@ export class ThumbnailModalComponent implements OnChanges {
   @Output('file-link')
   linkEmitter = new EventEmitter<string>();
 
-  isMainImage = new FormControl(false);
+  isMainImageInputControl = new FormControl(false);
 
   imageLink = '';
 
   copyButtonText = 'Insert Link'
 
-  constructor(private cdr: ChangeDetectorRef) {
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private store: Store,
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.isMainImageInputControl.valueChanges.pipe(
+      takeUntil(this.destroy$),
+      tap((res) =>
+        res
+          ? this.store.dispatch(PageEditorActions.setMainImage({ imageId: this.fileInfo.id }))
+          : this.store.dispatch(PageEditorActions.unsetMainImage())
+      ),
+    ).subscribe();
   }
 
   onCopyClicked() {
@@ -49,7 +81,7 @@ export class ThumbnailModalComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const info = changes['fileInfo'];
     if (changes['fileInfo']) {
-      this.imageLink = `![image](${environment.baseUrl}/images/${info.currentValue.id})`;
+      this.imageLink = `![image](${ environment.baseUrl }/images/${ info.currentValue.id })`;
     }
   }
 
@@ -60,8 +92,13 @@ export class ThumbnailModalComponent implements OnChanges {
     navigator.clipboard.write([clipboardItem]).then(() => {
       this.copyButtonText = 'Insert Link'
       this.cdr.detectChanges();
-    }).catch(err => {
+    }).catch((err: any) => {
       console.error('Could not copy text to clipboard', err);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
