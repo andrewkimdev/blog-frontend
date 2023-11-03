@@ -17,23 +17,23 @@ export const postEditorReducer = createReducer(
   initialState,
   on(PageEditorActions.initPostEditor, (state,{ id }) => {
     const post = duplicatePost(state.post, { id });
-    return { post, isDirty: false };
+    return { ...state, post, isDirty: false };
   }),
   on(PageEditorActions.updateTitle, (state, { title }) => {
     const post = duplicatePost(state.post, { title });
-    return { post, isDirty: true };
+    return { ...state, post, isDirty: true };
   }),
   on(PageEditorActions.selectCategory, (state, { category }) => {
     const post = duplicatePost(state.post, { category });
-    return { post, isDirty: true };
+    return { ...state, post, isDirty: true };
   }),
   on(PageEditorActions.setIsDraftState, (state, { isDraft }) => {
     const post = duplicatePost(state.post, { isDraft });
-    return { post, isDirty: true };
+    return { ...state, post, isDirty: true };
   }),
   on(PageEditorActions.updateText, (state, { text }) => {
     const post = duplicatePost(state.post, { text });
-    return { post, isDirty: true };
+    return { ...state, post, isDirty: true };
   }),
   on(PageEditorActions.addTag, (state, { tag }) => {
     const exists = tag && state.post.tags.some(t => t.toLowerCase() === tag.toLowerCase());
@@ -42,10 +42,10 @@ export const postEditorReducer = createReducer(
   on(PageEditorActions.removeTag, (state, { tag }) => {
     const updatedTags: string[] = state.post.tags.filter((t: string) => t !== tag);
     const post = duplicatePost(state.post, { tags: updatedTags });
-    return { post, isDirty: true };
+    return { ...state, post, isDirty: true };
   }),
   on(PageEditorActions.save, (state) => {
-    const post = duplicatePost(state.post, { updatedAt: getCurrentUnixTimeInSeconds() });
-    return { post, isDirty: false };
+    const post = duplicatePost(state.post);
+    return { ...state, post, isDirty: false };
   }),
 );
