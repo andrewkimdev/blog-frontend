@@ -1,12 +1,10 @@
 <div class="post-input-wrapper">
   <section class="buttons">
-    <app-buttons
-      (cancel)="onCancelClicked()">
-    </app-buttons>
+    <app-buttons/>
   </section>
 
   <section class="text">
-    <app-title></app-title>
+    <app-title/>
     <div class="post-organization">
       <app-categories [categories]="categories$ | async"></app-categories>
       <app-tags (tags)="onTagsUpdated($event)" [tagDelimiters]="[',', ';']"></app-tags>

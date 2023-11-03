@@ -27,3 +27,7 @@ export const selectCategory = createAction(
 export const save = createAction(
   '[PostEditor Page] Save post',
 );
+
+export const cancel = createAction(
+  '[PostEditor Page] Cancel post edit',
+);
