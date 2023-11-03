@@ -1,11 +1,16 @@
 // Angular Core Modules
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, debounceTime, filter, map, merge, Subject, takeUntil, tap } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { debounceTime, filter, map, merge, Subject, takeUntil, tap } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 // 3rd Party Vendor Modules
 import '@cds/core/icon/register.js';
 import { ClarityIcons, timesIcon } from '@cds/core/icon';
+
+// State Management
+import { selectPostEditorTag } from '../store/post-editor.selector';
+import * as PostEditorAction from '../store/post-editor.action';
 
 @Component({
   selector: 'app-tags',
@@ -13,9 +18,6 @@ import { ClarityIcons, timesIcon } from '@cds/core/icon';
   styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent implements OnInit, OnDestroy {
-  // User-added tags
-  @Output()
-  tags = new EventEmitter<string[]>;
 
   // Delimiters for tag input
   @Input()
@@ -25,12 +27,16 @@ export class TagsComponent implements OnInit, OnDestroy {
   enterKeyPressed$ = new Subject<void>();
 
   private destroy$ = new Subject<void>();
-  private tagLabelsSubject = new BehaviorSubject<string[]>([]);
-  tagLabels$ = this.tagLabelsSubject.asObservable();
+  tagLabels$ = this.store.select(selectPostEditorTag);
 
+  constructor(private store: Store){}
   ngOnInit(): void {
     this.setupTagInput();
     ClarityIcons.addIcons(timesIcon);
+
+    this.tagLabels$.pipe(
+      tap((res) => console.log(res))
+    ).subscribe();
   }
 
   onSpecialKeyPressed(event: KeyboardEvent): void {
@@ -41,25 +47,13 @@ export class TagsComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeTag(selectedTag: string): void {
-    const currentTags: string[] = this.tagLabelsSubject.value;
-    const updatedTags: string[] = currentTags.filter((tag: string) => tag !== selectedTag);
-    this.updateTags(updatedTags);
+  removeTag(tag: string): void {
+    this.store.dispatch(PostEditorAction.removeTag({ tag }))
   }
 
   private addTag(): void {
-    const tags: string[] = this.tagLabelsSubject.value;
     const tag: string = this.getTagFromInputControl();
-    if (!tag || tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())) {
-      return;
-    }
-    tags.push(tag);
-    this.updateTags(tags);
-  }
-
-  private updateTags(tags: string[]) {
-    this.tagLabelsSubject.next(tags);
-    this.tags.emit(tags);
+    this.store.dispatch(PostEditorAction.addTag({ tag }));
   }
 
   private getTagFromInputControl(): string {

@@ -17,7 +17,7 @@ import { Post } from 'src/app/shared/types';
 export class PostComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private store: Store<{ posts: Post[], id: number }>,
+    private store: Store,
   ) {}
 
   ngOnInit(): void {

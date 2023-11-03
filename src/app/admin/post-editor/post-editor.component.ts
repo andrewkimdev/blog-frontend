@@ -16,6 +16,9 @@ import { getCurrentUnixTimeInSeconds, getRandomNumberBetween } from 'src/app/sha
 // Application Data Type Definitions
 import { Post, Category } from 'src/app/shared/types';
 
+// State Management
+import { selectPostEditor } from './store/post-editor.selector';
+
 @Component({
   selector: 'app-post-editor',
   templateUrl: './post-editor.component.html',
@@ -57,16 +60,16 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     private postEditorService: PostEditorService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-    private store: Store<{post: Post}>,
+    private store: Store,
   ) {
   }
 
   ngOnInit(): void {
     this.refreshCategories();
     this.initNewPost();
-    this.store.select('post').subscribe(
+    this.store.select(selectPostEditor).subscribe(
       res => console.dir(res)
-    )
+    );
   }
 
   onSaveClicked() {
@@ -81,16 +84,6 @@ export class PostEditorComponent implements OnInit, OnDestroy {
   private duplicatePost(): Post {
     const post = this.postSubject.value;
     return { ...post, tags: [...post.tags], imageIdList: [...post.imageIdList]};
-  }
-
-  onCancelClicked(): void {
-    console.log('cancel clicked');
-  }
-
-  onTagsUpdated(tags: string[]): void {
-    const post: Post = { ...this.duplicatePost(), tags: [...tags] };
-    this.postSubject.next(post);
-    this.markPostAsDirty();
   }
 
   ngOnDestroy(): void {

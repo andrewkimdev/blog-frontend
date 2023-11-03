@@ -31,3 +31,13 @@ export const save = createAction(
 export const cancel = createAction(
   '[PostEditor Page] Cancel post edit',
 );
+
+export const addTag = createAction(
+  '[PostEditor Page] Add tag',
+  props<{ tag: string }>(),
+);
+
+export const removeTag = createAction(
+  '[PostEditor Page] Remove tag',
+  props<{ tag: string }>(),
+);

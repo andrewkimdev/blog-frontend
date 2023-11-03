@@ -3,23 +3,13 @@ import * as PageEditorActions from './post-editor.action';
 import { Post } from 'src/app/shared/types';
 
 import {
-  getCurrentUnixTimeInSeconds,
-  duplicatePost as duplicate,
+  duplicatePost as duplicate, createBlankPost,
 } from 'src/app/shared/functions';
 
-const initialState: Post = {
-  id: null,
-  authorId: null,
-  title: '',
-  body: '',
-  category: '',
-  tags: [],
-  isDraft: true,
-  createdAt: getCurrentUnixTimeInSeconds(),
-  updatedAt: null,
-  mainImage: null,
-  imageIdList: [],
-};
+export interface PostEditorState {
+  post: Post;
+}
+const initialState: Post = createBlankPost();
 
 export const postEditorReducer = createReducer(
   initialState,
@@ -27,4 +17,14 @@ export const postEditorReducer = createReducer(
   on(PageEditorActions.selectCategory, (state, { category }) => ({ ...duplicate(state), category })),
   on(PageEditorActions.setIsDraftState, (state, { isDraft }) => ({ ...duplicate(state), isDraft })),
   on(PageEditorActions.updateText, (state, { text }) => ({ ...duplicate(state), text })),
+  on(PageEditorActions.addTag, (state, { tag }) => {
+    if (!tag || state.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())) {
+      return state;
+    }
+    return { ...duplicate(state), tags: [...state.tags, tag] };
+  }),
+  on(PageEditorActions.removeTag, (state, { tag }) => {
+    const updatedTags: string[] = state.tags.filter((t: string) => t !== tag);
+    return { ...duplicate(state), tags: updatedTags };
+  }),
 );
