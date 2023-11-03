@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, filter, map, Subject, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, map, Subject, takeUntil, tap } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 
 import { Category } from 'src/app/shared/types';
@@ -33,6 +33,8 @@ export class CategoriesComponent implements OnInit, OnChanges, OnDestroy {
       takeUntil(this.destroy$),
       map((data) => data ?? ''),
       filter((data) => !!data),
+      debounceTime(300),
+      distinctUntilChanged(),
       tap((category: string) => this.store.dispatch(selectCategory({ category })))
     ).subscribe();
   }

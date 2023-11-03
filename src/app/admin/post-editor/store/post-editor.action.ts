@@ -1,5 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 
+export const initPostEditor = createAction(
+  '[PostEditor Page] Init post editor',
+  props<{ id: number }>(),
+)
 export const createPost = createAction(
   '[PostEditor Page] Create a brand new post'
 );

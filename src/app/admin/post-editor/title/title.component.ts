@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, Subject, takeUntil, tap } from 'rxjs';
 
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 
@@ -25,6 +25,8 @@ export class TitleComponent implements OnInit, OnDestroy {
     this.titleInputControl.valueChanges.pipe(
       takeUntil(this.destroy$),
       map((value) => value ?? ''),
+      debounceTime(300),
+      distinctUntilChanged(),
       tap((title) => this.store.dispatch(updateTitle({ title }))),
     ).subscribe();
   }

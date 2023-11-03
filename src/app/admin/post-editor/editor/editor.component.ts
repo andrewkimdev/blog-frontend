@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { map, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, map, Subject, takeUntil, tap } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { updateText } from '../store/post-editor.action';
@@ -59,6 +59,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     this.textInputFormControl.valueChanges.pipe(
       takeUntil(this.destroy$),
       map((value: string | null) => value ?? ''),
+      debounceTime(300),
       tap((text: string) => this.store.dispatch(updateText({ text }))),
     ).subscribe();
   }

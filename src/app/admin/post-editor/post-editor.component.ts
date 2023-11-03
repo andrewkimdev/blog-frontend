@@ -18,6 +18,7 @@ import { Post, Category } from 'src/app/shared/types';
 
 // State Management
 import { selectPostEditor } from './store/post-editor.selector';
+import * as PostEditorAction from './store/post-editor.action';
 
 @Component({
   selector: 'app-post-editor',
@@ -67,6 +68,8 @@ export class PostEditorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.refreshCategories();
     this.initNewPost();
+    this.store.dispatch(PostEditorAction.initPostEditor({ id: this.getCurrentPostId()}));
+
     this.store.select(selectPostEditor).subscribe(
       res => console.dir(res)
     );
@@ -128,6 +131,6 @@ export class PostEditorComponent implements OnInit, OnDestroy {
   }
 
   getCurrentPostId(): number {
-    return this.route.snapshot.params['id'];
+    return +this.route.snapshot.params['id'];
   }
 }
