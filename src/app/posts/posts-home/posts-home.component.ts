@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 
 import { Post } from 'src/app/shared/types';
-import * as PostsAction from './../store/posts.action';
+
 import { PostsState } from '../store/posts.reducer';
 import { selectPosts } from '../store/posts.selector';
+import * as PostsAction from './../store/posts.action';
 
 @Component({
   selector: 'app-posts-home',
@@ -15,9 +16,7 @@ import { selectPosts } from '../store/posts.selector';
   styleUrls: ['./posts-home.component.scss']
 })
 export class PostsHomeComponent implements OnInit {
-  posts$: Observable<Post[]> = this.store.pipe(select(selectPosts)).pipe(
-    tap((res) => console.log(res)),
-  );
+  posts$: Observable<Post[]> = this.store.pipe(select(selectPosts));
 
   constructor(
     private router: Router,
@@ -25,7 +24,7 @@ export class PostsHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(PostsAction.loadPosts());
+    this.store.dispatch(PostsAction.loadPostsFromCache());
   }
 
   showPost(p: any) {

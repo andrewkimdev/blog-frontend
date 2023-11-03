@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.getPostId();
-    this.store.dispatch(PostAction.loadPostById({ id }));
+    this.store.dispatch(PostAction.loadPostByIdFromCache({ id }));
   }
 
   post$: Observable<Post> = this.store.select(selectSinglePost);

@@ -1,9 +1,14 @@
 import { createAction, props } from '@ngrx/store';
 import { Post } from 'src/app/shared/types';
 
-export const loadPostById = createAction(
-  '[Single Post Page] Load Post by ID',
+export const loadPostByIdFromCache = createAction(
+  '[Single Post Page] Load Post by ID from cache',
   props<{ id: number }>(),
+);
+
+export const loadPostByIdFromServer = createAction(
+  '[Single Post Page] Load Post by ID from Server',
+  props<{ id: number}>(),
 );
 
 export const loadPostByIdSuccess = createAction(
@@ -11,7 +16,3 @@ export const loadPostByIdSuccess = createAction(
   props<{ post: Post }>(),
 );
 
-export const loadPostByIdFailure = createAction(
-  '[Single Post Page] Load Post by ID Failure',
-  props<{ id: number}>(),
-);

@@ -17,17 +17,17 @@ export class PostViewerEffects {
   ) {}
 
   loadCachedPost$ = createEffect(() => this.actions$.pipe(
-    ofType(PostAction.loadPostById),
+    ofType(PostAction.loadPostByIdFromCache),
     withLatestFrom(this.store.pipe(select(selectPosts))),
     map(([action, posts]) => {
       const post = posts.find(post => post.id === action.id);
-      return post ? PostAction.loadPostByIdSuccess({ post }) :  PostAction.loadPostByIdFailure({ id: action.id });
+      return post ? PostAction.loadPostByIdSuccess({ post }) :  PostAction.loadPostByIdFromServer({ id: action.id });
     }),
     catchError(() => EMPTY),
   ));
 
   loadPost$ = createEffect(() => this.actions$.pipe(
-    ofType(PostAction.loadPostByIdFailure),
+    ofType(PostAction.loadPostByIdFromServer),
     exhaustMap(({ id }) => this.postService.getOneById(id)),
     map((post) => {
       return PostAction.loadPostByIdSuccess({ post });
