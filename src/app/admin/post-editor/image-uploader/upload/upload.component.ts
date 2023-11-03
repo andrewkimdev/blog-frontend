@@ -9,11 +9,13 @@ import {
   ViewChild
 } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
-import { UploadService } from './upload.service';
-
 import { ImageFileInfo } from '../image-file-info.interface';
+
+import { UploadService } from './upload.service';
+import * as PostEditorAction from '../../store/post-editor.action';
 
 @Component({
   selector: 'app-upload',
@@ -34,8 +36,9 @@ export class UploadComponent implements OnInit {
   isDragOver: boolean = false;
 
   constructor(
-    private uploadService: UploadService,
+    private store: Store,
     private cdr: ChangeDetectorRef,
+    private uploadService: UploadService,
   ) {
   }
 
@@ -90,6 +93,7 @@ export class UploadComponent implements OnInit {
       if (thumbnailUrl && id) {
         const imageFileInfo: ImageFileInfo = { id, postId, imageUrl: thumbnailUrl };
         this.imageFile.emit(imageFileInfo);
+        this.store.dispatch(PostEditorAction.addImage({ imageId: id }));
         this.cdr.detectChanges();
       }
     };

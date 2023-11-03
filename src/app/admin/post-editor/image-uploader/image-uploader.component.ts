@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ImageFileInfo } from './image-file-info.interface';
+import * as PostEditorActions from '../store/post-editor.action';
 
 @Component({
   selector: 'app-image-uploader',
@@ -17,6 +19,8 @@ export class ImageUploaderComponent {
   imageFile!: ImageFileInfo ;
 
   isModalOpen: boolean = false;
+
+  constructor(private store: Store){}
 
   openModal(i: number) {
     this.isModalOpen = true;
@@ -43,5 +47,6 @@ export class ImageUploaderComponent {
 
   onRemovalTriggered(i: number) {
     this.imageFileList.splice(i, 1);
+    this.store.dispatch(PostEditorActions.removeImage({ index: i }))
   }
 }

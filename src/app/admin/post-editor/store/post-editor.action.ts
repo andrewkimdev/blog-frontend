@@ -54,3 +54,13 @@ export const setMainImage = createAction(
 export const unsetMainImage = createAction(
   '[PostEditor Page] Unset image main image',
 );
+
+export const addImage = createAction(
+  '[PostEditor Page] Add an image to post',
+  props<{ imageId: string }>(),
+);
+
+export const removeImage = createAction(
+  '[PostEditor Page] Remove an image to post',
+  props<{ index: number }>(),
+);

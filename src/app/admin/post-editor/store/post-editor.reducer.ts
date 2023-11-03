@@ -4,7 +4,7 @@ import { Post } from 'src/app/shared/types';
 
 import {
   createBlankPost,
-  duplicatePost, getCurrentUnixTimeInSeconds,
+  duplicatePost,
 } from 'src/app/shared/functions';
 
 export interface PostEditorState {
@@ -54,6 +54,14 @@ export const postEditorReducer = createReducer(
   }),
   on(PageEditorActions.unsetMainImage, (state) => {
     const post: Post = duplicatePost(state.post, { mainImage: null });
+    return { ...state, post, isDirty: true };
+  }),
+  on(PageEditorActions.addImage, (state, { imageId }) => {
+    const post: Post = duplicatePost(state.post, { imageIdList: [...state.post.imageIdList, imageId] });
+    return { ...state, post, isDirty: true };
+  }),
+  on(PageEditorActions.removeImage, (state, { index }) => {
+    const post: Post = duplicatePost(state.post, { imageIdList: state.post.imageIdList.filter((_, i) => i !== index) });
     return { ...state, post, isDirty: true };
   }),
 );
