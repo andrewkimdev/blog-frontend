@@ -17,11 +17,11 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   constructor(private store: Store){}
 
   onSaveButtonClicked(): void {
-    this.store.dispatch(PostEditorAction.save());
+    this.store.dispatch(PostEditorAction.savePost());
   }
 
   onCancelButtonClicked(): void {
-    this.store.dispatch(PostEditorAction.cancel());
+    this.store.dispatch(PostEditorAction.abandonPostEdit());
   }
 
   ngOnInit(): void {

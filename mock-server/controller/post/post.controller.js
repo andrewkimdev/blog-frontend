@@ -33,8 +33,23 @@ router.get('/posts/:id', (req, res) => {
 
 router.post('/posts', (req, res) => {
   req.body.createdAt = getTimeStamp();
-  posts.push(req.body);
-  res.status(201).json(posts);
+
+  // todo: make this database-dependent
+  const ids = posts.map(p => p.id);
+
+  const maxId = ids.length > 0 ? Math.max(...ids) : 0;
+  const nextId = maxId + 1;
+
+  // add post to posts array
+  const newPost = {
+    id: nextId,
+    createdAt: getTimeStamp(),
+  };
+
+  posts.push(newPost);
+
+  // todo: add author id
+  res.status(201).json(newPost);
 });
 
 router.post('/posts/:id/image', upload.single('image'), (req, res) => {
@@ -84,15 +99,12 @@ router.get('/images/:uuid', (req, res) => {
   });
 });
 
-
-
-
 router.put('/posts/:id', (req, res) => {
   const targetIndex = posts.findIndex((p) => +p.id === +req.params.id)
   req.body.id = +req.params.id;
   req.body.updatedAt = getTimeStamp();
   posts[targetIndex] = req.body;
-  res.status(200).json(posts);
+  res.status(200).json(posts[targetIndex]);
 });
 
 router.delete('/posts/:id', (req, res) => {

@@ -7,9 +7,14 @@ export const loadPostsFromCache = createAction(
 
 export const loadPostsFromServer = createAction(
   '[Posts Page] Load Posts from Server'
-)
+);
 
 export const postsLoadSuccess = createAction(
   '[Posts Page] Posts Loaded Success',
   props<{ posts: Post[]}>(),
+);
+
+export const addNewPost = createAction(
+  '[Posts Page] Add newly created/saved post',
+  props<{ post: Post}>(),
 );

@@ -24,6 +24,7 @@ import { ImageUploaderComponent } from './post-editor/image-uploader/image-uploa
 import { UploadComponent } from './post-editor/image-uploader/upload/upload.component';
 import { ThumbnailComponent } from './post-editor/thumbnail/thumbnail.component';
 import { ThumbnailModalComponent } from './post-editor/thumbnail-modal/thumbnail-modal.component';
+import { CreateNewPostComponent } from './create-new-post/create-new-post.component';
 
 // State Management
 import { postEditorReducer } from './post-editor/store/post-editor.reducer';
@@ -45,6 +46,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     ThumbnailComponent,
     ImageUploaderComponent,
     ThumbnailModalComponent,
+    CreateNewPostComponent,
   ],
   imports: [
     CommonModule,

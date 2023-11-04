@@ -7,7 +7,9 @@ const initialState: PostsState = { posts: [] };
 export interface PostsState {
   posts: Post[];
 }
+
 export const postsReducer = createReducer(
   initialState,
-  on(PostsAction.postsLoadSuccess, (_, { posts }) => ({ posts }) ),
+  on(PostsAction.postsLoadSuccess, (_, { posts }) => ({ posts })),
+  on(PostsAction.addNewPost, (state, { post }) => ({ ...state, post: [...state.posts, post]})),
 );

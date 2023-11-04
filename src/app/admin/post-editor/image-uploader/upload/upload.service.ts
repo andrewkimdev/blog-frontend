@@ -9,7 +9,9 @@ import { FileUploadResponse } from '../file-upload-response.interface';
   providedIn: 'root'
 })
 export class UploadService {
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   uploadImage(postId: number, selectedFile: File): Observable<FileUploadResponse> {
     const fd = new FormData();

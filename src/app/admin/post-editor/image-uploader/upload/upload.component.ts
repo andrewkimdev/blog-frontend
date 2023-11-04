@@ -1,3 +1,4 @@
+// Angular Core Modules
 import {
   ChangeDetectorRef,
   Component,
@@ -9,12 +10,19 @@ import {
   ViewChild
 } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { Store } from '@ngrx/store';
 
+// 3rd Party Vendor Modules
+import { Store } from '@ngrx/store';
 import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
+
+// Custom Data Definitions
+import { FileUploadResponse } from 'src/app/admin/post-editor/image-uploader/file-upload-response.interface';
 import { ImageFileInfo } from '../image-file-info.interface';
 
+// Application Services
 import { UploadService } from './upload.service';
+
+// State Management
 import * as PostEditorAction from '../../store/post-editor.action';
 
 @Component({
@@ -36,8 +44,8 @@ export class UploadComponent implements OnInit {
   isDragOver: boolean = false;
 
   constructor(
-    private store: Store,
     private cdr: ChangeDetectorRef,
+    private store: Store,
     private uploadService: UploadService,
   ) {
   }
@@ -108,11 +116,10 @@ export class UploadComponent implements OnInit {
     this.uploadService.uploadImage(postId, selectedFile).pipe(
       tap((res) => console.log(res)),
       catchError(this.handleUploadError)
-    ).subscribe((res) => {
+    ).subscribe((res: FileUploadResponse | null) => {
       if (res?.id) {
         this.createThumbnailAndEmit(res.id, postId, selectedFile);
       }
     });
   }
-
 }

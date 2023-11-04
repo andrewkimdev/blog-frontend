@@ -1,12 +1,32 @@
 import { createAction, props } from '@ngrx/store';
 
-export const initPostEditor = createAction(
-  '[PostEditor Page] Init post editor',
-  props<{ id: number }>(),
-)
 export const createPost = createAction(
-  '[PostEditor Page] Create a brand new post'
+  '[PostEditor Page] Create a brand new post at server',
 );
+
+export const createPostFailure = createAction(
+  'ERROR - [PostEditor Page] Create a brand new post at server',
+  props<{ err: any }>(),
+)
+
+export const initPost = createAction(
+  '[PostEditor Page] Init a post with id & timestamp from server',
+  props<{ id: number, createdAt: number }>(),
+)
+
+export const moveToEditorRoute = createAction(
+  '[PostEditor Page] Move to editor route',
+  props<{ id: number }>(),
+);
+
+export const savePost = createAction(
+  '[PostEditor Page] Save post',
+);
+
+export const abandonPostEdit = createAction(
+  '[PostEditor Page] Cancel post edit',
+);
+
 
 export const updateTitle = createAction(
   '[PostEditor Page] Update title',
@@ -26,14 +46,6 @@ export const setIsDraftState = createAction(
 export const selectCategory = createAction(
   '[PostEditor Page] Select category',
   props<{ category: string }>(),
-)
-
-export const save = createAction(
-  '[PostEditor Page] Save post',
-);
-
-export const cancel = createAction(
-  '[PostEditor Page] Cancel post edit',
 );
 
 export const addTag = createAction(
