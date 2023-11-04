@@ -1,6 +1,6 @@
 <div *ngIf="post$ | async as post; else loading" class="post-container">
     <h1>{{ post.title }}</h1>
-    <img class="main-image" [src]="post.mainImage" [alt]="'Main image of ' + post.title"/>
+    <img class="main-image" [src]="getImageUrl(post.mainImage)" [alt]="'Main image of ' + post.title"/>
 
     <div
         *ngIf="post.updatedAt && post.updatedAt !== post.createdAt"
