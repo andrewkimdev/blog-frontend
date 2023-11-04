@@ -11,5 +11,7 @@ export interface PostsState {
 export const postsReducer = createReducer(
   initialState,
   on(PostsAction.postsLoadSuccess, (_, { posts }) => ({ posts })),
-  on(PostsAction.addNewPost, (state, { post }) => ({ ...state, post: [...state.posts, post]})),
+  on(PostsAction.addNewPost, (state, { post }) => (
+    { ...state, posts: [...state.posts, post]}
+  )),
 );
