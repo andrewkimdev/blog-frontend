@@ -17,6 +17,7 @@ import { Category } from 'src/app/shared/types';
 
 // State Management
 import { selectPost } from '../store/post-editor.selector';
+import * as PostEditorActions from '../store/post-editor.action';
 
 @Component({
   selector: 'app-post-editor',
@@ -62,6 +63,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.store.dispatch(PostEditorActions.clearPost());
     this.destroy$.next();
     this.destroy$.complete();
   }

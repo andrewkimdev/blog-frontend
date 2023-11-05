@@ -27,6 +27,9 @@ export const abandonPostEdit = createAction(
   '[PostEditor Page] Cancel post edit',
 );
 
+export const clearPost = createAction(
+  '[PostEditor Page] Clear Post Edit cache',
+);
 
 export const updateTitle = createAction(
   '[PostEditor Page] Update title',
