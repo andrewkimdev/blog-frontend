@@ -6,7 +6,7 @@
   <section class="text">
     <app-title/>
     <div class="post-organization">
-      <app-categories [categories]="categories$ | async"></app-categories>
+      <app-categories/>
       <app-tags [tagDelimiters]="[',', ';']"></app-tags>
     </div>
     <app-image-uploader [postId]="getCurrentPostId()" (file-link)="onFileLinkUpdated($event)"></app-image-uploader>

@@ -32,6 +32,11 @@ export class SinglePostHome implements OnInit {
     return +this.route.snapshot.params['id'];
   }
 
+  editPost(): void {
+    const id = this.getPostId();
+    this.store.dispatch(PostAction.moveToEditorRoute({ id }));
+  }
+
   getImageUrl(str: string | null): string {
     if (!str) {
       // todo - return a generic main message for the category or other key words.

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, exhaustMap, map, withLatestFrom } from 'rxjs';
+import { catchError, EMPTY, exhaustMap, map, tap, withLatestFrom } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 
@@ -34,5 +34,10 @@ export class PostViewerEffects {
       return PostAction.loadPostByIdSuccess({ post });
     }),
     catchError(() => EMPTY),
-  ))
+  ));
+
+  moveToEditorPath$ = createEffect(() => this.actions$.pipe(
+    ofType(PostAction.moveToEditorRoute),
+    tap(({ id }) => this.postService.moveToEditorRoute(id)),
+  ), { dispatch: false });
 }

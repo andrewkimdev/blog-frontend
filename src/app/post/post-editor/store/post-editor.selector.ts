@@ -14,9 +14,3 @@ export const selectPostTags = createSelector(
   selectPost,
   (post: Post) => post.tags,
 );
-
-export const selectPostId = createSelector(
-  selectPost,
-  (post: Post) => post.id,
-);
-

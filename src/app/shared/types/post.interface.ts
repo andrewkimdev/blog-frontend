@@ -1,4 +1,5 @@
 import { User } from 'src/app/shared/types/author.interface';
+import { Category } from 'src/app/shared/types/category.interface';
 
 export interface Post {
   id: number | null;
@@ -6,7 +7,7 @@ export interface Post {
   author?: User;
   title: string;
   body: string;
-  category: string | null;
+  category: Category | null;
   tags: string[];
   mainImage: string | null;
   imageIdList: string[];

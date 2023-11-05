@@ -1,4 +1,5 @@
 <div *ngIf="post$ | async as post; else loading" class="post-container">
+    <button (click)="editPost()" class="btn btn-danger-outline">Edit</button>
     <h1>{{ post.title }}</h1>
     <img *ngIf="post.mainImage" class="main-image" [src]="getImageUrl(post.mainImage)" [alt]="'Main image of ' + post.title"/>
 

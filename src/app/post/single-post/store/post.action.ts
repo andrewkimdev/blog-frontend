@@ -16,3 +16,7 @@ export const loadPostByIdSuccess = createAction(
   props<{ post: Post }>(),
 );
 
+export const moveToEditorRoute = createAction(
+  '[Single Post Page] Move to Editor Route',
+  props<{ id: number }>(),
+)

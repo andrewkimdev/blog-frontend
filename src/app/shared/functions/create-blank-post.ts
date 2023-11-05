@@ -7,7 +7,7 @@ export const createBlankPost = (): Post =>
     authorId: null,
     title: '',
     body: '',
-    category: '',
+    category: null,
     tags: [],
     isDraft: true,
     createdAt: getCurrentUnixTimeInSeconds(),

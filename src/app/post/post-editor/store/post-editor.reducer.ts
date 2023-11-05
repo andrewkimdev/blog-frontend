@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as PageEditorActions from './post-editor.action';
-import { Post } from 'src/app/shared/types';
+import { Category, Post } from 'src/app/shared/types';
 
 import {
   createBlankPost,
@@ -10,8 +10,9 @@ import {
 export interface PostEditorState {
   post: Post;
   isDirty: boolean;
+  categories: Category[],
 }
-const initialState: PostEditorState = { post: createBlankPost(), isDirty: false };
+const initialState: PostEditorState = { post: createBlankPost(), isDirty: false, categories: [] };
 
 export const postEditorReducer = createReducer(
   initialState,
@@ -31,7 +32,7 @@ export const postEditorReducer = createReducer(
     const post = duplicatePost(state.post, { title });
     return { ...state, post, isDirty: true };
   }),
-  on(PageEditorActions.selectCategory, (state, { category }) => {
+  on(PageEditorActions.setCategory, (state, { category }) => {
     const post = duplicatePost(state.post, { category });
     return { ...state, post, isDirty: true };
   }),

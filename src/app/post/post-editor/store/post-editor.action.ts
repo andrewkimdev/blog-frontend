@@ -50,7 +50,7 @@ export const setIsDraftState = createAction(
   props<{ isDraft: boolean }>()
 );
 
-export const selectCategory = createAction(
+export const setCategory = createAction(
   '[PostEditor Page] Select category',
   props<{ category: string }>(),
 );

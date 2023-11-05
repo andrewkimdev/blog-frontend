@@ -10,7 +10,7 @@ import { ClarityIcons, timesIcon } from '@cds/core/icon';
 
 // State Management
 import * as PostEditorAction from '../../store/post-editor.action';
-import { selectPostTags } from '../../store/post-editor.selector';
+import { selectPostTags } from 'src/app/post/post-editor/store/post-editor.selector';
 
 @Component({
   selector: 'app-tags',
