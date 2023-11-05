@@ -11,7 +11,16 @@ export interface PostsState {
 export const postsReducer = createReducer(
   initialState,
   on(PostsAction.postsLoadSuccess, (_, { posts }) => ({ posts })),
-  on(PostsAction.addNewPost, (state, { post }) => (
-    { ...state, posts: [...state.posts, post]}
-  )),
+  on(PostsAction.savePost, savePostHandler),
 );
+
+function savePostHandler(state: PostsState, { post }: { post: Post }) {
+    const existingPostIndex = state.posts.findIndex(existingPost => existingPost.id === post.id);
+    const updatedPostList: Post[] = existingPostIndex > -1
+      ? state.posts.map((currentPost, index) => index === existingPostIndex ? post : currentPost)
+      : [...state.posts, post];
+    return {
+      ...state,
+      posts: updatedPostList,
+    };
+}

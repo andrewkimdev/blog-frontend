@@ -14,7 +14,7 @@ export const postsLoadSuccess = createAction(
   props<{ posts: Post[]}>(),
 );
 
-export const addNewPost = createAction(
+export const savePost = createAction(
   '[Posts Page] Add newly created/saved post',
   props<{ post: Post}>(),
 );

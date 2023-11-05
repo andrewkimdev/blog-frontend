@@ -36,7 +36,7 @@ export class PostEditorEffects {
     ofType(PostEditorAction.savePost),
     switchMap(() => this.post$),
     exhaustMap(( post ) => this.postEditorService.updatePost(post)),
-    map((post) => PostsAction.addNewPost({ post })),
+    map((post) => PostsAction.savePost({ post })),
   ));
 
   moveToNewPostEditorRoute$ = createEffect(() => this.actions$.pipe(
