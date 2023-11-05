@@ -12,9 +12,9 @@ import { selectPosts } from '../../post-list/store/posts.selector';
 export class PostViewerEffects {
 
   constructor(
-    private actions$: Actions,
-    private postService: PostService,
     private store: Store,
+    private postService: PostService,
+    private actions$: Actions,
   ) {}
 
   loadCachedPost$ = createEffect(() => this.actions$.pipe(
