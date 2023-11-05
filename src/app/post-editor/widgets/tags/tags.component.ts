@@ -49,7 +49,9 @@ export class TagsComponent implements OnInit, OnDestroy {
 
   private addTag(): void {
     const tag: string = this.getTagFromInputControl();
-    this.store.dispatch(PostEditorAction.addTag({ tag }));
+    if (tag.trim()) {
+      this.store.dispatch(PostEditorAction.addTag({ tag }));
+    }
   }
 
   private getTagFromInputControl(): string {
