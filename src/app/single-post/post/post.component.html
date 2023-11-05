@@ -16,7 +16,7 @@
             class="user-profile-image"
         />
     </div>
-    <div *ngIf="post.createdAt" class="created-at">Created at: {{ post.createdAt * 1000 | date:'yyyy/MM/dd' }}</div>
+    <div *ngIf="post.createdAt && !post.updatedAt" class="created-at">Created at: {{ post.createdAt * 1000 | date:'yyyy/MM/dd' }}</div>
     <h6 *ngIf="post.category">Category: {{ post.category }}</h6>
     <div *ngIf="post.tags.length > 0" class="tag-container">
         <span *ngFor="let tag of post.tags" class="label label-info">{{ tag }}</span>
