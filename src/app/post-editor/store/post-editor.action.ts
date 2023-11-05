@@ -31,6 +31,10 @@ export const clearPost = createAction(
   '[PostEditor Page] Clear Post Edit cache',
 );
 
+export const setPostId = createAction(
+  '[PostEditor Page] Set post id as id is null',
+  props<{ id: number }>(),
+)
 export const updateTitle = createAction(
   '[PostEditor Page] Update title',
   props<{ title: string }>(),

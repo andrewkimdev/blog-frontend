@@ -15,6 +15,6 @@ export const postsLoadSuccess = createAction(
 );
 
 export const savePost = createAction(
-  '[Posts Page] Add newly created/saved post',
+  '[Posts Page] Save post to view list',
   props<{ post: Post}>(),
 );

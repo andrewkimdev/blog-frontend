@@ -19,6 +19,14 @@ export const postEditorReducer = createReducer(
     const post = duplicatePost(state.post, { id, createdAt });
     return { ...state, post, isDirty: false };
   }),
+  on(PageEditorActions.setPostId, (state, { id }) => {
+    if (!state.post.id) {
+      const post = duplicatePost(state.post, { id });
+      return { ...state, post, isDirty: false };
+    } else {
+      return state;
+    }
+  }),
   on(PageEditorActions.updateTitle, (state, { title }) => {
     const post = duplicatePost(state.post, { title });
     return { ...state, post, isDirty: true };
@@ -45,6 +53,9 @@ export const postEditorReducer = createReducer(
     return { ...state, post, isDirty: true };
   }),
   on(PageEditorActions.savePost, (state) => {
+    if (!state.post.id) {
+      return state;
+    }
     const post = duplicatePost(state.post);
     return { ...state, post, isDirty: false };
   }),

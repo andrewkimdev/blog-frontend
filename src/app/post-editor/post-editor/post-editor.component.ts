@@ -1,6 +1,6 @@
 // Angular Core Modules
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, distinctUntilChanged, map, Observable, Subject, tap } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map, Observable, Subject, take, tap } from 'rxjs';
 
 import { ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -57,8 +57,17 @@ export class PostEditorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refreshCategories();
-    this.store.select(selectPost).subscribe(
-      res => console.log(res)
+    this.ensurePostId();
+  }
+
+  // This is needed when the user has just refreshed page and arrived at post editor view.
+  private ensurePostId() {
+    this.store.select(selectPost).pipe(take(1)).subscribe(
+      post => {
+        if (!post.id) {
+          this.store.dispatch(PostEditorActions.setPostId({ id: this.getCurrentPostId() }));
+        }
+      }
     );
   }
 
