@@ -84,7 +84,7 @@ export class UploadComponent implements OnInit {
   private handleSelectedFiles(files?: FileList | null) {
     if (files && files.length > 0) {
       this.selectedFile = files[0];
-      this.uploadFile(this.postId, this.selectedFile);
+      this.uploadFile(this.selectedFile);
     }
   }
 
@@ -94,12 +94,12 @@ export class UploadComponent implements OnInit {
     return of(null);
   }
 
-  private createThumbnailAndEmit(id: string, postId: number, selectedFile: File): void {
+  private createThumbnailAndEmit(id: string, selectedFile: File): void {
     const reader = new FileReader();
     reader.onload = (event) => {
       const thumbnailUrl = event.target?.result as ArrayBuffer;
       if (thumbnailUrl && id) {
-        const imageFileInfo: ImageFileInfo = { id, postId, imageUrl: thumbnailUrl };
+        const imageFileInfo: ImageFileInfo = { id, imageUrl: thumbnailUrl };
         this.imageFile.emit(imageFileInfo);
         this.store.dispatch(PostEditorAction.addImage({ imageId: id }));
         this.cdr.detectChanges();
@@ -108,17 +108,17 @@ export class UploadComponent implements OnInit {
     reader.readAsDataURL(selectedFile);
   }
 
-  private uploadFile(postId: number | null, selectedFile: File): void {
-    if (!postId || !selectedFile) {
+  private uploadFile(selectedFile: File): void {
+    if (!selectedFile) {
       return;
     }
 
-    this.uploadService.uploadImage(postId, selectedFile).pipe(
+    this.uploadService.uploadImage(selectedFile).pipe(
       tap((res) => console.log(res)),
       catchError(this.handleUploadError)
     ).subscribe((res: FileUploadResponse | null) => {
       if (res?.id) {
-        this.createThumbnailAndEmit(res.id, postId, selectedFile);
+        this.createThumbnailAndEmit(res.id, selectedFile);
       }
     });
   }

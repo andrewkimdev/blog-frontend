@@ -13,9 +13,9 @@ export class UploadService {
     private http: HttpClient,
   ) { }
 
-  uploadImage(postId: number, selectedFile: File): Observable<FileUploadResponse> {
+  uploadImage(selectedFile: File): Observable<FileUploadResponse> {
     const fd = new FormData();
     fd.append('image', selectedFile, encodeURIComponent(selectedFile.name));
-    return this.http.post<FileUploadResponse>(`${environment.baseUrl}/posts/${postId}/image`, fd);
+    return this.http.post<FileUploadResponse>(`${environment.baseUrl}/image`, fd);
   }
 }
