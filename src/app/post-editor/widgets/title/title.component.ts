@@ -4,7 +4,7 @@ import { debounceTime, distinctUntilChanged, map, Subject, takeUntil, tap } from
 
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 
-import { updateTitle } from '../store/post-editor.action';
+import { updateTitle } from '../../store/post-editor.action';
 
 @Component({
   selector: 'app-title',

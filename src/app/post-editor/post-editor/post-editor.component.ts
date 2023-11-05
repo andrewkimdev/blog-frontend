@@ -9,14 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 // Application Services and Functions
-import { CategoryService } from './categories/category.service';
+import { CategoryService } from '../widgets/categories/category.service';
 import { getRandomNumberBetween } from 'src/app/shared/functions';
 
 // Application Data Type Definitions
 import { Category } from 'src/app/shared/types';
 
 // State Management
-import { selectPost } from './store/post-editor.selector';
+import { selectPost } from '../store/post-editor.selector';
 
 @Component({
   selector: 'app-post-editor',

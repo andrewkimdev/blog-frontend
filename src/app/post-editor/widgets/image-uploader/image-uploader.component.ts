@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ImageFileInfo } from './image-file-info.interface';
-import * as PostEditorActions from '../store/post-editor.action';
+import * as PostEditorActions from '../../store/post-editor.action';
 
 @Component({
   selector: 'app-image-uploader',

@@ -4,7 +4,7 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, map, Subje
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 
 import { Category } from 'src/app/shared/types';
-import { selectCategory } from '../store/post-editor.action';
+import { selectCategory } from '../../store/post-editor.action';
 
 @Component({
   selector: 'app-categories',

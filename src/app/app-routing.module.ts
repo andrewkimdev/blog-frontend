@@ -22,6 +22,11 @@ const appRoutes: Routes = [
       .then(m => m.PostsModule),
   },
   {
+    path: 'post-editor',
+    title: 'Post Editor',
+    loadChildren: () => import('./post-editor/post-editor.module').then(m => m.PostEditorModule),
+  },
+  {
     path: 'about-me',
     title: 'About Me',
     loadComponent: () => import('./about-me/about-me.component')

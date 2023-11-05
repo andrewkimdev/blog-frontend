@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ButtonsComponent } from 'src/app/admin/post-editor/buttons/buttons.component';
+import { ButtonsComponent } from './buttons.component';
 
 describe('ButtonsComponent', () => {
   let component: ButtonsComponent;

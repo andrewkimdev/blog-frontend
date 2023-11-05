@@ -16,14 +16,14 @@ import { Store } from '@ngrx/store';
 import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
 
 // Custom Data Definitions
-import { FileUploadResponse } from 'src/app/admin/post-editor/image-uploader/file-upload-response.interface';
 import { ImageFileInfo } from '../image-file-info.interface';
+import { FileUploadResponse } from '../file-upload-response.interface';
 
 // Application Services
 import { UploadService } from './upload.service';
 
 // State Management
-import * as PostEditorAction from '../../store/post-editor.action';
+import * as PostEditorAction from '../../../store/post-editor.action';
 
 @Component({
   selector: 'app-upload',

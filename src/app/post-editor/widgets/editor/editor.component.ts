@@ -11,7 +11,7 @@ import {
 import { debounceTime, map, Subject, takeUntil, tap } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { updateText } from '../store/post-editor.action';
+import { updateText } from '../../store/post-editor.action';
 
 @Component({
   selector: 'app-editor',

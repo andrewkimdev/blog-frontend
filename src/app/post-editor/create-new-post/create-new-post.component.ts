@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as PostEditorActions from '../post-editor/store/post-editor.action';
+import * as PostEditorActions from '../store/post-editor.action';
 
 @Component({
   template: '',

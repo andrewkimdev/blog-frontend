@@ -15,7 +15,7 @@ import { Store } from '@ngrx/store';
 
 import { ImageFileInfo } from '../image-uploader/image-file-info.interface';
 
-import * as PageEditorActions from 'src/app/admin/post-editor/store/post-editor.action';
+import * as PageEditorActions from '../../store/post-editor.action';
 
 import { environment } from 'src/environments/environment';
 

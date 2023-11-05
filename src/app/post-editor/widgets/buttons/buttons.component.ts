@@ -3,7 +3,7 @@ import { map, Subject, takeUntil, tap } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import * as PostEditorAction from '../store/post-editor.action';
+import * as PostEditorAction from '../../store/post-editor.action';
 
 @Component({
   selector: 'app-buttons',
