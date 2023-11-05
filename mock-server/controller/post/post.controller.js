@@ -43,6 +43,9 @@ router.post('/posts', (req, res) => {
 });
 
 router.put('/posts/:id', (req, res) => {
+  if (['null', 'undefined', ''].includes(req.body.id)) {
+      res.status(400).json({ message: 'id cannot be non-numeric: ' + req.body.id });
+  }
   const targetIndex = posts.findIndex((p) => +p.id === +req.params.id)
   req.body.id = +req.params.id;
   req.body.updatedAt = getTimeStamp();
