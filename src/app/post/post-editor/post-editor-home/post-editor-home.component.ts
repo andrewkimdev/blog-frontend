@@ -20,12 +20,12 @@ import { selectPost } from '../store/post-editor.selector';
 import * as PostEditorActions from '../store/post-editor.action';
 
 @Component({
-  selector: 'app-post-editor',
-  templateUrl: './post-editor.component.html',
-  styleUrls: ['./post-editor.component.scss'],
+  selector: 'app-single-post-home-editor',
+  templateUrl: './post-editor-home.component.html',
+  styleUrls: ['./post-editor-home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostEditorComponent implements OnInit, OnDestroy {
+export class PostEditorHomeComponent implements OnInit, OnDestroy {
   private addedTextSubject = new BehaviorSubject<string>('');
   addedText$ = this.addedTextSubject.asObservable();
 
@@ -60,7 +60,7 @@ export class PostEditorComponent implements OnInit, OnDestroy {
     this.ensurePostId();
   }
 
-  // This is needed when the user has just refreshed page and arrived at post editor view.
+  // This is needed when the user has just refreshed page and arrived at single-post-home editor view.
   private ensurePostId() {
     this.store.select(selectPost).pipe(take(1)).subscribe(
       post => {

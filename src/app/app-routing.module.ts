@@ -18,13 +18,13 @@ const appRoutes: Routes = [
   {
     path: 'posts',
     title: 'Posts',
-    loadChildren: () => import('./posts/posts.module')
+    loadChildren: () => import('./post/post-list/posts.module')
       .then(m => m.PostsModule),
   },
   {
     path: 'post-editor',
     title: 'Post Editor',
-    loadChildren: () => import('./post-editor/post-editor.module').then(m => m.PostEditorModule),
+    loadChildren: () => import('./post/post-editor/post-editor.module').then(m => m.PostEditorModule),
   },
   {
     path: 'about-me',

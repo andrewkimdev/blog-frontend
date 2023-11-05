@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { catchError, EMPTY, exhaustMap, map, withLatestFrom } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { selectPosts } from 'src/app/posts/store/posts.selector';
+import { select, Store } from '@ngrx/store';
+
+import { PostService } from '../services/post.service';
 
 import * as PostAction from './post.action';
-import { PostService } from '../service/post.service';
-import { select, Store } from '@ngrx/store';
+import { selectPosts } from '../../post-list/store/posts.selector';
 
 @Injectable()
 export class PostViewerEffects {

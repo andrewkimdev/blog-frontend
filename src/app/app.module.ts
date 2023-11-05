@@ -19,7 +19,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 // Routing Module
 import { AppRoutingModule } from './app-routing.module';
 
-import { PostsModule } from './posts/posts.module';
+import { PostsModule } from './post/post-list/posts.module';
 
 import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';

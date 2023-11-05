@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // 3rd Party Vendor Modules
-import { ClarityDesignSystemModule, NgxMarkdownModule } from '../lib';
+import { ClarityDesignSystemModule, NgxMarkdownModule } from '../../lib';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -12,7 +12,7 @@ import { CoreModule } from 'src/app/core/core.module';
 
 
 // Editor-related Components
-import { PostEditorComponent } from './post-editor/post-editor.component';
+import { PostEditorHomeComponent } from 'src/app/post/post-editor/post-editor-home/post-editor-home.component';
 import { TagsComponent } from './widgets/tags/tags.component';
 import { TitleComponent } from './widgets/title/title.component';
 import { EditorComponent } from './widgets/editor/editor.component';
@@ -33,7 +33,7 @@ import { PostEditorRoutingModule } from './post-editor-routing.module';
 
 @NgModule({
   declarations: [
-    PostEditorComponent,
+    PostEditorHomeComponent,
     TagsComponent,
     TitleComponent,
     EditorComponent,

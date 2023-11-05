@@ -11,7 +11,7 @@ import { selectPosts } from '../store/posts.selector';
 import * as PostsAction from './../store/posts.action';
 
 @Component({
-  selector: 'app-posts-home',
+  selector: 'app-single-post-home-list-home',
   templateUrl: './posts-home.component.html',
   styleUrls: ['./posts-home.component.scss']
 })

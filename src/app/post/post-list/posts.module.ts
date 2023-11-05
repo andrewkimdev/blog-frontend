@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { ClarityDesignSystemModule } from '../lib';
+import { ClarityDesignSystemModule } from '../../lib';
 
 import { PostsHomeComponent } from './posts-home/posts-home.component';
 

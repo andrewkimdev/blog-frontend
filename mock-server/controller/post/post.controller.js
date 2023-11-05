@@ -30,7 +30,7 @@ router.post('/posts', (req, res) => {
   const maxId = ids.length > 0 ? Math.max(...ids) : 0;
   const nextId = maxId + 1;
 
-  // add post to posts array
+  // add single-post-home to single-post-home-list array
   const newPost = {
     id: nextId,
     createdAt: getTimeStamp(),

@@ -1,16 +1,16 @@
 import { createAction, props } from '@ngrx/store';
 
 export const createPost = createAction(
-  '[PostEditor Page] Create a brand new post at server',
+  '[PostEditor Page] Create a brand new single-post-home at server',
 );
 
 export const createPostFailure = createAction(
-  'ERROR - [PostEditor Page] Create a brand new post at server',
+  'ERROR - [PostEditor Page] Create a brand new single-post-home at server',
   props<{ err: any }>(),
 )
 
 export const initPost = createAction(
-  '[PostEditor Page] Init a post with id & timestamp from server',
+  '[PostEditor Page] Init a single-post-home with id & timestamp from server',
   props<{ id: number, createdAt: number }>(),
 )
 
@@ -20,11 +20,11 @@ export const moveToEditorRoute = createAction(
 );
 
 export const savePost = createAction(
-  '[PostEditor Page] Save post',
+  '[PostEditor Page] Save single-post-home',
 );
 
 export const abandonPostEdit = createAction(
-  '[PostEditor Page] Cancel post edit',
+  '[PostEditor Page] Cancel single-post-home edit',
 );
 
 export const clearPost = createAction(
@@ -32,7 +32,7 @@ export const clearPost = createAction(
 );
 
 export const setPostId = createAction(
-  '[PostEditor Page] Set post id as id is null',
+  '[PostEditor Page] Set single-post-home id as id is null',
   props<{ id: number }>(),
 )
 export const updateTitle = createAction(
@@ -75,11 +75,11 @@ export const unsetMainImage = createAction(
 );
 
 export const addImage = createAction(
-  '[PostEditor Page] Add an image to post',
+  '[PostEditor Page] Add an image to single-post-home',
   props<{ imageId: string }>(),
 );
 
 export const removeImage = createAction(
-  '[PostEditor Page] Remove an image to post',
+  '[PostEditor Page] Remove an image to single-post-home',
   props<{ index: number }>(),
 );

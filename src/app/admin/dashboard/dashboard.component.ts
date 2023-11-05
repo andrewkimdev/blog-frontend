@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   }
 
   createPost() {
-    this.router.navigate(['post-editor', 'new']);
+    this.router.navigate(['post-editor-home', 'new']);
   }
 }
 

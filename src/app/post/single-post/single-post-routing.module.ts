@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PostComponent } from './post/post.component';
+import { SinglePostHome } from 'src/app/post/single-post/single-post-home/single-post-home.component';
 
 const postRoutes: Routes = [
-  { path: '', component: PostComponent }
+  { path: '', component: SinglePostHome }
 ]
 @NgModule({
   imports: [RouterModule.forChild(postRoutes)],

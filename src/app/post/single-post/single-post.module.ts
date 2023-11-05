@@ -4,9 +4,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { MarkdownModule } from 'ngx-markdown';
-import { CoreModule } from '../core/core.module';
+import { CoreModule } from 'src/app/core/core.module';
 
-import { PostComponent } from './post/post.component';
+import { SinglePostHome } from 'src/app/post/single-post/single-post-home/single-post-home.component';
 import { singlePostViewerReducer } from './store/post.reducer';
 import { PostViewerEffects } from './store/post.effect';
 import { SinglePostRoutingModule } from './single-post-routing.module';
@@ -15,7 +15,7 @@ import { SinglePostRoutingModule } from './single-post-routing.module';
 
 @NgModule({
   declarations: [
-    PostComponent,
+    SinglePostHome,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Post } from '../../shared/types';
+import { Post } from 'src/app/shared/types';
 
 export const loadPostsFromCache = createAction(
   '[Posts Page] Load Posts from Cache',
@@ -15,6 +15,6 @@ export const postsLoadSuccess = createAction(
 );
 
 export const savePost = createAction(
-  '[Posts Page] Save post to view list',
+  '[Posts Page] Save single-post-home to view list',
   props<{ post: Post}>(),
 );

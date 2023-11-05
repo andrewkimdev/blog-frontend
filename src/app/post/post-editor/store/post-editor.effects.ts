@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { PostEditorService } from '../post-editor.service';
+import { PostEditorService } from '../services/post-editor.service';
 import { selectPost } from '../store/post-editor.selector';
 
 import * as PostEditorAction from './post-editor.action';
-import * as PostsAction from '../../posts/store/posts.action';
+import * as PostsAction from '../../post-list/store/posts.action';
 
 @Injectable()
 export class PostEditorEffects {

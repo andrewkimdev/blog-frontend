@@ -6,17 +6,17 @@ import { Observable } from 'rxjs';
 
 import { Post } from 'src/app/shared/types';
 
-import { selectSinglePost } from 'src/app/single-post/store/post.selector';
+import { selectSinglePost } from 'src/app/post/single-post/store/post.selector';
 import { environment } from 'src/environments/environment';
 import * as PostAction from '../store/post.action';
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss'],
+  selector: 'app-single-post-home',
+  templateUrl: './single-post-home.component.html',
+  styleUrls: ['./single-post-home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostComponent implements OnInit {
+export class SinglePostHome implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store,
