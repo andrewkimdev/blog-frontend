@@ -35,7 +35,7 @@ export const updateTitle = createAction(
 
 export const updateText = createAction(
   '[PostEditor Page] Update text',
-  props<{ text: string}>(),
+  props<{ body: string}>(),
 );
 
 export const setIsDraftState = createAction(

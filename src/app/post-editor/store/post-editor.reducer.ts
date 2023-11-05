@@ -31,8 +31,8 @@ export const postEditorReducer = createReducer(
     const post = duplicatePost(state.post, { isDraft });
     return { ...state, post, isDirty: true };
   }),
-  on(PageEditorActions.updateText, (state, { text }) => {
-    const post = duplicatePost(state.post, { text });
+  on(PageEditorActions.updateText, (state, { body }) => {
+    const post = duplicatePost(state.post, { body });
     return { ...state, post, isDirty: true };
   }),
   on(PageEditorActions.addTag, (state, { tag }) => {

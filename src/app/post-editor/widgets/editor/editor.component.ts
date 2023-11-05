@@ -60,7 +60,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
       takeUntil(this.destroy$),
       map((value: string | null) => value ?? ''),
       debounceTime(300),
-      tap((text: string) => this.store.dispatch(updateText({ text }))),
+      tap((body: string) => this.store.dispatch(updateText({ body }))),
     ).subscribe();
   }
 
