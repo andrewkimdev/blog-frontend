@@ -12,6 +12,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 const postRouter = require('./controller/post/post.controller');
+const imageRouter = require('./controller/image/image.controller');
 const userRouter = require('./controller/user/user.controller');
 const categoryRouter = require('./controller/category/category.controller');
 
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 })
 
 router.use(postRouter);
+router.use(imageRouter);
 router.use(userRouter);
 router.use(categoryRouter);
 
