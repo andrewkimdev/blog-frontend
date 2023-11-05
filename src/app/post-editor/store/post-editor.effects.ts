@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { exhaustMap, map, switchMap, tap, } from 'rxjs';
+import { exhaustMap, filter, map, switchMap, tap, } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
@@ -35,6 +35,7 @@ export class PostEditorEffects {
   savePostAtServer$ = createEffect(() => this.actions$.pipe(
     ofType(PostEditorAction.savePost),
     switchMap(() => this.post$),
+    filter((post) => !!post.id),
     exhaustMap(( post ) => this.postEditorService.updatePost(post)),
     map((post) => PostsAction.savePost({ post })),
   ));
