@@ -10,6 +10,9 @@ export class ThumbnailComponent implements OnInit {
   @Input('imageUrl')
   thumbnailUrl: string | ArrayBuffer | null = null;
 
+  @Input('uuid')
+  uuid: string | null = null;
+
   @Output()
   remove = new EventEmitter<void>();
 

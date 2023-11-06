@@ -1,6 +1,7 @@
 <div class="image-container">
     <img *ngIf="thumbnailUrl"
          [src]="thumbnailUrl"
+         [attr.data-uuid]="uuid"
          alt="Uploaded thumbnail"
          class="thumbnail"
          (click)="triggerOpenModal()"

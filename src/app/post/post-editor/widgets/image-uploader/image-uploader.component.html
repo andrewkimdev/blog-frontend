@@ -3,6 +3,7 @@
     <div class="thumbnail-container">
         <app-thumbnail
             *ngFor="let imageFile of imageFileList; index as i"
+            [uuid]="imageFile.id"
             [imageUrl]="imageFile.imageUrl"
             (remove)="onRemovalTriggered(i)"
             (openModal)="onThumbnailClicked(i)"
