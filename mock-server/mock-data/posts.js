@@ -110,7 +110,7 @@ Staying healthy involves a combination of regular exercise, a balanced diet, suf
 **Date**: October 27, 2023
 
     `,
-    "category": "Health",
+    "category": { "name": "Health"},
     "tags": ["health", "exercise", "diet"],
     "imageIdList": [],
   },
