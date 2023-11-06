@@ -4,29 +4,27 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnDestroy,
-  OnInit,
   Output,
   SimpleChanges
 } from '@angular/core';
-import { map, Observable, Subject, take, takeUntil, tap } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { selectPost } from 'src/app/post/post-editor/store/post-editor.selector';
+
 import { Post } from 'src/app/shared/types';
+import { createImageUrlFromUuid } from 'src/app/shared/functions';
 
 import { ImageFileInfo } from '../image-uploader/image-file-info.interface';
 
 import * as PageEditorActions from '../../store/post-editor.action';
-
-import { environment } from 'src/environments/environment';
+import { selectPost } from 'src/app/post/post-editor/store/post-editor.selector';
 
 @Component({
   selector: 'app-thumbnail-modal',
   templateUrl: './thumbnail-modal.component.html',
   styleUrls: ['./thumbnail-modal.component.scss']
 })
-export class ThumbnailModalComponent implements OnInit, OnChanges, OnDestroy {
+export class ThumbnailModalComponent implements OnChanges {
   @Input('imageFile')
   fileInfo!: ImageFileInfo;
 
@@ -47,7 +45,7 @@ export class ThumbnailModalComponent implements OnInit, OnChanges, OnDestroy {
 
   copyButtonText = 'Insert Link'
 
-  private destroy$ = new Subject<void>();
+  initialCheckValue: boolean | null = null;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -55,61 +53,52 @@ export class ThumbnailModalComponent implements OnInit, OnChanges, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
-    this.setInitialCheckboxValue();
-    this.isMainImageInputControl.valueChanges.pipe(
-      takeUntil(this.destroy$),
-      tap((res) =>{
-        if (res){
-          this.store.dispatch(PageEditorActions.setMainImage({ imageId: this.fileInfo.id }))
-        } else if (!res && this.isMainImageInputControl.dirty) {
-          this.store.dispatch(PageEditorActions.unsetMainImage());
-        }
-      }),
-    ).subscribe();
-  }
-
   private setInitialCheckboxValue(): void {
-    // todo - debug the initial checkbox logic
     this.post$.pipe(
       take(1),
-      tap((post) => {
-        console.log(this.fileInfo.id);
-        console.log(post.mainImage);
-        console.log(this.fileInfo.id === post.mainImage);
-      }),
       map((post) => post.mainImage === this.fileInfo.id),
     ).subscribe((isMainImage) => {
-
       this.isMainImageInputControl.setValue(isMainImage);
       this.isMainImageInputControl.markAsPristine();
       this.isMainImageInputControl.markAsUntouched();
+      this.initialCheckValue = isMainImage;
     });
+  }
+
+  private setMainImage(): void {
+    const currentCheckValue = this.isMainImageInputControl.value;
+
+    if (currentCheckValue !== this.initialCheckValue) {
+      if (currentCheckValue) {
+        this.store.dispatch(PageEditorActions.setMainImage({ imageId: this.fileInfo.id }));
+      } else {
+        this.store.dispatch(PageEditorActions.unsetMainImage());
+      }
+    }
   }
 
   onCopyClicked() {
     this.copyLinkToClipboard(this.imageLink);
-    this.emitLink(this.imageLink);
+    this.linkEmitter.emit(this.imageLink);
     this.closeModal();
-  }
-
-  emitLink(link: string) {
-    this.linkEmitter.emit(link);
   }
 
   closeModal(): void {
     this.copyButtonText = 'Insert Link';
     this.cdr.detectChanges();
     this.openChange.emit(false);
+    this.setMainImage();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const info = changes['fileInfo'];
-    if (changes['fileInfo']) {
-      this.imageLink = `![image](${ environment.baseUrl }/images/${ info.currentValue.id })`;
-    }
-    if (changes['open'] && changes['open'].currentValue) {
+    const open = changes['open'];
+
+    if (open?.currentValue) {
       this.setInitialCheckboxValue();
+    }
+    if (info) {
+      this.imageLink = createImageUrlFromUuid(info.currentValue.id);
     }
   }
 
@@ -123,10 +112,5 @@ export class ThumbnailModalComponent implements OnInit, OnChanges, OnDestroy {
     }).catch((err: any) => {
       console.error('Could not copy text to clipboard', err);
     });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
