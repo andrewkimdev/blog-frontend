@@ -1,19 +1,17 @@
 const MockUsers = [
   {
-    'author': {
-      'id': 1,
-      'name': 'Alice',
-      'email': 'alice@example.com',
-      'profileImage': 'assets/images/user-profile/user_profile_female_1.jpg',
-      'bio': 'Software Engineer passionate about clean code.',
-      'role': 'Staff Writer',
-      'socialMedia': [
-        {
-          'platform': 'Twitter',
-          'url': 'https://twitter.com/alice'
-        }
-      ]
-    },
+    'id': 1,
+    'name': 'Alice',
+    'email': 'alice@example.com',
+    'profileImage': 'assets/images/user-profile/user_profile_female_1.jpg',
+    'bio': 'Software Engineer passionate about clean code.',
+    'role': 'Staff Writer',
+    'socialMedia': [
+      {
+        'platform': 'Twitter',
+        'url': 'https://twitter.com/alice'
+      }
+    ]
   },
   {
     "id": 2,
