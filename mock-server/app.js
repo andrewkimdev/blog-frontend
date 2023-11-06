@@ -15,7 +15,7 @@ const postRouter = require('./controller/post/post.controller');
 const imageRouter = require('./controller/image/image.controller');
 const userRouter = require('./controller/user/user.controller');
 const categoryRouter = require('./controller/category/category.controller');
-
+const authRouter = require('./controller/auth/auth.controller');
 const port = 3000;
 
 const router = express.Router();
@@ -26,9 +26,10 @@ app.use((req, res, next) => {
 })
 
 router.use(postRouter);
+router.use(categoryRouter);
 router.use(imageRouter);
 router.use(userRouter);
-router.use(categoryRouter);
+router.use(authRouter);
 
 app.listen(port, () => {
   console.log(`Mock server listening at http://localhost:${port}`);
