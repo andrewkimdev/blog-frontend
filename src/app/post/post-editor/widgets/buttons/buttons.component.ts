@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { map, Subject, takeUntil, tap } from 'rxjs';
+import { filter, map, Observable, Subject, take, takeUntil, tap } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
+
 import * as PostEditorAction from '../../store/post-editor.action';
+import { selectPost } from '../../store/post-editor.selector';
+import { Post } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-buttons',
@@ -13,6 +16,8 @@ import * as PostEditorAction from '../../store/post-editor.action';
 export class ButtonsComponent implements OnInit, OnDestroy {
   isDraftInputControl = new FormControl(false);
   private destroy$ = new Subject<void>();
+
+  post$: Observable<Post> = this.store.select(selectPost);
 
   constructor(private store: Store){}
 
@@ -25,10 +30,26 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.reactToInputControlChanges();
+    this.setInitialValue();
+  }
+
+  private reactToInputControlChanges(): void {
     this.isDraftInputControl.valueChanges.pipe(
       takeUntil(this.destroy$),
       map((value) => !!value),
       tap((isDraft: boolean) => this.store.dispatch(PostEditorAction.setIsDraftState({ isDraft }))),
+    ).subscribe();
+  }
+
+  private setInitialValue(): void {
+    this.post$.pipe(
+      filter((post) => !!post.id),
+      take(1),
+      tap((post) => {
+        this.isDraftInputControl.setValue(post.isDraft);
+        this.isDraftInputControl.markAsPristine();
+      }),
     ).subscribe();
   }
 

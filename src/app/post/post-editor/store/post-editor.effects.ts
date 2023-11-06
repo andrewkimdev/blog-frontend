@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { exhaustMap, filter, map, switchMap, tap, } from 'rxjs';
 import { Router } from '@angular/router';
 
+import { PostEditorService } from '../services/post-editor.service';
+import { PostService } from '../../single-post/services/post.service';
+
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { PostEditorService } from '../services/post-editor.service';
-import { selectPost } from '../store/post-editor.selector';
-
 import * as PostEditorAction from './post-editor.action';
 import * as PostsAction from '../../post-list/store/posts.action';
+import { selectPost } from './post-editor.selector';
 
 @Injectable()
 export class PostEditorEffects {
@@ -17,6 +18,7 @@ export class PostEditorEffects {
     private router: Router,
     private store: Store,
     private postEditorService: PostEditorService,
+    private postService: PostService,
   ){}
 
   post$ = this.store.select(selectPost);
@@ -28,8 +30,15 @@ export class PostEditorEffects {
       const _id = id as number;
       return { id: _id, createdAt };
     }),
-    tap(({ id, createdAt }) => this.store.dispatch(PostEditorAction.initPost({ id, createdAt }))),
+    tap(({ id, createdAt }) => this.store.dispatch(PostEditorAction.createPostSuccess({ id, createdAt }))),
     map(({ id }) => PostEditorAction.moveToEditorRoute({ id })),
+  ));
+
+  hydratePost$ = createEffect(() => this.actions$.pipe(
+    // todo - add case when post id is invalid or server is not available
+    ofType(PostEditorAction.hydratePostByPostId),
+    exhaustMap(({ id }) => this.postService.getOneById(id)),
+    map((post) => PostEditorAction.fillInPage({ post })),
   ));
 
   savePostAtServer$ = createEffect(() => this.actions$.pipe(

@@ -1,17 +1,22 @@
 // Angular Core Modules
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, distinctUntilChanged, map, Observable, Subject, take, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  distinctUntilChanged,
+  map,
+  Observable,
+  Subject,
+  tap
+} from 'rxjs';
 
 import { ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
-// 3rd Party Vendor Modules
-import { Store } from '@ngrx/store';
 
 // Application Services and Functions
 import { getRandomNumberBetween } from 'src/app/shared/functions';
 
 // State Management
+import { Store } from '@ngrx/store';
 import { selectPost } from '../store/post-editor.selector';
 import * as PostEditorActions from '../store/post-editor.action';
 
@@ -30,6 +35,7 @@ export class PostEditorHomeComponent implements OnInit, OnDestroy {
   );
 
   private controlValidationErrorsSubject = new BehaviorSubject<ValidationErrors | null>(null);
+
   controlHasErrors$ = this.controlValidationErrorsSubject.asObservable().pipe(
     map((error) => !!error),
     distinctUntilChanged(),
@@ -49,18 +55,11 @@ export class PostEditorHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.ensurePostId();
+    this.hydrateCurrentPost();
   }
 
-  // This is needed when the user has just refreshed page and arrived at single-post-home editor view.
-  private ensurePostId() {
-    this.store.select(selectPost).pipe(take(1)).subscribe(
-      post => {
-        if (!post.id) {
-          this.store.dispatch(PostEditorActions.setPostId({ id: this.getCurrentPostId() }));
-        }
-      }
-    );
+  private hydrateCurrentPost(): void {
+    this.store.dispatch(PostEditorActions.hydratePostByPostId({ id: this.getCurrentPostId() }));
   }
 
   ngOnDestroy(): void {

@@ -8,10 +8,14 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { debounceTime, map, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, filter, map, Subject, take, takeUntil, tap } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+
+import { Post } from 'src/app/shared/types';
+
 import { Store } from '@ngrx/store';
-import { updateText } from '../../store/post-editor.action';
+import { setBodyText } from '../../store/post-editor.action';
+import { selectPost } from '../../store/post-editor.selector';
 
 @Component({
   selector: 'app-editor',
@@ -19,7 +23,6 @@ import { updateText } from '../../store/post-editor.action';
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit, OnChanges, OnDestroy {
-
   @Input('added-text-at-cursor')
   addedTextAtCursor: string | null = null;
 
@@ -31,10 +34,14 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     '',
     [Validators.required, Validators.minLength(6), Validators.maxLength(10000)],
   );
+
+  post$ = this.store.select(selectPost);
+
   private destroy$ = new Subject<void>();
 
-  constructor(private store: Store) {
-  }
+  constructor(
+    private store: Store,
+  ) { }
 
   saveCursorLocation() {
     const textareaElem = this.textarea.nativeElement;
@@ -43,7 +50,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     const addedText = changes['addedTextAtCursor'];
-    if (addedText) {
+    if (addedText.currentValue) {
       this.appendText(addedText.currentValue);
     }
   }
@@ -56,11 +63,27 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.reactToInputControlChanges();
+    this.setInitialValue();
+  }
+
+  private reactToInputControlChanges(): void {
     this.textInputFormControl.valueChanges.pipe(
       takeUntil(this.destroy$),
       map((value: string | null) => value ?? ''),
       debounceTime(300),
-      tap((body: string) => this.store.dispatch(updateText({ body }))),
+      tap((body: string) => this.store.dispatch(setBodyText({ body }))),
+    ).subscribe();
+  }
+
+  private setInitialValue(): void {
+    this.post$.pipe(
+      filter((post: Post) => !!post.id),
+      take(1),
+      tap((post: Post) => {
+        this.textInputFormControl.setValue(post.body);
+        this.textInputFormControl.markAsPristine();
+      }),
     ).subscribe();
   }
 

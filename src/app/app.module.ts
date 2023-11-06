@@ -16,16 +16,17 @@ import { EffectsModule } from '@ngrx/effects'
 // Dev Tools
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-// Routing Module
-import { AppRoutingModule } from './app-routing.module';
-
+// Application Modules
 import { PostsModule } from './post/post-list/posts.module';
-
 import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';
 
+// Application Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+
+// Routing Module
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [

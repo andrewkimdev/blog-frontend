@@ -6,15 +6,19 @@ import {
   map,
   Observable,
   Subject,
+  take,
   takeUntil,
   tap
 } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+
+import { Category, Post } from 'src/app/shared/types';
+
 import { Store } from '@ngrx/store';
 
-import { Category } from 'src/app/shared/types';
 import * as PostEditorActions from '../../store/post-editor.action';
-import { selectAvailableCategories } from 'src/app/post/post-editor/store/category.selectors';
+import { selectAvailableCategories } from '../../store/category.selectors';
+import { selectPost } from '../../store/post-editor.selector';
 
 @Component({
   selector: 'app-categories',
@@ -26,19 +30,35 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     '', [Validators.required, Validators.minLength(4)]
   );
 
+  post$ = this.store.select(selectPost);
+
   private destroy$ = new Subject<void>();
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+  ) {}
 
   categoryNames: Observable<string[]> = this.store.select(selectAvailableCategories).pipe(
     map((c: Category[]) => c.map(({ name }) => name)),
   );
 
   ngOnInit(): void {
-    this.reactToCategoryChange();
+    this.reactToInputControlChanges();
+    this.setInitialValue();
   }
 
-  private reactToCategoryChange(): void {
+  private setInitialValue(): void {
+    this.post$.pipe(
+      filter((post: Post) => !!post.id),
+      take(1),
+      tap((post: Post) => {
+
+        this.categoryInputControl.setValue(post.category?.name ?? '');
+      }),
+    ).subscribe();
+  }
+
+  private reactToInputControlChanges(): void {
     this.categoryInputControl.valueChanges.pipe(
       takeUntil(this.destroy$),
       map((data) => data ?? ''),
@@ -48,8 +68,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       tap((category: string) => this.store.dispatch(PostEditorActions.setCategory({ category })))
     ).subscribe();
   }
-
-
 
   inputControlError(): ValidationErrors | null {
     if (this.categoryInputControl.touched && this.categoryInputControl.errors) {

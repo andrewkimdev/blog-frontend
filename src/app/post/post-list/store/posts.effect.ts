@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, exhaustMap, map, tap, withLatestFrom } from 'rxjs';
+import { catchError, EMPTY, exhaustMap, map, withLatestFrom } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -33,7 +33,6 @@ export class PostsEffects {
     ofType(PostsAction.loadPostsFromServer),
     exhaustMap(() => this.postsService.getAll().pipe(
       map((posts) => PostsAction.postsLoadSuccess({ posts })),
-      tap((res) => console.log(res)),
     )),
     catchError(() => EMPTY),
   ));

@@ -1,17 +1,28 @@
 import { createAction, props } from '@ngrx/store';
+import { Post } from 'src/app/shared/types';
 
 export const createPost = createAction(
   '[PostEditor Page] Create a brand new single-post-home at server',
 );
 
+export const createPostSuccess = createAction(
+  '[PostEditor Page] Init a single-post-home with id & timestamp obtained from server',
+  props<{ id: number, createdAt: number }>(),
+);
+
 export const createPostFailure = createAction(
   'ERROR - [PostEditor Page] Create a brand new single-post-home at server',
   props<{ err: any }>(),
-)
+);
 
-export const initPost = createAction(
-  '[PostEditor Page] Init a single-post-home with id & timestamp from server',
-  props<{ id: number, createdAt: number }>(),
+export const hydratePostByPostId = createAction(
+  '[PostEditor Page] Hydrate page from source',
+  props<{ id: number }>(),
+);
+
+export const fillInPage = createAction(
+  '[PostEditor Page] Fill in page with fetched post',
+  props<{ post: Post }>(),
 )
 
 export const moveToEditorRoute = createAction(
@@ -35,13 +46,13 @@ export const setPostId = createAction(
   '[PostEditor Page] Set single-post-home id as id is null',
   props<{ id: number }>(),
 )
-export const updateTitle = createAction(
-  '[PostEditor Page] Update title',
+export const setTitle = createAction(
+  '[PostEditor Page] Set title',
   props<{ title: string }>(),
 );
 
-export const updateText = createAction(
-  '[PostEditor Page] Update text',
+export const setBodyText = createAction(
+  '[PostEditor Page] Set body text',
   props<{ body: string }>(),
 );
 

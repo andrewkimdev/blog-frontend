@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { debounceTime, distinctUntilChanged, map, Subject, takeUntil, tap } from 'rxjs';
-
+import { debounceTime, distinctUntilChanged, filter, map, Subject, take, takeUntil, tap } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 
-import { updateTitle } from '../../store/post-editor.action';
+import { Post } from 'src/app/shared/types';
+
+import { Store } from '@ngrx/store';
+import { setTitle } from '../../store/post-editor.action';
+import { selectPost } from '../../store/post-editor.selector';
+
 
 @Component({
   selector: 'app-title',
@@ -17,21 +20,40 @@ export class TitleComponent implements OnInit, OnDestroy {
     [Validators.required, Validators.minLength(6), Validators.maxLength(50)],
   );
 
+  post$ = this.store.select(selectPost);
+
   private destroy$ = new Subject<void>();
 
   constructor(private store: Store){}
 
   ngOnInit() {
+    this.reactToInputControlChanges();
+    this.setInitialValue();
+  }
+
+  private reactToInputControlChanges(): void {
     this.titleInputControl.valueChanges.pipe(
       takeUntil(this.destroy$),
       map((value) => value ?? ''),
       debounceTime(300),
       distinctUntilChanged(),
-      tap((title) => this.store.dispatch(updateTitle({ title }))),
+      tap((title) => this.store.dispatch(setTitle({ title }))),
     ).subscribe();
   }
 
-  inputControlError(): ValidationErrors | null {
+  private setInitialValue(): void {
+    this.post$.pipe(
+      filter((post: Post) => !!post.id),
+      take(1),
+      tap((post: Post) => {
+        this.titleInputControl.setValue(post.title);
+        this.titleInputControl.markAsPristine();
+      }),
+    ).subscribe()
+  }
+
+
+    inputControlError(): ValidationErrors | null {
     if (this.titleInputControl.touched && this.titleInputControl.errors) {
       return this.titleInputControl.errors || null;
     }

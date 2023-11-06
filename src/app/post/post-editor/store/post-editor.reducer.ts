@@ -16,8 +16,11 @@ const initialState: PostEditorState = { post: createBlankPost(), isDirty: false,
 
 export const postEditorReducer = createReducer(
   initialState,
-  on(PageEditorActions.initPost, (state,{ id, createdAt }) => {
+  on(PageEditorActions.createPostSuccess, (state, { id, createdAt }) => {
     const post = duplicatePost(state.post, { id, createdAt });
+    return { ...state, post, isDirty: false };
+  }),
+  on(PageEditorActions.fillInPage, (state, { post}) => {
     return { ...state, post, isDirty: false };
   }),
   on(PageEditorActions.setPostId, (state, { id }) => {
@@ -28,7 +31,7 @@ export const postEditorReducer = createReducer(
       return state;
     }
   }),
-  on(PageEditorActions.updateTitle, (state, { title }) => {
+  on(PageEditorActions.setTitle, (state, { title }) => {
     const post = duplicatePost(state.post, { title });
     return { ...state, post, isDirty: true };
   }),
@@ -40,7 +43,7 @@ export const postEditorReducer = createReducer(
     const post = duplicatePost(state.post, { isDraft });
     return { ...state, post, isDirty: true };
   }),
-  on(PageEditorActions.updateText, (state, { body }) => {
+  on(PageEditorActions.setBodyText, (state, { body }) => {
     const post = duplicatePost(state.post, { body });
     return { ...state, post, isDirty: true };
   }),
