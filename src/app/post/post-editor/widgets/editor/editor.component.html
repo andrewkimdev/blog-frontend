@@ -3,6 +3,7 @@
                   #textarea
                   class="clr-textarea"
                   (blur)="saveCursorLocation()"
+                  (drop)="preventDefault($event)"
                   required
                   [formControl]="textInputFormControl"
                   placeholder="Enter blog text here... (markdown)"

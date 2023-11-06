@@ -67,6 +67,11 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     this.setInitialValue();
   }
 
+  preventDefault(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   private reactToInputControlChanges(): void {
     this.textInputFormControl.valueChanges.pipe(
       takeUntil(this.destroy$),
