@@ -5,7 +5,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild
 } from '@angular/core';
@@ -13,7 +12,6 @@ import { catchError, Observable, of, tap } from 'rxjs';
 
 // 3rd Party Vendor Modules
 import { Store } from '@ngrx/store';
-import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
 
 // Custom Data Definitions
 import { ImageFileInfo } from '../image-file-info.interface';
@@ -30,7 +28,7 @@ import * as PostEditorAction from '../../../store/post-editor.action';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
 })
-export class UploadComponent implements OnInit {
+export class UploadComponent {
   @Input('postId')
   postId: number | null = null;
 
@@ -48,10 +46,6 @@ export class UploadComponent implements OnInit {
     private store: Store,
     private uploadService: UploadService,
   ) {
-  }
-
-  ngOnInit(): void {
-    ClarityIcons.addIcons(uploadCloudIcon);
   }
 
   // File Upload - Drag-and-Drop
