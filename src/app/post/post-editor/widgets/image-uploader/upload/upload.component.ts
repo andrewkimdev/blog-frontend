@@ -13,7 +13,6 @@ import { catchError, Observable, of, tap } from 'rxjs';
 
 // 3rd Party Vendor Modules
 import { Store } from '@ngrx/store';
-import { ClarityIcons, uploadCloudIcon } from '@cds/core/icon';
 
 // Custom Data Definitions
 import { ImageFileInfo } from '../image-file-info.interface';
@@ -51,7 +50,6 @@ export class UploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    ClarityIcons.addIcons(uploadCloudIcon);
   }
 
   // File Upload - Drag-and-Drop

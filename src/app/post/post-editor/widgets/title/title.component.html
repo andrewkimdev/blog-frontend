@@ -1,5 +1,5 @@
-<div class="title-wrapper" [ngClass]="{'clr-error': inputControlError()}">
+<div class="title-wrapper">
     <span>(i)</span>
-    <input id="title" class="clr-input" [formControl]="titleInputControl" placeholder="Title...">
+    <input id="title" [formControl]="titleInputControl" placeholder="Title...">
     <app-error-message [error]="inputControlError()"></app-error-message>
 </div>
