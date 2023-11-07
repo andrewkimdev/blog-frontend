@@ -10,7 +10,6 @@ import { EffectsModule } from '@ngrx/effects';
 // Custom Shared Modules
 import { CoreModule } from 'src/app/core/core.module';
 
-
 // Editor-related Components
 import { PostEditorHomeComponent } from 'src/app/post/post-editor/post-editor-home/post-editor-home.component';
 import { TagsComponent } from './widgets/tags/tags.component';
@@ -22,7 +21,6 @@ import { ImageUploaderComponent } from './widgets/image-uploader/image-uploader.
 import { UploadComponent } from './widgets/image-uploader/upload/upload.component';
 import { ThumbnailComponent } from './widgets/thumbnail/thumbnail.component';
 import { ThumbnailModalComponent } from './widgets/thumbnail-modal/thumbnail-modal.component';
-import { CreateNewPostComponent } from './create-new-post/create-new-post.component';
 
 // State Management
 import { postEditorReducer } from './store/post-editor.reducer';
@@ -43,7 +41,6 @@ import { PostEditorRoutingModule } from './post-editor-routing.module';
     ThumbnailComponent,
     ImageUploaderComponent,
     ThumbnailModalComponent,
-    CreateNewPostComponent,
   ],
   imports: [
     CommonModule,

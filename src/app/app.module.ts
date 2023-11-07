@@ -17,7 +17,7 @@ import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 // Application Modules
-import { PostsModule } from './post/post-list/posts.module';
+import { PostsModule } from './post/posts.module';
 import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';
 

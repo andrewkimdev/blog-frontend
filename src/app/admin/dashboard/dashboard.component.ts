@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,17 +6,13 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
   constructor(
     private router: Router,
   ) {}
 
-  ngOnInit(): void {
-  }
-
   createPost() {
-    this.router.navigate(['post-editor', 'new']);
+    this.router.navigate(['posts', 'new']);
   }
 }
-

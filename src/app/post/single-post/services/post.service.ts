@@ -21,6 +21,6 @@ export class PostService {
   }
 
   moveToEditorRoute(id: number): void {
-    this.router.navigate(['post-editor', id, 'edit']);
+    this.router.navigate(['posts', id, 'edit']);
   }
 }

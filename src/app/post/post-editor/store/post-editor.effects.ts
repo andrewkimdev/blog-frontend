@@ -52,6 +52,6 @@ export class PostEditorEffects {
   moveToNewPostEditorRoute$ = createEffect(() => this.actions$.pipe(
     ofType(PostEditorAction.moveToEditorRoute),
     map((action) => action.id),
-    exhaustMap((id) => this.router.navigateByUrl(`/post-editor/${id}/edit`))
+    exhaustMap((id) => this.router.navigateByUrl(`/posts/${id}/edit`))
   ), { dispatch: false });
 }

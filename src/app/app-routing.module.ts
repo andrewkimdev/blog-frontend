@@ -18,25 +18,17 @@ const appRoutes: Routes = [
   {
     path: 'posts',
     title: 'Posts',
-    loadChildren: () => import('./post/post-list/posts.module')
-      .then(m => m.PostsModule),
-  },
-  {
-    path: 'post-editor',
-    title: 'Post Editor',
-    loadChildren: () => import('./post/post-editor/post-editor.module').then(m => m.PostEditorModule),
+    loadChildren: () => import('./post/posts.module').then(m => m.PostsModule),
   },
   {
     path: 'about-me',
     title: 'About Me',
-    loadComponent: () => import('./about-me/about-me.component')
-      .then(c => c.AboutMeComponent),
+    loadComponent: () => import('./about-me/about-me.component').then(c => c.AboutMeComponent),
   },
   {
     path: 'admin',
     title: 'Admin',
-    loadChildren: () => import('./admin/admin.module')
-      .then(m => m.AdminModule),
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
   },
   {
     path: '**',

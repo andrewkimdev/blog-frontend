@@ -5,19 +5,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { ClarityDesignSystemModule } from '../../lib';
+import { ClarityDesignSystemModule } from '../lib';
 
-import { PostsHomeComponent } from './posts-home/posts-home.component';
+import { PostsHomeComponent } from './post-list/posts-home/posts-home.component';
+import { CreateNewPostComponent } from './create-new-post/create-new-post.component';
 
 import { PostsRoutingModule } from './posts-routing.module';
 import { MarkdownModule } from 'ngx-markdown';
 
-import { postsReducer } from './store/posts.reducer';
-import { PostsEffects } from './store/posts.effect';
+import { postsReducer } from './post-list/store/posts.reducer';
+import { PostsEffects } from './post-list/store/posts.effect';
 
 @NgModule({
   declarations: [
     PostsHomeComponent,
+    CreateNewPostComponent,
   ],
   imports: [
     CommonModule,
