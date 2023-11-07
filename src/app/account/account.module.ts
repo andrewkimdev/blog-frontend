@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ClarityDesignSystemModule } from '../lib';
 import { AccountRoutingModule } from './account-routing.module';
-
 
 
 @NgModule({
@@ -9,6 +9,7 @@ import { AccountRoutingModule } from './account-routing.module';
   ],
   imports: [
     CommonModule,
+    ClarityDesignSystemModule,
     AccountRoutingModule,
   ]
 })

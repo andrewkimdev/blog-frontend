@@ -8,8 +8,11 @@ import {
   ClrIconModule,
   ClrInputModule,
   ClrModalModule,
+  ClrPasswordModule,
+  ClrSelectModule,
   ClrTextareaModule,
-  ClrVerticalNavModule
+  ClrVerticalNavModule,
+
 } from '@clr/angular';
 
 const modules = [
@@ -20,6 +23,8 @@ const modules = [
   ClrIconModule,
   ClrInputModule,
   ClrModalModule,
+  ClrPasswordModule,
+  ClrSelectModule,
   ClrTextareaModule,
   ClrVerticalNavModule,
 ]
