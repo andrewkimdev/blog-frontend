@@ -29,4 +29,5 @@ import { TopAlertComponent } from './top-alert/top-alert.component';
     TopAlertComponent,
   ],
 })
-export class CoreModule { }
+export class CoreModule {
+}

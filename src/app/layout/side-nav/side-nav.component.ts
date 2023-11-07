@@ -22,6 +22,7 @@ export class SideNavComponent implements OnInit {
   toggleCollapse() {
     this.collapsed = !this.collapsed;
   }
+
   ngOnInit() {
     ClarityIcons.addIcons(cloudIcon, cogIcon);
     ClarityIcons.addIcons(userIcon, boltIcon, sadFaceIcon, bugIcon, shieldIcon, certificateIcon, vmBugIcon)

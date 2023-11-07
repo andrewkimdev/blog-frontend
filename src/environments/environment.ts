@@ -8,7 +8,7 @@ export const environment = {
     publicKey: 'btqicxhz',
     privateKey: '61688d63-6060-40ae-9af1-056d0e687dbe',
   },
-  baseUrl:'http://localhost:3000/api/v1',
+  baseUrl: 'http://localhost:3000/api/v1',
 };
 
 /*
@@ -18,4 +18,3 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

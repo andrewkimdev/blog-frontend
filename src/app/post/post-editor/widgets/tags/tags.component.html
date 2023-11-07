@@ -1,17 +1,17 @@
 <div class="container">
-  <div class="tag-label-group">
+    <div class="tag-label-group">
     <span *ngFor="let tag of tagLabels$ | async" class="label text-no-select">
       {{ tag }}
-      <cds-icon class="cursor-pointer" shape="times" (click)="removeTag(tag)"/>
+        <cds-icon class="cursor-pointer" shape="times" (click)="removeTag(tag)"/>
     </span>
-  </div>
-  <div class="clr-input-wrapper">
-    <input
-      class="clr-input"
-      type="text"
-      [formControl]="tagsInputControl"
-      placeholder="Enter tags here..."
-      (keydown)="onSpecialKeyPressed($event)"
-    >
-  </div>
+    </div>
+    <div class="clr-input-wrapper">
+        <input
+                class="clr-input"
+                type="text"
+                [formControl]="tagsInputControl"
+                placeholder="Enter tags here..."
+                (keydown)="onSpecialKeyPressed($event)"
+        >
+    </div>
 </div>

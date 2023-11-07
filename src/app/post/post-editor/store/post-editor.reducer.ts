@@ -12,6 +12,7 @@ export interface PostEditorState {
   isDirty: boolean;
   categories: Category[],
 }
+
 const initialState: PostEditorState = { post: createBlankPost(), isDirty: false, categories: [] };
 
 export const postEditorReducer = createReducer(
@@ -20,7 +21,7 @@ export const postEditorReducer = createReducer(
     const post = duplicatePost(state.post, { id, createdAt });
     return { ...state, post, isDirty: false };
   }),
-  on(PageEditorActions.fillInPage, (state, { post}) => {
+  on(PageEditorActions.fillInPage, (state, { post }) => {
     return { ...state, post, isDirty: false };
   }),
   on(PageEditorActions.setPostId, (state, { id }) => {

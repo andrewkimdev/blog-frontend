@@ -26,4 +26,5 @@ import { SinglePostRoutingModule } from './single-post-routing.module';
     SinglePostRoutingModule,
   ]
 })
-export class SinglePostModule { }
+export class SinglePostModule {
+}

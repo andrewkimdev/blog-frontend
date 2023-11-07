@@ -11,16 +11,15 @@
         <clr-dg-cell>{{ p.title }}</clr-dg-cell>
         <clr-dg-cell>{{ p.author?.name || 'anonymous'}}</clr-dg-cell>
         <ng-container *ngIf="p.createdAt; else unavailable">
-          <clr-dg-cell>{{ p.createdAt * 1000 | date }}</clr-dg-cell>
+            <clr-dg-cell>{{ p.createdAt * 1000 | date }}</clr-dg-cell>
         </ng-container>
         <ng-container *ngIf="p.updatedAt; else unavailable">
-          <clr-dg-cell>{{ (p.updatedAt * 1000 | date) }}</clr-dg-cell>
+            <clr-dg-cell>{{ (p.updatedAt * 1000 | date) }}</clr-dg-cell>
         </ng-container>
         <ng-template #unavailable>
-          <clr-dg-cell>Not Available</clr-dg-cell>
+            <clr-dg-cell>Not Available</clr-dg-cell>
         </ng-template>
     </clr-dg-row>
 
     <clr-dg-footer>{{ ps.length }} posts</clr-dg-footer>
 </clr-datagrid>
-<!--<pre *ngIf="single-post-home-list$ | async as ps">{{ ps | json }}</pre>-->

@@ -8,7 +8,7 @@ export const loadPostByIdFromCache = createAction(
 
 export const loadPostByIdFromServer = createAction(
   '[Single Post Page] Load Post by ID from Server',
-  props<{ id: number}>(),
+  props<{ id: number }>(),
 );
 
 export const loadPostByIdSuccess = createAction(

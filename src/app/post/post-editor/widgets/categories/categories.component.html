@@ -1,7 +1,7 @@
 <clr-datalist-container>
-  <input clrDatalistInput [formControl]="categoryInputControl" placeholder="Selected category" name="Option" />
-  <datalist>
-    <option *ngFor="let item of categoryNames | async" [value]="item"></option>
-  </datalist>
+    <input clrDatalistInput [formControl]="categoryInputControl" placeholder="Selected category" name="Option"/>
+    <datalist>
+        <option *ngFor="let item of categoryNames | async" [value]="item"></option>
+    </datalist>
 </clr-datalist-container>
 <app-error-message [error]="inputControlError()"/>

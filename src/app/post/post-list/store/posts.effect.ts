@@ -16,7 +16,8 @@ export class PostsEffects {
     private actions$: Actions,
     private store: Store,
     private postsService: PostsService,
-  ){}
+  ) {
+  }
 
   loadPostsFromCache$ = createEffect(() => this.actions$.pipe(
     ofType(PostsAction.loadPostsFromCache),

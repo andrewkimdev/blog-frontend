@@ -34,4 +34,5 @@ const modules = [
     ...modules,
   ]
 })
-export class ClarityDesignSystemModule { }
+export class ClarityDesignSystemModule {
+}

@@ -21,7 +21,8 @@ export class PostsHomeComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store<PostsState>,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.store.dispatch(PostsAction.loadPostsFromCache());

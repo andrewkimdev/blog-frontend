@@ -20,7 +20,8 @@ export class SinglePostHome implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const id = this.getPostId();
@@ -28,6 +29,7 @@ export class SinglePostHome implements OnInit {
   }
 
   post$: Observable<Post> = this.store.select(selectSinglePost);
+
   private getPostId(): number {
     return +this.route.snapshot.params['id'];
   }

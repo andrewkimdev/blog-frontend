@@ -15,7 +15,8 @@ import { environment } from 'src/environments/environment';
 export class PostEditorService {
   constructor(
     private http: HttpClient,
-  ){}
+  ) {
+  }
 
   createNewPost(): Observable<Post> {
     return this.http.post<Post>(`${environment.baseUrl}/posts`, '');

@@ -32,4 +32,5 @@ import { PostsEffects } from './post-list/store/posts.effect';
     EffectsModule.forFeature([PostsEffects]),
   ],
 })
-export class PostsModule { }
+export class PostsModule {
+}

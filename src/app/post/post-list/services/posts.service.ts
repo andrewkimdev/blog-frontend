@@ -11,11 +11,12 @@ import { environment } from 'src/environments/environment';
 export class PostsService {
   constructor(
     private http: HttpClient,
-  ) {}
+  ) {
+  }
 
   getAll(): Observable<Post[]> {
-    const posts$: Observable<Post[]> = this.http.get<Post[]>(`${ environment.baseUrl }/posts`);
-    const users$: Observable<User[]> = this.http.get<User[]>(`${ environment.baseUrl }/users`);
+    const posts$: Observable<Post[]> = this.http.get<Post[]>(`${environment.baseUrl}/posts`);
+    const users$: Observable<User[]> = this.http.get<User[]>(`${environment.baseUrl}/users`);
 
     return combineLatest([posts$, users$]).pipe(
       take(1),

@@ -16,7 +16,8 @@ export class CategoryEffects {
     private actions$: Actions,
     private store: Store,
     private categoryService: CategoryService,
-  ){}
+  ) {
+  }
 
   readonly categories$ = this.store.select(selectAvailableCategories);
 
@@ -30,14 +31,14 @@ export class CategoryEffects {
     ofType(CategoryActions.addCategory),
     withLatestFrom(this.categories$),
     filter((categories) => !!categories),
-    map(([{ name }, categories]) => ({ name, categories: categories || [] as Category[]})),
+    map(([{ name }, categories]) => ({ name, categories: categories || [] as Category[] })),
     filter(({ name, categories }) =>
-       !categories.some((c) => c.name.toLowerCase() === name.toLowerCase())
+      !categories.some((c) => c.name.toLowerCase() === name.toLowerCase())
     ),
     map(({ name, categories }) => {
       const c: Category = { name };
-      return [...categories, c ]
+      return [...categories, c]
     }),
-    map(( categories ) => CategoryActions.fetchCategoriesSuccess({ categories })),
+    map((categories) => CategoryActions.fetchCategoriesSuccess({ categories })),
   ));
 }

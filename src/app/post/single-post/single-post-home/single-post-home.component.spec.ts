@@ -10,7 +10,7 @@ describe('PostComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SinglePostHome]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SinglePostHome);
     component = fixture.componentInstance;

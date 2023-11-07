@@ -19,14 +19,15 @@ export class PostEditorEffects {
     private store: Store,
     private postEditorService: PostEditorService,
     private postService: PostService,
-  ){}
+  ) {
+  }
 
   post$ = this.store.select(selectPost);
 
   createNewPost$ = createEffect(() => this.actions$.pipe(
     ofType(PostEditorAction.createPost),
     exhaustMap(() => this.postEditorService.createNewPost()),
-    map(({ id, createdAt}) => {
+    map(({ id, createdAt }) => {
       const _id = id as number;
       return { id: _id, createdAt };
     }),
@@ -45,7 +46,7 @@ export class PostEditorEffects {
     ofType(PostEditorAction.savePost),
     switchMap(() => this.post$),
     filter((post) => !!post.id),
-    exhaustMap(( post ) => this.postEditorService.updatePost(post)),
+    exhaustMap((post) => this.postEditorService.updatePost(post)),
     map((post) => PostsAction.savePost({ post })),
   ));
 

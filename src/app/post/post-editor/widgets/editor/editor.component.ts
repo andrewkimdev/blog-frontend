@@ -41,7 +41,8 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     private store: Store,
-  ) { }
+  ) {
+  }
 
   saveCursorLocation() {
     const textareaElem = this.textarea.nativeElement;

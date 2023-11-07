@@ -24,7 +24,8 @@ export class TitleComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private store: Store){}
+  constructor(private store: Store) {
+  }
 
   ngOnInit() {
     this.reactToInputControlChanges();
@@ -53,7 +54,7 @@ export class TitleComponent implements OnInit, OnDestroy {
   }
 
 
-    inputControlError(): ValidationErrors | null {
+  inputControlError(): ValidationErrors | null {
     if (this.titleInputControl.touched && this.titleInputControl.errors) {
       return this.titleInputControl.errors || null;
     }

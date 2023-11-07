@@ -52,4 +52,5 @@ import { PostEditorRoutingModule } from './post-editor-routing.module';
     PostEditorRoutingModule,
   ]
 })
-export class PostEditorModule { }
+export class PostEditorModule {
+}

@@ -4,9 +4,11 @@ import * as CategoryAction from './category.action';
 export interface Category {
   name: string;
 }
+
 export interface CategoryState {
   categories: Category[];
 }
+
 const initialState: CategoryState = { categories: [] };
 
 

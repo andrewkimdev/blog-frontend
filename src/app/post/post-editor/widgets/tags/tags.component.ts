@@ -29,7 +29,9 @@ export class TagsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   tagLabels$ = this.store.select(selectPostTags);
 
-  constructor(private store: Store){}
+  constructor(private store: Store) {
+  }
+
   ngOnInit(): void {
     this.setupTagInput();
     ClarityIcons.addIcons(timesIcon);
@@ -59,7 +61,7 @@ export class TagsComponent implements OnInit, OnDestroy {
     const regexStr = '[' + charactersToRemove.join('') + ']'; // Construct the regular expression string
     const regex = new RegExp(regexStr, 'g'); // Create the RegExp object
 
-    return this.tagsInputControl.value?.replace(regex, '').trim() || '';
+    return this.tagsInputControl.value?.replace(regex, '').trim() ?? '';
   }
 
   private setupTagInput(): void {

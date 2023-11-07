@@ -30,15 +30,18 @@
   flex-direction: row;
   width: 100%;
   height: 100%;
+
   & > * {
     width: 100%;
   }
+
   margin-top: 10px;
 
   :not(:last-child) {
     margin-right: 10px;
   }
 }
+
 .markdown-viewer {
   //background-color: #ffffff10;
   //border-radius: 10px;

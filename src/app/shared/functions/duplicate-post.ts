@@ -6,7 +6,7 @@ export const duplicatePost = (post: Post, args?: {}): Post => {
     ...post,
     tags: post.tags?.length > 0 ? [...post.tags] : [],
     imageIdList: post.imageIdList?.length > 0 ? [...post.imageIdList] : [],
-    updatedAt: getCurrentUnixTimeInSeconds() ,
+    updatedAt: getCurrentUnixTimeInSeconds(),
     ...args,
   };
 }

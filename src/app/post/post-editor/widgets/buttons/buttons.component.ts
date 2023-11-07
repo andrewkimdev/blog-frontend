@@ -19,7 +19,8 @@ export class ButtonsComponent implements OnInit, OnDestroy {
 
   post$: Observable<Post> = this.store.select(selectPost);
 
-  constructor(private store: Store){}
+  constructor(private store: Store) {
+  }
 
   onSaveButtonClicked(): void {
     this.store.dispatch(PostEditorAction.savePost());

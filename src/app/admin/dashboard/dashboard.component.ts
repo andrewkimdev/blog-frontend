@@ -10,7 +10,8 @@ export class DashboardComponent {
 
   constructor(
     private router: Router,
-  ) {}
+  ) {
+  }
 
   createPost() {
     this.router.navigate(['posts', 'new']);

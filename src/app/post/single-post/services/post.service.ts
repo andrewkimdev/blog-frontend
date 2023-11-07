@@ -14,10 +14,11 @@ export class PostService {
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) { }
+  ) {
+  }
 
   getOneById(id: number): Observable<Post> {
-    return this.http.get<Post>(`${ environment.baseUrl }/posts/${id}`);
+    return this.http.get<Post>(`${environment.baseUrl}/posts/${id}`);
   }
 
   moveToEditorRoute(id: number): void {

@@ -16,11 +16,12 @@ export class ImageUploaderComponent {
   fileLink = new EventEmitter<string>();
 
   imageFileList: ImageFileInfo[] = [];
-  imageFile!: ImageFileInfo ;
+  imageFile!: ImageFileInfo;
 
   isModalOpen: boolean = false;
 
-  constructor(private store: Store){}
+  constructor(private store: Store) {
+  }
 
   openModal(i: number) {
     this.isModalOpen = true;

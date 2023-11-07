@@ -7,7 +7,8 @@ import { TopAlertService } from '../services/top-alert.service';
   styleUrls: ['./top-alert.component.scss']
 })
 export class TopAlertComponent {
-  constructor(private alertService: TopAlertService) {}
+  constructor(private alertService: TopAlertService) {
+  }
 
   options$ = this.alertService.alertOptions$;
 

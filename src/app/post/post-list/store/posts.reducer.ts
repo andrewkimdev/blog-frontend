@@ -15,15 +15,15 @@ export const postsReducer = createReducer(
 );
 
 function savePostHandler(state: PostsState, { post }: { post: Post }) {
-    if (!post.id || !post.title || !post.body || !post?.tags) {
-      return state;
-    }
-    const existingPostIndex = state.posts.findIndex(existingPost => existingPost.id === post.id);
-    const updatedPostList: Post[] = existingPostIndex > -1
-      ? state.posts.map((currentPost, index) => index === existingPostIndex ? post : currentPost)
-      : [...state.posts, post];
-    return {
-      ...state,
-      posts: updatedPostList,
-    };
+  if (!post.id || !post.title || !post.body || !post?.tags) {
+    return state;
+  }
+  const existingPostIndex = state.posts.findIndex(existingPost => existingPost.id === post.id);
+  const updatedPostList: Post[] = existingPostIndex > -1
+    ? state.posts.map((currentPost, index) => index === existingPostIndex ? post : currentPost)
+    : [...state.posts, post];
+  return {
+    ...state,
+    posts: updatedPostList,
+  };
 }

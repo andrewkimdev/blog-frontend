@@ -1,23 +1,23 @@
 <div class="post-input-wrapper">
-  <section class="buttons">
-    <app-buttons/>
-  </section>
+    <section class="buttons">
+        <app-buttons/>
+    </section>
 
-  <section class="text">
-    <app-title/>
-    <div class="post-organization">
-      <app-categories/>
-      <app-tags [tagDelimiters]="[',', ';']"></app-tags>
-    </div>
-    <app-image-uploader [postId]="getCurrentPostId()" (file-link)="onFileLinkUpdated($event)"></app-image-uploader>
+    <section class="text">
+        <app-title/>
+        <div class="post-organization">
+            <app-categories/>
+            <app-tags [tagDelimiters]="[',', ';']"></app-tags>
+        </div>
+        <app-image-uploader [postId]="getCurrentPostId()" (file-link)="onFileLinkUpdated($event)"></app-image-uploader>
 
-    <div class="markdown-wrapper">
-      <app-editor [added-text-at-cursor]="addedText$ | async"></app-editor>
-      <markdown
-        class="markdown-viewer"
-        [data]="(markdownData$ | async)"
-        clipboard
-      ></markdown>
-    </div>
-  </section>
+        <div class="markdown-wrapper">
+            <app-editor [added-text-at-cursor]="addedText$ | async"></app-editor>
+            <markdown
+                    class="markdown-viewer"
+                    [data]="(markdownData$ | async)"
+                    clipboard
+            ></markdown>
+        </div>
+    </section>
 </div>

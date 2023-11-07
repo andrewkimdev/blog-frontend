@@ -9,7 +9,8 @@ import * as PostEditorActions from '../post-editor/store/post-editor.action';
 export class CreateNewPostComponent implements OnInit {
   constructor(
     private store: Store,
-  ){}
+  ) {
+  }
 
   ngOnInit(): void {
     this.createPostAndRedirect();

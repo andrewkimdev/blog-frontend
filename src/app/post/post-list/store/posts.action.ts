@@ -11,10 +11,10 @@ export const loadPostsFromServer = createAction(
 
 export const postsLoadSuccess = createAction(
   '[Posts Page] Posts Loaded Success',
-  props<{ posts: Post[]}>(),
+  props<{ posts: Post[] }>(),
 );
 
 export const savePost = createAction(
   '[Posts Page] Save single-post-home to view list',
-  props<{ post: Post}>(),
+  props<{ post: Post }>(),
 );

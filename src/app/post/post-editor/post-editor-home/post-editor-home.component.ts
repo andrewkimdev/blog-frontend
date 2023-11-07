@@ -27,13 +27,11 @@ import * as PostEditorActions from '../store/post-editor.action';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostEditorHomeComponent implements OnInit, OnDestroy {
-  private addedTextSubject = new BehaviorSubject<string>('');
-  addedText$ = this.addedTextSubject.asObservable();
-
   markdownData$: Observable<string | null> = this.store.select(selectPost).pipe(
     map((p) => p.body),
   );
-
+  private addedTextSubject = new BehaviorSubject<string>('');
+  addedText$ = this.addedTextSubject.asObservable();
   private controlValidationErrorsSubject = new BehaviorSubject<ValidationErrors | null>(null);
 
   controlHasErrors$ = this.controlValidationErrorsSubject.asObservable().pipe(
@@ -41,11 +39,6 @@ export class PostEditorHomeComponent implements OnInit, OnDestroy {
     distinctUntilChanged(),
     tap((res) => console.log('error: ' + res))
   );
-
-  onFileLinkUpdated(link: string) {
-    this.addedTextSubject.next(link);
-  }
-
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -54,12 +47,12 @@ export class PostEditorHomeComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
-    this.hydrateCurrentPost();
+  onFileLinkUpdated(link: string) {
+    this.addedTextSubject.next(link);
   }
 
-  private hydrateCurrentPost(): void {
-    this.store.dispatch(PostEditorActions.hydratePostByPostId({ id: this.getCurrentPostId() }));
+  ngOnInit(): void {
+    this.hydrateCurrentPost();
   }
 
   ngOnDestroy(): void {
@@ -68,11 +61,15 @@ export class PostEditorHomeComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private getCurrentAuthorId(): number {
-    return getRandomNumberBetween(1, 8)
-  }
-
   getCurrentPostId(): number {
     return +this.route.snapshot.params['id'];
+  }
+
+  private hydrateCurrentPost(): void {
+    this.store.dispatch(PostEditorActions.hydratePostByPostId({ id: this.getCurrentPostId() }));
+  }
+
+  private getCurrentAuthorId(): number {
+    return getRandomNumberBetween(1, 8)
   }
 }

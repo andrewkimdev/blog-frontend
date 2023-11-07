@@ -10,8 +10,8 @@ describe('TopHeaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TopHeaderComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(TopHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

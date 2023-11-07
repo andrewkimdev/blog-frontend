@@ -21,4 +21,5 @@ import { ClipboardButtonComponent, ClipboardOptions, MarkdownModule } from 'ngx-
     MarkdownModule,
   ]
 })
-export class NgxMarkdownModule { }
+export class NgxMarkdownModule {
+}

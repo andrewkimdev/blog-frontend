@@ -11,7 +11,8 @@ import { FileUploadResponse } from '../file-upload-response.interface';
 export class UploadService {
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+  }
 
   uploadImage(selectedFile: File): Observable<FileUploadResponse> {
     const fd = new FormData();

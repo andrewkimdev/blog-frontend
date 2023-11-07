@@ -26,7 +26,7 @@ import { selectPost } from '../../store/post-editor.selector';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit, OnDestroy {
-  categoryInputControl: FormControl<string|null> = new FormControl(
+  categoryInputControl: FormControl<string | null> = new FormControl(
     '', [Validators.required, Validators.minLength(4)]
   );
 
@@ -34,9 +34,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private store: Store,
-  ) {}
+  constructor(private store: Store) {
+  }
 
   categoryNames: Observable<string[]> = this.store.select(selectAvailableCategories).pipe(
     map((c: Category[]) => c.map(({ name }) => name)),

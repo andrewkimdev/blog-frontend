@@ -8,7 +8,7 @@ export const addCategory = createAction(
 
 export const fetchCategoriesSuccess = createAction(
   '[Category] Hydrate categories',
-  props<{ categories: Category[]}>(),
+  props<{ categories: Category[] }>(),
 )
 
 export const fetchCategories = createAction(

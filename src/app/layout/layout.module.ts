@@ -30,4 +30,5 @@ const LayoutComponents = [
     ...LayoutComponents,
   ]
 })
-export class LayoutModule{}
+export class LayoutModule {
+}
