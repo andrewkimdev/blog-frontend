@@ -26,6 +26,11 @@ const appRoutes: Routes = [
     loadComponent: () => import('./about-me/about-me.component').then(c => c.AboutMeComponent),
   },
   {
+    path: 'account',
+    title: 'All Auth-related components',
+    loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
+  },
+  {
     path: 'admin',
     title: 'Admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
