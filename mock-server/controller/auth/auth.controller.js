@@ -10,6 +10,8 @@ const path = require('path');
 const authFilePath = path.join(__basedir, 'auth.json');
 const MockUsers = require('../../mock-data/users');
 
+const getCurrentUnixTimeInSeconds = require('../../shared/time.helper')
+
 router.post('/signup', async (req, res) => {
    try {
        const { username, password } = req.body;
@@ -30,6 +32,7 @@ router.post('/signup', async (req, res) => {
            id: userAuth.length + 1,
            username,
            password: hashedPassword,
+           role: ['user'],
        };
 
        // Add the new user to the UserAuth array
@@ -55,7 +58,14 @@ router.post('/login', (req, res) => {
         bcrypt.compare(password, authData.password, (err, result) => {
             if (result) {
                 const userProfile = MockUsers.find(u => u.id === authData.id);
-                const token = jwt.sign({ id: authData.id, username: authData.username}, 'secretKey', { expiresIn: '1h'});
+                const payload = {
+                    iss: 'mock-server',
+                    sub: authData.username,
+                    roles: authData.roles,
+                    aud: 'blog-kbi-web-app',
+                    nbf: getCurrentUnixTimeInSeconds(),
+                };
+                const token = jwt.sign(payload, 'secretKey', { expiresIn: '1h'});
                 res.json({ token, userProfile });
             } else {
                 res.status(401).json({ message: 'Invalid credentials' });
