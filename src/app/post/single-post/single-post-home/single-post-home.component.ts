@@ -45,7 +45,7 @@ export class SinglePostHome implements OnInit {
       return ''
     }
 
-    if (str.includes('assets')) {
+    if (str.startsWith('assets')) {
       return str;
     } else {
       return `${environment.baseUrl}/images/${str}`;
