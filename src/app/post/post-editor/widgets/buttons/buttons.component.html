@@ -3,8 +3,8 @@
         <button (click)="onSaveButtonClicked()" class="btn btn-success-outline">Save</button>
         <button (click)="onCancelButtonClicked()" class="btn">Cancel</button>
     </div>
-    <clr-checkbox-wrapper>
-        <input type="checkbox" clrCheckbox [formControl]="isDraftInputControl" id="draft">
+    <div>
+        <input type="checkbox" [formControl]="isDraftInputControl" id="draft">
         <label for="draft" class="text-no-select">Draft</label>
-    </clr-checkbox-wrapper>
+    </div>
 </div>

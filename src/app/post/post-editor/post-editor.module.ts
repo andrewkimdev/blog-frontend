@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // 3rd Party Vendor Modules
-import { ClarityDesignSystemModule, NgxMarkdownModule } from '../../lib';
+import { NgxMarkdownModule } from '../../lib';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -46,7 +46,6 @@ import { PostEditorRoutingModule } from './post-editor-routing.module';
     CommonModule,
     CoreModule,
     NgxMarkdownModule,
-    ClarityDesignSystemModule,
     StoreModule.forFeature('postEditorFeatureKey', postEditorReducer),
     EffectsModule.forFeature([PostEditorEffects]),
     PostEditorRoutingModule,

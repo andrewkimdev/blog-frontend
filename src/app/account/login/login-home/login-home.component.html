@@ -6,32 +6,24 @@
             <div class="hint">Admin Only</div>
         </section>
         <form class="login-group" [formGroup]="form">
-            <clr-input-container>
-                <label class="clr-sr-only">E-mail</label>
+                <label>E-mail</label>
                 <input
                         type="text"
                         autocomplete="username"
                         name="username"
-                        clrInput
                         placeholder="Enter e-mail"
                         formControlName="username"
                 />
-            </clr-input-container>
-            <clr-password-container>
-                <label class="clr-sr-only">Password</label>
+                <label>Password</label>
                 <input
                         type="password"
                         autocomplete="current-password"
                         name="password"
-                        clrPassword
                         placeholder="Enter password"
                         formControlName="password"
                 />
-            </clr-password-container>
-            <clr-checkbox-wrapper>
                 <label>Remember me</label>
-                <input type="checkbox" name="rememberMe" clrCheckbox formControlName="rememberMe"/>
-            </clr-checkbox-wrapper>
+                <input type="checkbox" name="rememberMe" formControlName="rememberMe"/>
             <div class="error active">Invalid user name or password</div>
             <button type="submit" class="btn btn-primary">Log in</button>
         </form>

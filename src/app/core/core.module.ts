@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import { ClarityDesignSystemModule, NgxMarkdownModule } from '../lib';
+import { NgxMarkdownModule } from '../lib';
 
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -18,7 +18,6 @@ import { TopAlertComponent } from './top-alert/top-alert.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ClarityDesignSystemModule,
     NgxMarkdownModule,
     RouterLink,
   ],

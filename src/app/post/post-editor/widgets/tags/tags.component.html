@@ -2,7 +2,7 @@
     <div class="tag-label-group">
     <span *ngFor="let tag of tagLabels$ | async" class="label text-no-select">
       {{ tag }}
-        <cds-icon class="cursor-pointer" shape="times" (click)="removeTag(tag)"/>
+        <span class="cursor-pointer" (click)="removeTag(tag)">X</span>
     </span>
     </div>
     <div class="clr-input-wrapper">

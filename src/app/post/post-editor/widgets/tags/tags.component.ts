@@ -5,8 +5,6 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 // 3rd Party Vendor Modules
-import '@cds/core/icon/register.js';
-import { ClarityIcons, timesIcon } from '@cds/core/icon';
 
 // State Management
 import * as PostEditorAction from '../../store/post-editor.action';
@@ -34,7 +32,6 @@ export class TagsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.setupTagInput();
-    ClarityIcons.addIcons(timesIcon);
   }
 
   onSpecialKeyPressed(event: KeyboardEvent): void {

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { CoreModule } from '../core/core.module';
-import { ClarityDesignSystemModule } from '../lib';
 
 import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
@@ -19,7 +18,6 @@ const LayoutComponents = [
   imports: [
     CommonModule,
     CoreModule,
-    ClarityDesignSystemModule,
     RouterLink,
     RouterLinkActive,
   ],

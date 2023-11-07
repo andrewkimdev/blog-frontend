@@ -9,7 +9,6 @@ import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 // 3rd Party Vendor Module
 import { CoreModule } from 'src/app/core/core.module';
-import { ClarityDesignSystemModule } from './lib';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects'
 
@@ -37,7 +36,6 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
-    ClarityDesignSystemModule,
     HttpClientModule,
     PostsModule,
     AdminModule,

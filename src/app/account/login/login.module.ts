@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Library
-import { ClarityDesignSystemModule } from 'src/app/lib';
 
 // Module Components
 import { LoginHomeComponent } from './login-home/login-home.component';
@@ -19,7 +18,6 @@ import { LoginRoutingModule } from './login-routing.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ClarityDesignSystemModule,
     LoginRoutingModule,
   ]
 })

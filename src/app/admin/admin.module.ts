@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // 3rd Party Vendor Modules
-import { ClarityDesignSystemModule, NgxMarkdownModule } from '../lib';
+import { NgxMarkdownModule } from '../lib';
 
 // Custom Shared Modules
 import { CoreModule } from 'src/app/core/core.module';
@@ -23,7 +23,6 @@ import { AdminRoutingModule } from './admin-routing.module';
     CommonModule,
     CoreModule,
     NgxMarkdownModule,
-    ClarityDesignSystemModule,
     AdminRoutingModule,
   ]
 })

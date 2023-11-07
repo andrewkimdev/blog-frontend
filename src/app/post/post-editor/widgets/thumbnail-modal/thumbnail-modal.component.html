@@ -1,23 +1,23 @@
-<clr-modal
-        clrModalSize="lg"
-        [(clrModalOpen)]="open"
-        [clrModalClosable]="false"
-        [clrModalSkipAnimation]="'close'"
->
-    <h3 class="modal-title">Enlarged Image</h3>
-    <div class="modal-body">
-        <img [src]="fileInfo.imageUrl" style="max-width: 100%; max-height: 100%;" alt="Enlarged Image">
-    </div>
-    <div class="modal-footer">
-        <div class="modal-input-group">
-            <div class="clr-checkbox-wrapper">
-                <input type="checkbox" clrCheckbox id="is-main-image" [formControl]="isMainImageInputControl">
-                <label for="is-main-image" class="text-no-select">Main Image</label>
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-primary" id="copy" (click)="onCopyClicked()">{{ copyButtonText }}</button>
-                <button type="button" class="btn btn-outline" (click)="closeModal()">Close</button>
-            </div>
-        </div>
-    </div>
-</clr-modal>
+<!--<clr-modal-->
+<!--        clrModalSize="lg"-->
+<!--        [(clrModalOpen)]="open"-->
+<!--        [clrModalClosable]="false"-->
+<!--        [clrModalSkipAnimation]="'close'"-->
+<!--&gt;-->
+<!--    <h3 class="modal-title">Enlarged Image</h3>-->
+<!--    <div class="modal-body">-->
+<!--        <img [src]="fileInfo.imageUrl" style="max-width: 100%; max-height: 100%;" alt="Enlarged Image">-->
+<!--    </div>-->
+<!--    <div class="modal-footer">-->
+<!--        <div class="modal-input-group">-->
+<!--            <div class="clr-checkbox-wrapper">-->
+<!--                <input type="checkbox" clrCheckbox id="is-main-image" [formControl]="isMainImageInputControl">-->
+<!--                <label for="is-main-image" class="text-no-select">Main Image</label>-->
+<!--            </div>-->
+<!--            <div class="btn-group">-->
+<!--                <button class="btn btn-primary" id="copy" (click)="onCopyClicked()">{{ copyButtonText }}</button>-->
+<!--                <button type="button" class="btn btn-outline" (click)="closeModal()">Close</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</clr-modal>-->
