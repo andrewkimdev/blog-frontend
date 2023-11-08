@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoreModule } from 'src/app/core/core.module';
-import { MarkdownModule } from 'ngx-markdown';
+import { MaterialModule, NgxMarkdownModule } from 'src/app/shared/lib';
 
 import { SinglePostHome } from 'src/app/post/single-post/single-post-home/single-post-home.component';
 
@@ -20,7 +20,8 @@ import { SinglePostRoutingModule } from './single-post-routing.module';
   imports: [
     CommonModule,
     CoreModule,
-    MarkdownModule,
+    NgxMarkdownModule,
+    MaterialModule,
     StoreModule.forFeature('singlePostViewerFeatureKey', singlePostViewerReducer),
     EffectsModule.forFeature([PostViewerEffects]),
     SinglePostRoutingModule,
