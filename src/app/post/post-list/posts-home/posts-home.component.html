@@ -1,3 +1,20 @@
-<pre *ngIf="posts$ | async as posts ">
-    {{ posts | json }}
-</pre>
+<div *ngIf="posts$ | async as posts" class="post-cards-container">
+    <mat-card
+            *ngFor="let post of posts"
+            class="post-card cursor-pointer"
+            (click)="gotoPost(post.id)"
+    >
+        <mat-card-header class="post-card-header">
+            <img mat-card-avatar [src]="post.author?.profileImage" [alt]="post.author?.name ?? ''">
+            <mat-card-title>{{post.title}}</mat-card-title>
+            <mat-card-subtitle>Change subtitle</mat-card-subtitle>
+        </mat-card-header>
+        <div class="post-card-image-container">
+            <img mat-card-image [src]="post.mainImage" [alt]="post.title + ' main image'">
+        </div>
+        <mat-card-content class="post-card-content">
+            <p>{{ post.body.substring(0, 200) }}...</p>
+        </mat-card-content>
+        <span class="flex-spacer"></span>
+    </mat-card>
+</div>

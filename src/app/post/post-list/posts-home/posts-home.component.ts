@@ -28,7 +28,9 @@ export class PostsHomeComponent implements OnInit {
     this.store.dispatch(PostsAction.loadPostsFromCache());
   }
 
-  showPost(p: any) {
-    this.router.navigate(['posts', p.id]).then();
+  gotoPost(id: number | null) {
+    if (id) {
+      this.router.navigate(['posts', id]).then();
+    }
   }
 }

@@ -1,0 +1,40 @@
+.post-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.post-card {
+  width: 300px;
+  margin: 20px;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .post-card-header {
+    margin-bottom: 10px;
+  }
+
+  .post-card-image-container {
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+    img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .post-card-content {
+    margin-bottom: 10px;
+    min-height: 80px;
+  }
+}
