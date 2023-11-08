@@ -1,0 +1,4 @@
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+    <app-top-toolbar (toggleSidenav)="toggleSidenavOpen()" [title]="title"></app-top-toolbar>
+    <app-side-nav [open]="sidenavOpened" [mobileQueryMatches]="mobileQuery.matches"></app-side-nav>
+</div>

@@ -1,18 +1,12 @@
-<a routerLink="./normal" routerLinkActive="active">
-    Normal
-</a>
-<a routerLink="./electric" routerLinkActive="active">
-    Electric
-</a>
-<a routerLink="./poison" routerLinkActive="active">
-    Poison
-</a>
-<a routerLink="./grass" routerLinkActive="active">
-    Grass
-</a>
-<a routerLink="./fighting" routerLinkActive="active">
-    Fighting
-</a>
-<a routerLink="./credit" routerLinkActive="active">
-    Credit
-</a>
+<mat-sidenav-container class="sidenav-container"
+                       [style.marginTop.px]="mobileQueryMatches ? 56 : 0">
+    <mat-sidenav #sidenav [mode]="mobileQueryMatches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQueryMatches" fixedTopGap="56">
+        <app-side-nav-list></app-side-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <section class="router-wrapper">
+            <router-outlet/>
+        </section>
+    </mat-sidenav-content>
+</mat-sidenav-container>

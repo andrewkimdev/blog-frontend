@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  title = 'personal-blog-kbi';
+  title = `My Blog`;
 
   constructor(
     private router: Router,

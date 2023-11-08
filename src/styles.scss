@@ -1,4 +1,14 @@
+// Material Icons & Roboto Fonts are part of Angular Material Package.
+// To serve Material Icons from local server
 @import 'node_modules/material-icons/iconfont/material-icons.css';
+
+// To serve Material Roboto fonts from local server
+@import 'node_modules/@fontsource/roboto/300.css';
+@import 'node_modules/@fontsource/roboto/300-italic.css';
+@import 'node_modules/@fontsource/roboto/400.css';
+@import 'node_modules/@fontsource/roboto/400-italic.css';
+@import 'node_modules/@fontsource/roboto/500.css';
+@import 'node_modules/@fontsource/roboto/500-italic.css';
 
 html, body {
   height: 100%;
@@ -8,6 +18,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+// End of Angular Material Config
 
 .margin-top {
   margin-top: 16px;
