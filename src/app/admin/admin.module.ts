@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // 3rd Party Vendor Modules
-import { NgxMarkdownModule } from '../lib';
+import { NgxMarkdownModule } from 'src/app/shared/lib';
 
 // Custom Shared Modules
 import { CoreModule } from 'src/app/core/core.module';
