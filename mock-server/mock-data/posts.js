@@ -37,7 +37,7 @@ Machine learning is revolutionizing the way we interact with the world. From hea
 **Author**: John Doe
 **Date**: October 27, 2023
 `,
-    "category": "Programming",
+    "category": { "name": "Programming" },
     "tags": ["code", "clean code", "programming"],
     "imageIdList": [],
   },

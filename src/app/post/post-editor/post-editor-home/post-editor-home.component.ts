@@ -1,11 +1,13 @@
 // Angular Core Modules
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import {
   BehaviorSubject,
   distinctUntilChanged,
+  filter,
   map,
   Observable,
   Subject,
+  take,
   tap
 } from 'rxjs';
 
@@ -20,16 +22,20 @@ import { Store } from '@ngrx/store';
 import { selectPost } from '../store/post-editor.selector';
 import * as PostEditorActions from '../store/post-editor.action';
 
+// Custom Data Definitions
+import { Category } from 'src/app/shared/types';
+
 @Component({
   selector: 'app-single-post-home-editor',
   templateUrl: './post-editor-home.component.html',
   styleUrls: ['./post-editor-home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostEditorHomeComponent implements OnInit, OnDestroy {
+export class PostEditorHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   markdownData$: Observable<string | null> = this.store.select(selectPost).pipe(
     map((p) => p.body),
   );
+
   private addedTextSubject = new BehaviorSubject<string>('');
   addedText$ = this.addedTextSubject.asObservable();
   private controlValidationErrorsSubject = new BehaviorSubject<ValidationErrors | null>(null);
@@ -47,12 +53,29 @@ export class PostEditorHomeComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  onCategorySelected(category: Category) {
+    this.store.dispatch(PostEditorActions.setCategory({ name: category.name }))
+  }
+
+  initialCategoryName: Category = { name: 'n/a' };
+
+  private setInitialCategoryValue() {
+    this.store.select(selectPost).pipe(
+      map((p) => p.category),
+      filter((c) => !!c && !!c.name),
+      take(1),
+      map(( c) => c?.name ?? 'n/a'),
+      tap((name) => this.initialCategoryName = { name }),
+    ).subscribe()
+  }
+
   onFileLinkUpdated(link: string) {
     this.addedTextSubject.next(link);
   }
 
   ngOnInit(): void {
     this.hydrateCurrentPost();
+    this.setInitialCategoryValue();
   }
 
   ngOnDestroy(): void {
@@ -71,5 +94,11 @@ export class PostEditorHomeComponent implements OnInit, OnDestroy {
 
   private getCurrentAuthorId(): number {
     return getRandomNumberBetween(1, 8)
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.store.dispatch(PostEditorActions.markPostAsPristine());
+    }, 100)
   }
 }

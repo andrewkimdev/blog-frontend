@@ -7,8 +7,10 @@ router.get('/categories', (req, res) => {
 });
 
 router.post('/categories', (req, res) => {
-  data.push(req.body);
-  res.json(data);
+  const newCategoryName = req.params.newCategoryName;
+  // Add sanity check later
+  data.push(newCategoryNamee);
+  res.status(201).json({name: newCategoryName});
 });
 
 router.delete('/categories/:categoryName', (req, res) => {

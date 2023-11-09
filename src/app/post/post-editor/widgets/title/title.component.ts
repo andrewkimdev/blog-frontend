@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, map, Subject, take, takeUntil, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, skip, Subject, take, takeUntil, tap } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 
 import { Post } from 'src/app/shared/types';
@@ -35,6 +35,7 @@ export class TitleComponent implements OnInit, OnDestroy {
   private reactToInputControlChanges(): void {
     this.titleInputControl.valueChanges.pipe(
       takeUntil(this.destroy$),
+      skip(1), // Skip during hydration -- todo - test if this holds in creation
       map((value) => value ?? ''),
       debounceTime(300),
       distinctUntilChanged(),

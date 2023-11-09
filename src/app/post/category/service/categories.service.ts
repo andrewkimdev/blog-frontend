@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class CategoriesService {
   constructor(private http: HttpClient) {
   }
 
@@ -17,13 +17,8 @@ export class CategoryService {
     return this.http.get<Category[]>(`${environment.baseUrl}/categories`);
   }
 
-  addCategory(newCategoryName: string): void {
-    // 1. Check for duplicate entry
-
-    // 2. Being optimistic, apply the change to this.categoriesSubject.
-
-    // 3. Send the change to the server
-    // this.http.post<any>(`${ environment.baseUrl }/categories`, newCategory).pipe(
+  addCategory(newCategoryName: string): Observable<Category> {
+    return this.http.post<Category>(`${ environment.baseUrl }/categories`, { newCategoryName });
   }
 
   removeCategory(category: string): void {

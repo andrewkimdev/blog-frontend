@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as PageEditorActions from './post-editor.action';
-import { Category, Post } from 'src/app/shared/types';
+import { Post } from 'src/app/shared/types';
 
 import {
   createBlankPost,
@@ -10,10 +10,9 @@ import {
 export interface PostEditorState {
   post: Post;
   isDirty: boolean;
-  categories: Category[],
 }
 
-const initialState: PostEditorState = { post: createBlankPost(), isDirty: false, categories: [] };
+const initialState: PostEditorState = { post: createBlankPost(), isDirty: false };
 
 export const postEditorReducer = createReducer(
   initialState,
@@ -36,8 +35,8 @@ export const postEditorReducer = createReducer(
     const post = duplicatePost(state.post, { title });
     return { ...state, post, isDirty: true };
   }),
-  on(PageEditorActions.setCategory, (state, { category }) => {
-    const post = duplicatePost(state.post, { category });
+  on(PageEditorActions.setCategory, (state, { name }) => {
+    const post = duplicatePost(state.post, { category: { name} });
     return { ...state, post, isDirty: true };
   }),
   on(PageEditorActions.setIsDraftState, (state, { isDraft }) => {
@@ -67,6 +66,9 @@ export const postEditorReducer = createReducer(
   on(PageEditorActions.clearPost, () => {
     return initialState;
   }),
+  on(PageEditorActions.markPostAsPristine, (state) => ({
+    ...state, isDirty: false,
+  })),
   on(PageEditorActions.setMainImage, (state, { imageId }) => {
     const post: Post = duplicatePost(state.post, { mainImage: imageId });
     return { ...state, post, isDirty: true };

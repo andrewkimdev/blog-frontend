@@ -1,18 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
-import * as CategoryAction from './category.action';
+import * as CategoryAction from './categories.action';
 
-export interface Category {
-  name: string;
-}
+import { Category } from 'src/app/shared/types';
 
-export interface CategoryState {
+
+export interface CategoriesState {
   categories: Category[];
 }
 
-const initialState: CategoryState = { categories: [] };
+const initialState: CategoriesState = { categories: [] };
 
 
-export const categoryReducer = createReducer(
+export const categoriesReducer = createReducer(
   initialState,
   on(CategoryAction.addCategory, (state, { name }) => {
     const categoryExists = state.categories.some((c) => c.name === name);
@@ -21,7 +20,7 @@ export const categoryReducer = createReducer(
       : { ...state, categories: [...state.categories, { name }] };
   }),
   on(CategoryAction.fetchCategoriesSuccess, (state, { categories }) => {
-    categories.sort((a, b) => a.name.localeCompare(b.name));
+    // categories.((a, b) => a.name.localeCompare(b.name));
     return { ...state, categories };
   }),
 );

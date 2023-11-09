@@ -16,7 +16,6 @@ import { TagsComponent } from './widgets/tags/tags.component';
 import { TitleComponent } from './widgets/title/title.component';
 import { EditorComponent } from './widgets/editor/editor.component';
 import { ButtonsComponent } from './widgets/buttons/buttons.component';
-import { CategoriesComponent } from './widgets/categories/categories.component';
 import { ImageUploaderComponent } from './widgets/image-uploader/image-uploader.component';
 import { UploadComponent } from './widgets/image-uploader/upload/upload.component';
 import { ThumbnailComponent } from './widgets/thumbnail/thumbnail.component';
@@ -28,6 +27,7 @@ import { PostEditorEffects } from './store/post-editor.effects';
 
 // Routing Module
 import { PostEditorRoutingModule } from './post-editor-routing.module';
+import { CategoriesModule } from '../category/categories.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { PostEditorRoutingModule } from './post-editor-routing.module';
     TitleComponent,
     EditorComponent,
     ButtonsComponent,
-    CategoriesComponent,
     UploadComponent,
     ThumbnailComponent,
     ImageUploaderComponent,
@@ -49,6 +48,7 @@ import { PostEditorRoutingModule } from './post-editor-routing.module';
     StoreModule.forFeature('postEditorFeatureKey', postEditorReducer),
     EffectsModule.forFeature([PostEditorEffects]),
     PostEditorRoutingModule,
+    CategoriesModule,
   ]
 })
 export class PostEditorModule {

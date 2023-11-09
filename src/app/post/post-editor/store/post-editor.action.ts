@@ -34,6 +34,10 @@ export const savePost = createAction(
   '[PostEditor Page] Save single-post-home',
 );
 
+export const markPostAsPristine = createAction(
+  '[PostEditor Page] Mark page as pristine',
+)
+
 export const abandonPostEdit = createAction(
   '[PostEditor Page] Cancel single-post-home edit',
 );
@@ -63,7 +67,7 @@ export const setIsDraftState = createAction(
 
 export const setCategory = createAction(
   '[PostEditor Page] Select category',
-  props<{ category: string }>(),
+  props<{ name: string }>(),
 );
 
 export const addTag = createAction(

@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { debounceTime, filter, map, Subject, take, takeUntil, tap } from 'rxjs';
+import { debounceTime, filter, map, skip, Subject, take, takeUntil, tap } from 'rxjs';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 
 import { Post } from 'src/app/shared/types';
@@ -76,6 +76,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   private reactToInputControlChanges(): void {
     this.textInputFormControl.valueChanges.pipe(
       takeUntil(this.destroy$),
+      skip(1),
       map((value: string | null) => value ?? ''),
       debounceTime(300),
       tap((body: string) => this.store.dispatch(setBodyText({ body }))),

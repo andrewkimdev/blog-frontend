@@ -1,5 +1,0 @@
-    <input [formControl]="categoryInputControl" placeholder="Selected category" name="Option"/>
-    <datalist>
-        <option *ngFor="let item of categoryNames | async" [value]="item"></option>
-    </datalist>
-<app-error-message [error]="inputControlError()"/>
