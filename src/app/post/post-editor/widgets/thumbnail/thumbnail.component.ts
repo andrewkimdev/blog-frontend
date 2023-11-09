@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ThumbnailDialogComponent } from '../thumbnail-dialog/thumbnail-dialog.component';
 
 @Component({
   selector: 'app-thumbnail',
@@ -18,8 +20,20 @@ export class ThumbnailComponent {
   @Output()
   openModal = new EventEmitter<void>();
 
+  constructor(public dialog: MatDialog) {}
+
   triggerOpenModal() {
-    this.openModal.emit();
+    console.log(this.thumbnailUrl)
+    const dialogRef = this.dialog.open(ThumbnailDialogComponent, {
+      width: 'lg',
+      data: { fileInfo: { id: this.uuid, imageUrl: this.thumbnailUrl } }
+    });
+
+    console.log(this.uuid);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
   }
   removeImage(): void {
     this.remove.emit();

@@ -15,5 +15,13 @@
 
 .dropzone:hover,
 .dropzone.dragover {
-  background-color: #ffffff33;
+  background-color: #00000033;
+}
+
+mat-card-content {
+  // Custom styles for the card content if needed
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

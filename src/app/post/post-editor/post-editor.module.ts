@@ -19,6 +19,7 @@ import { ButtonsComponent } from './widgets/buttons/buttons.component';
 import { ImageUploaderComponent } from './widgets/image-uploader/image-uploader.component';
 import { UploadComponent } from './widgets/image-uploader/upload/upload.component';
 import { ThumbnailComponent } from './widgets/thumbnail/thumbnail.component';
+import { ThumbnailDialogComponent } from './widgets/thumbnail-dialog/thumbnail-dialog.component';
 import { ThumbnailModalComponent } from './widgets/thumbnail-modal/thumbnail-modal.component';
 
 // State Management
@@ -40,6 +41,7 @@ import { CategoriesModule } from '../category/categories.module';
     ThumbnailComponent,
     ImageUploaderComponent,
     ThumbnailModalComponent,
+    ThumbnailDialogComponent,
   ],
   imports: [
     CommonModule,
