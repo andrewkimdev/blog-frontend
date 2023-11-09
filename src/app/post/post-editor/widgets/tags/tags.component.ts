@@ -1,10 +1,11 @@
 // Angular Core Modules
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { debounceTime, filter, map, merge, Subject, takeUntil, tap } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import { Component, inject, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 // 3rd Party Vendor Modules
+import {COMMA, ENTER, SEMICOLON} from '@angular/cdk/keycodes';
+import { MatChipInputEvent, MatChipEditedEvent } from '@angular/material/chips';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 // State Management
 import * as PostEditorAction from '../../store/post-editor.action';
@@ -15,72 +16,56 @@ import { selectPostTags } from 'src/app/post/post-editor/store/post-editor.selec
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss']
 })
-export class TagsComponent implements OnInit, OnDestroy {
+export class TagsComponent {
 
   // Delimiters for tag input
   @Input()
-  tagDelimiters = [',', ';'];
+  tagDelimitersCodes = [COMMA, SEMICOLON];
 
-  tagsInputControl = new FormControl('');
-  enterKeyPressed$ = new Subject<void>();
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  tags: string[] = []; // Initialize this with your actual tags
 
-  private destroy$ = new Subject<void>();
-  tagLabels$ = this.store.select(selectPostTags);
+  announcer = inject(LiveAnnouncer);
 
   constructor(private store: Store) {
+    // Fetch tags from the store and update `tags` array
+    this.store.select(selectPostTags).subscribe((tagsFromStore) => {
+      this.tags = tagsFromStore;
+    });
   }
 
-  ngOnInit(): void {
-    this.setupTagInput();
-  }
 
-  onSpecialKeyPressed(event: KeyboardEvent): void {
-    if (['Enter', 'Tab'].includes(event.key)) {
-      event.preventDefault();
-      event.stopPropagation();
-      this.enterKeyPressed$.next();
-    }
-  }
+  tagLabels$ = this.store.select(selectPostTags);
 
-  removeTag(tag: string): void {
+  remove(tag: string): void {
     this.store.dispatch(PostEditorAction.removeTag({ tag }));
+
+    this.announcer.announce(`Removed ${tag}`);
   }
 
-  private addTag(): void {
-    const tag: string = this.getTagFromInputControl();
-    if (tag.trim()) {
-      this.store.dispatch(PostEditorAction.addTag({ tag }));
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our tag
+    if (value) {
+      this.store.dispatch(PostEditorAction.addTag({ tag: value }));
     }
   }
+  edit(tag: string, event: MatChipEditedEvent) {
+    const value = event.value.trim();
 
-  private getTagFromInputControl(): string {
-    const charactersToRemove = this.tagDelimiters; // This array can be external
-    const regexStr = '[' + charactersToRemove.join('') + ']'; // Construct the regular expression string
-    const regex = new RegExp(regexStr, 'g'); // Create the RegExp object
+    // Here you might need to handle the editing logic
+    // For now, it just updates the tag if it's not empty
+    if (!value) {
+      this.remove(tag);
+      return;
+    }
 
-    return this.tagsInputControl.value?.replace(regex, '').trim() ?? '';
-  }
-
-  private setupTagInput(): void {
-    const enterKeyPressed$ = this.enterKeyPressed$;
-
-    const commaSeparated$ = this.tagsInputControl.valueChanges.pipe(
-      filter((tag) => !!tag),
-      map((tag) => tag as string),
-      map((tag: string) => this.tagDelimiters.some(char => tag.includes(char))),
-      filter((tag) => tag),
-    );
-
-    merge(commaSeparated$, enterKeyPressed$).pipe(
-      takeUntil(this.destroy$),
-      debounceTime(0), // Needed to fix Hangul input error - last character is appended without this hack.
-      tap(() => this.addTag()),
-      tap(() => this.tagsInputControl.setValue('')),
-    ).subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    const index = this.tags.indexOf(tag);
+    if (index >= 0) {
+      // Update the tag in your store as necessary
+      this.tags[index] = value;
+    }
   }
 }

@@ -1,5 +1,7 @@
 <div class="title-wrapper">
-    <span>(i)</span>
-    <input id="title" [formControl]="titleInputControl" placeholder="Title...">
+    <mat-form-field class="title-input-wrapper">
+        <mat-label>Title</mat-label>
+        <input matInput type="text" [formControl]="titleInputControl">
+    </mat-form-field>
     <app-error-message [error]="inputControlError()"></app-error-message>
 </div>

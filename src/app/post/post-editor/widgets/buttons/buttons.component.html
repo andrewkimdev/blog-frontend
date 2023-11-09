@@ -1,10 +1,9 @@
 <div class="input-group">
     <div class="btn-group">
-        <button (click)="onSaveButtonClicked()" class="btn btn-success-outline">Save</button>
-        <button (click)="onCancelButtonClicked()" class="btn">Cancel</button>
+        <button mat-stroked-button color="primary" (click)="onSaveButtonClicked()" class="btn btn-success-outline">Save</button>
+        <button mat-stroked-button color="warn" (click)="onCancelButtonClicked()" class="btn">Cancel</button>
     </div>
     <div>
-        <input type="checkbox" [formControl]="isDraftInputControl" id="draft">
-        <label for="draft" class="text-no-select">Draft</label>
+        <mat-checkbox [formControl]="isDraftInputControl">Draft</mat-checkbox>
     </div>
 </div>

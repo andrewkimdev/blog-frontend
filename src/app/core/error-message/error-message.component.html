@@ -1,1 +1,3 @@
-<span>{{ errorMessage }}</span>
+<mat-error *ngIf="errorMessage">
+    {{ errorMessage }}
+</mat-error>

@@ -34,7 +34,7 @@ export class CategoriesEffects {
     filter(([{ name }, { categories } ]) => {
       return !!name && !categories.some((c) => c.name.toLowerCase() === name.toLowerCase());
     }),
-    map(([{ name }, { categories } ]): Category => ({name})),
+    map(([{ name }, _ ]): Category => ({name})),
     exhaustMap(({ name }) => this.categoriesService.addCategory(name)),
   ), { dispatch: false });
 }

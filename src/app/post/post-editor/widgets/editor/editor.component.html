@@ -1,12 +1,16 @@
 <div class="hint-container">
+    <mat-form-field>
+        <mat-label>Edit your blog post</mat-label>
         <textarea id="markdown-input"
+                  matInput
                   #textarea
                   (blur)="saveCursorLocation()"
                   (drop)="preventDefault($event)"
                   required
                   [formControl]="textInputFormControl"
-                  placeholder="Enter blog text here... (markdown)"
+                  placeholder="Blah blah..."
         ></textarea>
+    </mat-form-field>
     <app-error-message [error]="inputControlError()"></app-error-message>
     <div class="hint-button-right">
     <span>

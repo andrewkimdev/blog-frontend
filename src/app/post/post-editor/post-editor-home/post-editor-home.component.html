@@ -7,7 +7,7 @@
         <app-title/>
         <div class="post-organization">
             <app-categories (category)="onCategorySelected($event)" [initCategory]="initialCategoryName"/>
-            <app-tags [tagDelimiters]="[',', ';']"></app-tags>
+            <app-tags></app-tags>
         </div>
         <app-image-uploader [postId]="getCurrentPostId()" (file-link)="onFileLinkUpdated($event)"></app-image-uploader>
 
