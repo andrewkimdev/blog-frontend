@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { filter, map, Observable, Subject, take, takeUntil, tap } from 'rxjs';
+import { filter, map, Observable, skip, Subject, take, takeUntil, tap } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
@@ -38,6 +38,7 @@ export class ButtonsComponent implements OnInit, OnDestroy {
   private reactToInputControlChanges(): void {
     this.isDraftInputControl.valueChanges.pipe(
       takeUntil(this.destroy$),
+      skip(1),
       map((value) => !!value),
       tap((isDraft: boolean) => this.store.dispatch(PostEditorAction.setIsDraftState({ isDraft }))),
     ).subscribe();
