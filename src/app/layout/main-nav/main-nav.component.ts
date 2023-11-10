@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, Input } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-main-nav',
@@ -24,7 +23,6 @@ export class MainNavComponent implements OnDestroy {
   constructor(
     private cdr: ChangeDetectorRef,
     private media: MediaMatcher,
-    private store: Store,
   ) { }
 
   ngOnInit(): void {

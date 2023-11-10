@@ -43,7 +43,7 @@ export class TagsComponent {
   remove(tag: string): void {
     this.store.dispatch(PostEditorAction.removeTag({ tag }));
 
-    this.announcer.announce(`Removed ${tag}`);
+    this.announcer.announce(`Removed ${ tag }`).then();
   }
 
   add(event: MatChipInputEvent): void {

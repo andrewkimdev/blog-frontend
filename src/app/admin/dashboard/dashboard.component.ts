@@ -13,7 +13,7 @@ export class DashboardComponent {
   ) {
   }
 
-  createPost() {
-    this.router.navigate(['posts', 'new']);
+  createPost(): void {
+    this.router.navigate(['posts', 'new']).then();
   }
 }

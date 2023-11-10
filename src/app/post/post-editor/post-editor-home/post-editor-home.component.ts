@@ -138,7 +138,7 @@ export class PostEditorHomeComponent implements OnInit, AfterViewInit, OnDestroy
     this.store.dispatch(PostEditorActions.hydratePostByPostId({ id: this.getCurrentPostId() }));
   }
 
-  private getCurrentAuthorId(): number {
+  private _getCurrentAuthorId(): number {
     return getRandomNumberBetween(1, 8)
   }
 }

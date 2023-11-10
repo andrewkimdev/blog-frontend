@@ -4,14 +4,14 @@ import { CanActivateFn, Router } from '@angular/router';
 
 import { PostEditorService } from '../post-editor/services/post-editor.service';
 
-export const postCreateGuard: CanActivateFn = (route, state) => {
+export const postCreateGuard: CanActivateFn = (_route, _state) => {
   const postEditorService = inject(PostEditorService);
   const router = inject(Router);
 
   return postEditorService.createNewPost().pipe(
     map(({ id, createdAt }) => {
       if (id) {
-        router.navigate(['posts', id, 'edit'], { queryParams: { 'is-new': true, 'created-at': createdAt }});
+        router.navigate(['posts', id, 'edit'], { queryParams: { 'is-new': true, 'created-at': createdAt }}).then();
         return true;
       }
       return false;
