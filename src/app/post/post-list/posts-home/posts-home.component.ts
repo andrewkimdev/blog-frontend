@@ -19,16 +19,20 @@ import * as PostsAction from './../store/posts.action';
 })
 export class PostsHomeComponent implements OnInit {
   posts$: Observable<Post[]> = this.store.pipe(select(selectPosts)).pipe(
-    map((posts: Post[]) => {
-      return posts.map((post: Post) => {
-        const _mainImage = post.mainImage?.startsWith('assets')
-          ? post.mainImage
-          : createImageUrlFromUuid(post.mainImage ?? '', 'html');
-        const mainImage = this.sanitizer.bypassSecurityTrustResourceUrl(_mainImage);
-        return duplicatePost(post, { mainImage });
-      });
-    }),
+    map((posts: Post[]) =>
+      posts.map((post: Post) => this.applySanitizedImageUrl(post))
+    ),
   );
+
+  // N.B.: It is ideal to place this in the reducer but DomSanitizer should be run in the DI context.
+  // Using 'inject()' produces error when tried.
+  private applySanitizedImageUrl(post: Post): Post {
+    const _mainImage = post.mainImage?.startsWith('assets')
+      ? post.mainImage
+      : createImageUrlFromUuid(post.mainImage ?? '', 'html');
+    const mainImage = this.sanitizer.bypassSecurityTrustResourceUrl(_mainImage);
+    return duplicatePost(post, { mainImage });
+  }
 
   constructor(
     private router: Router,
