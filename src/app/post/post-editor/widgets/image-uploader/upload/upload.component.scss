@@ -1,27 +1,27 @@
-.dropzone {
-  border: 2px dashed #ccc;
-  width: 300px;
-  height: 200px;
-  text-align: center;
-  padding: 36px;
-  border-radius: 24px;
 
+.card {
+  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  transition: all 0.2s ease-in-out;
-}
+  width: 350px;
 
-.dropzone:hover,
-.dropzone.dragover {
-  background-color: #00000033;
-}
+  .dropzone {
+    border: 2px dashed #ccc;
+    width: 79%;
+    height: 200px;
+    text-align: center;
+    padding: 36px;
+    border-radius: 24px;
 
-mat-card-content {
-  // Custom styles for the card content if needed
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transition: all 0.2s ease-in-out;
+
+    &:hover,
+    &.dragover {
+      background-color: #ececec;
+    }
+  }
 }
