@@ -5,10 +5,8 @@
 
     <section class="text">
         <app-title/>
-        <div class="post-organization">
-            <app-categories (category)="onCategorySelected($event)" [initCategory]="initialCategoryName"/>
-            <app-tags></app-tags>
-        </div>
+        <app-categories (category)="onCategorySelected($event)" [initCategory]="initialCategoryName"/>
+        <app-tags></app-tags>
         <app-image-uploader [postId]="getCurrentPostId()" (file-link)="onFileLinkUpdated($event)"></app-image-uploader>
 
         <div class="markdown-wrapper">

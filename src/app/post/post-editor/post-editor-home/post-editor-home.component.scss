@@ -4,16 +4,10 @@
   height: 50vh;
 }
 
-.post-organization {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 6px;
-}
-
 .buttons {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  //justify-content: flex-end;
   flex-grow: 0;
 }
 

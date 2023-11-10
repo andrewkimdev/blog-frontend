@@ -1,13 +1,6 @@
-//
-//.title-wrapper {
-//  width: 100%;
-//
-//  #title {
-//    width: calc(100% - 24px);
-//    font-size: 24px;
-//  }
-//}
-//
-//.title-input-wrapper {
-//  width: 100%;
-//}
+.title-wrapper {
+  width: 100%;
+  .title-input-wrapper {
+    width: 100%;
+  }
+}
