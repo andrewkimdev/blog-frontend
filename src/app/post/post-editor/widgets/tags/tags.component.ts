@@ -10,6 +10,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 // State Management
 import * as PostEditorAction from '../../store/post-editor.action';
 import { selectPostTags } from 'src/app/post/post-editor/store/post-editor.selector';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tags',
@@ -26,6 +27,8 @@ export class TagsComponent {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: string[] = []; // Initialize this with your actual tags
 
+  tagInputControl = new FormControl('');
+
   announcer = inject(LiveAnnouncer);
 
   constructor(private store: Store) {
@@ -34,7 +37,6 @@ export class TagsComponent {
       this.tags = tagsFromStore;
     });
   }
-
 
   tagLabels$ = this.store.select(selectPostTags);
 
@@ -50,6 +52,7 @@ export class TagsComponent {
     // Add our tag
     if (value) {
       this.store.dispatch(PostEditorAction.addTag({ tag: value }));
+      this.tagInputControl.setValue('');
     }
   }
   edit(tag: string, event: MatChipEditedEvent) {
