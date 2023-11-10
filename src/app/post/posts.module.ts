@@ -6,7 +6,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { PostsHomeComponent } from './post-list/posts-home/posts-home.component';
-import { CreateNewPostComponent } from './create-new-post/create-new-post.component';
 
 import { PostsRoutingModule } from './posts-routing.module';
 import { MarkdownModule } from 'ngx-markdown';
@@ -14,11 +13,12 @@ import { MaterialModule } from '../shared/lib';
 
 import { postsReducer } from './post-list/store/posts.reducer';
 import { PostsEffects } from './post-list/store/posts.effect';
+import { RedirectComponent } from './create-new-post/redirect.component';
 
 @NgModule({
   declarations: [
     PostsHomeComponent,
-    CreateNewPostComponent,
+    RedirectComponent,
   ],
   imports: [
     CommonModule,

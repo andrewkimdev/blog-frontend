@@ -12,7 +12,7 @@ import {
 } from 'rxjs';
 
 import { ValidationErrors } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // 3rd Party Vendor Modules
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -53,6 +53,7 @@ export class PostEditorHomeComponent implements OnInit, AfterViewInit, OnDestroy
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private store: Store,
     private _snackBar: MatSnackBar,
   ) {
@@ -90,6 +91,21 @@ export class PostEditorHomeComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnInit(): void {
     this.hydrateCurrentPost();
     this.setInitialCategoryValue();
+    this.getEditorMode();
+  }
+
+  getEditorMode() {
+    const queryParams = this.route.snapshot.queryParams;
+    const isNew = queryParams['is-new'];
+    const createdAt = queryParams['created-at'];
+    const id = this.route.snapshot.params['id'];
+
+    if (id && isNew && createdAt) {
+      this.store.dispatch(PostEditorActions.createPostSuccess({ id, createdAt }));
+    }
+
+    console.log('createdAt: ' + createdAt);
+    console.log('isNew: ' + isNew);
   }
 
   ngOnDestroy(): void {

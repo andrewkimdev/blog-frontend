@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { exhaustMap, filter, map, switchMap, tap, } from 'rxjs';
+import { exhaustMap, filter, map, switchMap, } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { PostEditorService } from '../services/post-editor.service';
@@ -23,17 +23,6 @@ export class PostEditorEffects {
   }
 
   post$ = this.store.select(selectPost);
-
-  createNewPost$ = createEffect(() => this.actions$.pipe(
-    ofType(PostEditorAction.createPost),
-    exhaustMap(() => this.postEditorService.createNewPost()),
-    map(({ id, createdAt }) => {
-      const _id = id as number;
-      return { id: _id, createdAt };
-    }),
-    tap(({ id, createdAt }) => this.store.dispatch(PostEditorAction.createPostSuccess({ id, createdAt }))),
-    map(({ id }) => PostEditorAction.moveToEditorRoute({ id })),
-  ));
 
   hydratePost$ = createEffect(() => this.actions$.pipe(
     // todo - add case when post id is invalid or server is not available
