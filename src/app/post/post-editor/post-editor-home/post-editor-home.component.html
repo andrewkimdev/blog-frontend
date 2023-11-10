@@ -1,14 +1,19 @@
-<div class="post-input-wrapper">
+<div class="post-input-container">
     <section class="buttons">
         <app-buttons/>
     </section>
 
     <section class="text">
-        <app-title/>
-        <app-categories (category)="onCategorySelected($event)" [initCategory]="initialCategoryName"/>
-        <app-tags></app-tags>
-        <app-image-uploader [postId]="getCurrentPostId()" (file-link)="onFileLinkUpdated($event)"></app-image-uploader>
-
+        <div class="meta-data">
+            <div class="left">
+                <app-title/>
+                <app-categories (category)="onCategorySelected($event)" [initCategory]="initialCategoryName"/>
+                <app-tags></app-tags>
+            </div>
+            <div class="right">
+                <app-image-uploader [postId]="getCurrentPostId()" (file-link)="onFileLinkUpdated($event)"></app-image-uploader>
+            </div>
+        </div>
         <div class="markdown-wrapper">
             <app-editor [added-text-at-cursor]="addedText$ | async"></app-editor>
             <markdown
