@@ -5,13 +5,13 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import * as PostEditorAction from '../../store/post-editor.action';
-import { selectPost } from '../../store/post-editor.selector';
+import { selectIsDirty, selectPost } from '../../store/post-editor.selector';
 import { Post } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-buttons',
   templateUrl: './buttons.component.html',
-  styleUrls: ['./buttons.component.scss']
+  styleUrls: ['./buttons.component.scss'],
 })
 export class ButtonsComponent implements OnInit, OnDestroy {
   isDraftInputControl = new FormControl(false);
@@ -19,15 +19,24 @@ export class ButtonsComponent implements OnInit, OnDestroy {
 
   post$: Observable<Post> = this.store.select(selectPost);
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+  ) {
   }
+
+  // Note: Using the 'async' pipe directly on 'this.store.select(selectIsDirty)'
+  // yields boolean | null type, which prevents the source from compiling,
+  // hence the legacy style is used.
+  // This is efficient as the container component 'PostEditorHome' uses effective
+  // onPush detection strategy.
+  saveDisabled = true;
+  saveButtonDisabledSubscription = this.store.select(selectIsDirty).pipe(
+    takeUntil(this.destroy$),
+    tap((isDirty) => this.saveDisabled = !isDirty),
+  ).subscribe();
 
   onSaveButtonClicked(): void {
     this.store.dispatch(PostEditorAction.savePost());
-  }
-
-  onCancelButtonClicked(): void {
-    this.store.dispatch(PostEditorAction.abandonPostEdit());
   }
 
   ngOnInit(): void {

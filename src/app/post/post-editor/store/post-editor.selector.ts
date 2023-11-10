@@ -9,6 +9,10 @@ export const selectPost = createSelector(
   selectPostEditorFeature,
   (state) => state.post,
 );
+export const selectIsDirty = createSelector(
+  selectPostEditorFeature,
+  (state) => state.isDirty,
+);
 
 export const selectPostTags = createSelector(
   selectPost,
