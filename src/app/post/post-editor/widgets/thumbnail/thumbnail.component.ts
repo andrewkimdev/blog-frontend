@@ -20,21 +20,23 @@ export class ThumbnailComponent {
   @Output()
   openModal = new EventEmitter<void>();
 
-  constructor(public dialog: MatDialog) {}
-
-  triggerOpenModal() {
-    console.log(this.thumbnailUrl)
-    const dialogRef = this.dialog.open(ThumbnailDialogComponent, {
-      width: 'lg',
-      data: { fileInfo: { id: this.uuid, imageUrl: this.thumbnailUrl } }
-    });
-
-    console.log(this.uuid);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    })
+  constructor(
+    public dialog: MatDialog,
+  ) {
   }
+
+  triggerOpenModal(event: MouseEvent) {
+    event.stopPropagation();
+    const data = {
+      fileInfo: {
+        id: this.uuid,
+        imageUrl: this.thumbnailUrl
+      },
+    };
+
+    this.dialog.open(ThumbnailDialogComponent, { width: 'lg', data });
+  }
+
   removeImage(): void {
     this.remove.emit();
   }

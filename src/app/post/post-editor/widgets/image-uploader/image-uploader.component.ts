@@ -16,34 +16,14 @@ export class ImageUploaderComponent {
   fileLink = new EventEmitter<string>();
 
   imageFileList: ImageFileInfo[] = [];
-  imageFile!: ImageFileInfo;
 
-  isModalOpen: boolean = false;
-
-  constructor(private store: Store) {
-  }
-
-  openModal(i: number) {
-    this.isModalOpen = true;
-    this.imageFile = this.imageFileList[i];
-  }
-
-  handleKeyOnModal(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      this.isModalOpen = false;
-    }
+  constructor(
+    private store: Store,
+  ) {
   }
 
   onFileUploaded(fileInfo: ImageFileInfo) {
     this.imageFileList.push(fileInfo);
-  }
-
-  onThumbnailClicked(i: number) {
-    this.openModal(i);
-  }
-
-  onFileLinkUpdated(link: string) {
-    this.fileLink.emit(link);
   }
 
   onRemovalTriggered(i: number) {

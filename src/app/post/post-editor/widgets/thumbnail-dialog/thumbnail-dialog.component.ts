@@ -1,4 +1,3 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   ChangeDetectorRef,
   Component,
@@ -8,14 +7,19 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { map, Observable, take } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { Store } from '@ngrx/store';
+
+import { createImageUrlFromUuid } from 'src/app/shared/functions';
+import { Post } from 'src/app/shared/types';
+
 import { ImageFileInfo } from '../image-uploader/image-file-info.interface';
-import * as PageEditorActions from '../../store/post-editor.action';
-import { createImageUrlFromUuid } from '../../../../shared/functions';
-import { map, Observable, take, tap } from 'rxjs';
-import { Post } from '../../../../shared/types';
+
 import { selectPost } from '../../store/post-editor.selector';
+import * as PageEditorActions from '../../store/post-editor.action';
 
 @Component({
   selector: 'app-thumbnail-dialog',
@@ -48,7 +52,6 @@ export class ThumbnailDialogComponent implements OnInit {
   ){}
 
   onCopyClicked() {
-    console.log(this.imageLink);
     this.copyLinkToClipboard(this.imageLink);
     this.linkEmitter.emit(this.imageLink);
     this.closeModal();
@@ -60,7 +63,6 @@ export class ThumbnailDialogComponent implements OnInit {
     this.setMainImage();
     this.dialogRef.close();
   }
-
 
   private setMainImage(): void {
     const currentCheckValue = this.isMainImageInputControl.value;
@@ -91,8 +93,6 @@ export class ThumbnailDialogComponent implements OnInit {
   private setInitialCheckboxValue(): void {
     this.post$.pipe(
       take(1),
-      tap((res) => console.log(res)),
-      tap(() => console.log(this.data.fileInfo)),
       map((post) => post.mainImage === this.data.fileInfo.id),
     ).subscribe((isMainImage) => {
       this.isMainImageInputControl.setValue(isMainImage);

@@ -1,10 +1,12 @@
 <div class="image-container">
+    <button class="cancel-button" mat-icon-button (click)="removeImage()" aria-label="Remove thumbnail">
+        <mat-icon>cancel</mat-icon>
+    </button>
     <img *ngIf="thumbnailUrl"
          [src]="thumbnailUrl"
          [attr.data-uuid]="uuid"
          alt="Uploaded thumbnail"
          class="thumbnail"
-         (click)="triggerOpenModal()"
+         (click)="triggerOpenModal($event)"
     >
-    <span (click)="removeImage()">X</span>
 </div>

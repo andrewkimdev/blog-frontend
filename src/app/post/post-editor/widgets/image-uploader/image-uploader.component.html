@@ -1,20 +1,10 @@
-<section (keydown)="handleKeyOnModal($event)">
-    <app-upload [postId]="postId" (fileUpload)="onFileUploaded($event)"></app-upload>
-    <div class="thumbnail-container">
-        <app-thumbnail
-                *ngFor="let imageFile of imageFileList; index as i"
-                [uuid]="imageFile.id"
-                [imageUrl]="imageFile.imageUrl"
-                (remove)="onRemovalTriggered(i)"
-                (openModal)="onThumbnailClicked(i)"
-        >
-        </app-thumbnail>
-    </div>
-
-    <app-thumbnail-modal
-            *ngIf="imageFile"
-            [imageFile]="imageFile"
-            (file-link)="onFileLinkUpdated($event)"
-            [(open)]="isModalOpen"
-    ></app-thumbnail-modal>
-</section>
+<app-upload [postId]="postId" (fileUpload)="onFileUploaded($event)"></app-upload>
+<div class="thumbnail-container">
+    <app-thumbnail
+            *ngFor="let imageFile of imageFileList; index as i"
+            [uuid]="imageFile.id"
+            [imageUrl]="imageFile.imageUrl"
+            (remove)="onRemovalTriggered(i)"
+    >
+    </app-thumbnail>
+</div>

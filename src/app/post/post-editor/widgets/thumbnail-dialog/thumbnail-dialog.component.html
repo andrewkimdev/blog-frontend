@@ -1,11 +1,16 @@
 <h2 mat-dialog-title>Enlarged Image</h2>
-<mat-dialog-content>
-    <img [src]="data.fileInfo.imageUrl" alt="Enlarged Image">
+<mat-dialog-content class="content">
+    <div class="image-container">
+        <img [src]="data.fileInfo.imageUrl" class="enlarged-image" alt="Enlarged Image">
+    </div>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions class="actions">
     <div class="clr-checkbox-wrapper">
         <mat-checkbox [formControl]="isMainImageInputControl">Main Image</mat-checkbox>
     </div>
-    <button mat-button (click)="closeModal()">Close</button>
-    <button mat-button (click)="onCopyClicked()">Copy</button>
+    <div class="buttons">
+        <button mat-button (click)="onCopyClicked()">Copy</button>
+        <span class="flex-spacer"></span>
+        <button mat-button (click)="closeModal()">Close</button>
+    </div>
 </mat-dialog-actions>
