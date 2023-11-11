@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { combineLatest, map, Observable, take } from 'rxjs';
+import { catchError, combineLatest, EMPTY, map, Observable, take } from 'rxjs';
+
+import { HttpClient } from '@angular/common/http';
 import { Post, User } from 'src/app/shared/types';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -30,5 +32,15 @@ export class PostsManagerService {
         return res.length > 0 ? res : [] as Post[];
       }),
     );
+  }
+
+  deletePostById(postId: number) {
+    return this.http.delete<{ id: number }>(`${environment.baseUrl}/posts/${postId}`).pipe(
+      map(() => ({ id: postId })),
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
+    )
   }
 }

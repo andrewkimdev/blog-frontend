@@ -8,4 +8,14 @@ export const loadPostsFromServer = createAction(
 export const postsLoadSuccess = createAction(
   '[Posts Manager Page] Post Loading SUCCESS',
   props<{ posts: Post[] }>(),
-)
+);
+
+export const deletePostByIdFromServer = createAction(
+  '[Post Manager Page] Delete Post from Server',
+  props<{ id: number }>(),
+);
+
+export const deletePostByIdAtClient = createAction(
+  '[Post Manager Page] Delete Post at Client',
+  props<{ id: number }>(),
+);

@@ -1,1 +1,42 @@
-<p>posts-manager works!</p>
+<section *ngIf="posts$ | async as posts">
+    <table mat-table [dataSource]="posts">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let element" class="text-align-right">{{ element.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef>Category</th>
+            <td mat-cell *matCellDef="let element">{{ element.category.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef>Created At</th>
+            <td mat-cell *matCellDef="let element">{{ (element.createdAt * 1000) | date:'yyyy-MM-dd' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+        </ng-container>
+        <ng-container matColumnDef="isDraft">
+            <th mat-header-cell *matHeaderCellDef>Is Draft</th>
+            <td mat-cell *matCellDef="let element" class="text-align-center">
+                {{ element.isDraft ? 'O' : ''}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="author">
+            <th mat-header-cell *matHeaderCellDef>Author</th>
+            <td mat-cell *matCellDef="let element" [ngClass]="{'no-author text-align-center': !element.author?.name}">
+                {{  element.author?.name || '-' }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Remove</th>
+            <td mat-cell *matCellDef="let element">
+                <button [attr.data-post-id]="element.id" class="trash-can" mat-icon-button (click)="onDeleteClicked($event, element.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+    </table>
+</section>

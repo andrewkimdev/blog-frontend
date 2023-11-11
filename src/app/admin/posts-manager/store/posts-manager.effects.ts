@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { catchError, EMPTY, exhaustMap, map } from 'rxjs';
-import { PostsManagerService } from 'src/app/admin/posts-manager/service/posts-manager.service';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+
+import { PostsManagerService } from '../service/posts-manager.service';
+
 import * as PostManagerActions from './posts-manager.actions';
+
 @Injectable()
 export class PostsManagerEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store,
     private postsService: PostsManagerService,
   ) {
   }
@@ -19,6 +20,20 @@ export class PostsManagerEffects {
     exhaustMap(() => this.postsService.getAll().pipe(
       map((posts) => PostManagerActions.postsLoadSuccess({ posts })),
     )),
-    catchError(() => EMPTY),
+    catchError((err) => {
+      console.error(err);
+      return EMPTY
+    }),
+  ));
+
+  deletePostByIdAtServer$ = createEffect(() => this.actions$.pipe(
+    ofType(PostManagerActions.deletePostByIdFromServer),
+    exhaustMap(({ id }) => this.postsService.deletePostById(id).pipe(
+      catchError((err) => {
+        console.error(err);
+        return EMPTY
+      }),
+    )),
+    map(({ id }) => PostManagerActions.deletePostByIdAtClient({ id }))
   ));
 }

@@ -54,9 +54,10 @@ router.put('/posts/:id', (req, res) => {
 });
 
 router.delete('/posts/:id', (req, res) => {
-  const id = req.params.id;
+  const id = +req.params.id;
+  console.log('deleting a post by id: ', id);
   posts = posts.filter((post) => post.id !== id);
-  res.status(204);
+  res.status(204).json();
 });
 
 module.exports = router;

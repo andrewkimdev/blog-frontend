@@ -1,19 +1,14 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent {
 
   constructor(
-    private router: Router,
   ) {
-  }
-
-  createPost(): void {
-    this.router.navigate(['posts', 'new']).then();
   }
 }
