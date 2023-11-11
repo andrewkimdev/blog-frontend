@@ -61,7 +61,7 @@ export class CategoriesComponent implements OnInit, OnChanges, OnDestroy {
   ]).pipe(
     map(([value, list]) => {
       const filterValue = value?.toLowerCase() ?? '';
-      return list.filter((item) => item.toLowerCase().includes(filterValue));
+      return list.filter((item) => item.toLowerCase().includes(filterValue.trim()));
     }),
   );
 
@@ -83,13 +83,6 @@ export class CategoriesComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(CategoriesActions.fetchCategories());
     this.reactToInputControlChanges();
-  }
-
-  inputControlError(): ValidationErrors | null {
-    if (this.categoryInputControl.touched && this.categoryInputControl.errors) {
-      return this.categoryInputControl.errors || null;
-    }
-    return null;
   }
 
   ngOnDestroy(): void {
