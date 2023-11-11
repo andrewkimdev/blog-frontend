@@ -22,7 +22,7 @@ import {
   takeUntil,
   tap
 } from 'rxjs';
-import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { Category } from 'src/app/shared/types';

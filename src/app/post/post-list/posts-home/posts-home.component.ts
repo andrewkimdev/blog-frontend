@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { map, Observable } from 'rxjs';
 
@@ -15,7 +15,8 @@ import * as PostsAction from './../store/posts.action';
 @Component({
   selector: 'app-single-post-home-list-home',
   templateUrl: './posts-home.component.html',
-  styleUrls: ['./posts-home.component.scss']
+  styleUrls: ['./posts-home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostsHomeComponent implements OnInit {
   posts$: Observable<Post[]> = this.store.pipe(select(selectPosts)).pipe(

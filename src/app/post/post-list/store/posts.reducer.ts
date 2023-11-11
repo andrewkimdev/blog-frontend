@@ -2,11 +2,11 @@ import { createReducer, on } from '@ngrx/store';
 import { Post } from 'src/app/shared/types';
 import * as PostsAction from './posts.action';
 
-const initialState: PostsState = { posts: [] };
-
 export interface PostsState {
   posts: Post[];
 }
+
+const initialState: PostsState = { posts: [] };
 
 export const postsReducer = createReducer(
   initialState,

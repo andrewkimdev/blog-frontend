@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -30,6 +31,7 @@ const matModules = [
   MatProgressSpinnerModule,
   MatSidenavModule,
   MatSnackBarModule,
+  MatTableModule,
   MatToolbarModule,
   MatTooltipModule,
 ];
