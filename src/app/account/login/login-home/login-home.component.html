@@ -45,8 +45,10 @@
                     color="primary"
                     type="button"
                     (click)="onLoginButtonClicked()"
+                    [disabled]="form.invalid"
             >Login
             </button>
         </mat-card-actions>
     </form>
 </mat-card>
+
