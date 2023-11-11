@@ -33,9 +33,8 @@ export class PostsManagerComponent implements OnInit {
     }
   }
 
-  onRowClicked(post: Post) {
-    console.log(post);
-    // todo - show post content in a dialog
+  onRowClicked(postId: number) {
+    window.open('/posts/' + postId, '_blank');
   }
 
   ngOnInit(): void {
