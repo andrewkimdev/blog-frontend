@@ -8,13 +8,11 @@ import { MatInputModule } from '@angular/material/input';
 
 import { NgxMarkdownModule } from 'src/app/shared/lib';
 
-import { ErrorMessageComponent } from './error-message/error-message.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TopAlertComponent } from './top-alert/top-alert.component';
 
 @NgModule({
   declarations: [
-    ErrorMessageComponent,
     PageNotFoundComponent,
     TopAlertComponent,
   ],
@@ -28,7 +26,6 @@ import { TopAlertComponent } from './top-alert/top-alert.component';
   ],
   exports: [
     ReactiveFormsModule,
-    ErrorMessageComponent,
     PageNotFoundComponent,
     TopAlertComponent,
   ],

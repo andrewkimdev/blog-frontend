@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged, filter, map, skip, Subject, take, takeUntil, tap } from 'rxjs';
-import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { Post } from 'src/app/shared/types';
+import { getErrorMessageForControl } from 'src/app/shared/functions';
 
-import { Store } from '@ngrx/store';
 import { setTitle } from '../../store/post-editor.action';
 import { selectPost } from '../../store/post-editor.selector';
 
@@ -21,6 +22,7 @@ export class TitleComponent implements OnInit, OnDestroy {
   );
 
   post$ = this.store.select(selectPost);
+  getErrorMessages = getErrorMessageForControl;
 
   private destroy$ = new Subject<void>();
 
@@ -52,14 +54,6 @@ export class TitleComponent implements OnInit, OnDestroy {
         this.titleInputControl.markAsPristine();
       }),
     ).subscribe()
-  }
-
-
-  inputControlError(): ValidationErrors | null {
-    if (this.titleInputControl.touched && this.titleInputControl.errors) {
-      return this.titleInputControl.errors || null;
-    }
-    return null;
   }
 
   ngOnDestroy(): void {

@@ -1,31 +1,44 @@
-<div class="login-wrapper">
-    <form class="login">
-        <section class="title">
-            <!-- These could be heading elements. -->
-            <div class="welcome">My Blog Site</div>
-            <div class="hint">Admin Only</div>
-        </section>
-        <form class="login-group" [formGroup]="form">
-                <label>E-mail</label>
-                <input
-                        type="text"
-                        autocomplete="username"
-                        name="username"
-                        placeholder="Enter e-mail"
-                        formControlName="username"
-                />
-                <label>Password</label>
-                <input
+<mat-card class="login-wrapper">
+    <form [formGroup]="form">
+        <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+            <mat-card-subtitle>Admin Only</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="login-group">
+                <mat-form-field appearance="fill" class="username-wrapper">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput
+                           type="text"
+                           placeholder="Enter e-mail"
+                           formControlName="username"
+                    />
+                    <mat-error>{{ inputControlError(form.get('username')) }}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="password-wrapper">
+                    <mat-label>Password</mat-label>
+                    <input
+                        matInput
                         type="password"
-                        autocomplete="current-password"
-                        name="password"
                         placeholder="Enter password"
                         formControlName="password"
-                />
-                <label>Remember me</label>
-                <input type="checkbox" name="rememberMe" formControlName="rememberMe"/>
-            <div class="error active">Invalid user name or password</div>
-            <button type="submit" class="btn btn-primary">Log in</button>
-        </form>
+                    />
+                <mat-error>{{ inputControlError(form.get('password')) }}</mat-error>
+                </mat-form-field>
+                <mat-checkbox class="remember-me" formControlName="rememberMe">Remember me</mat-checkbox>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions class="actions">
+            <button
+                    mat-raised-button
+                    color="primary"
+                    type="button"
+                    (click)="onLoginButtonClicked()"
+            >Login
+            </button>
+        </mat-card-actions>
     </form>
-</div>
+</mat-card>

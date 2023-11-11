@@ -9,6 +9,5 @@
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions$ | async;" [value]="option">{{ option }}</mat-option>
     </mat-autocomplete>
+    <mat-error>{{getErrorMessages(categoryInputControl)}} </mat-error>
 </mat-form-field>
-
-<app-error-message [error]="inputControlError()"/>

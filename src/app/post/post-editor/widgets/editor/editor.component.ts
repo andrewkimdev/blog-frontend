@@ -9,11 +9,12 @@ import {
   ViewChild
 } from '@angular/core';
 import { debounceTime, filter, map, skip, Subject, take, takeUntil, tap } from 'rxjs';
-import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { Post } from 'src/app/shared/types';
+import { getErrorMessageForControl } from 'src/app/shared/functions';
 
-import { Store } from '@ngrx/store';
 import { setBodyText } from '../../store/post-editor.action';
 import { selectPost } from '../../store/post-editor.selector';
 
@@ -37,6 +38,8 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
   post$ = this.store.select(selectPost);
 
+  getErrorMessages = getErrorMessageForControl;
+
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -54,13 +57,6 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     if (addedText.currentValue) {
       this.appendText(addedText.currentValue);
     }
-  }
-
-  inputControlError(): ValidationErrors | null {
-    if (this.textInputFormControl.touched && this.textInputFormControl.errors) {
-      return this.textInputFormControl.errors || null;
-    }
-    return null;
   }
 
   ngOnInit(): void {

@@ -26,6 +26,7 @@ import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { Category } from 'src/app/shared/types';
+import { getErrorMessageForControl } from 'src/app/shared/functions';
 
 import { selectAvailableCategories } from '../store/categories.selectors';
 import * as CategoriesActions from '../store/categories.action';
@@ -63,6 +64,8 @@ export class CategoriesComponent implements OnInit, OnChanges, OnDestroy {
       return list.filter((item) => item.toLowerCase().includes(filterValue));
     }),
   );
+
+  getErrorMessages = getErrorMessageForControl;
 
   private destroy$ = new Subject<void>();
 

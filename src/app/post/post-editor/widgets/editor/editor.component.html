@@ -10,8 +10,8 @@
                   [formControl]="textInputFormControl"
                   placeholder="Blah blah..."
         ></textarea>
+        <mat-error>{{ getErrorMessages(textInputFormControl) }}</mat-error>
     </mat-form-field>
-    <app-error-message [error]="inputControlError()"></app-error-message>
     <div class="hint-button-right">
     <span>
       <a class="hint label clickable label-orange" href="https://www.markdownguide.org/cheat-sheet/"
