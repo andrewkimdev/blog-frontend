@@ -19,7 +19,6 @@ const MockUsers = [
     "email": "bob@example.com",
     "profileImage": "assets/images/user-profile/user_profile_male_1.jpg",
     "bio": "Health and wellness enthusiast.",
-    "role": "Contributor",
     "socialMedia": [
       {
         "platform": "Instagram",
@@ -33,7 +32,6 @@ const MockUsers = [
     "email": "charlie@example.com",
     "profileImage": "assets/images/user-profile/user_profile_male_2.jpg",
     "bio": "Expert in personal development and effective communication.",
-    "role": "Guest Contributor",
     "socialMedia": [
       {
         "platform": "LinkedIn",
@@ -47,7 +45,6 @@ const MockUsers = [
     "email": "david@example.com",
     "profileImage": "assets/images/user-profile/user_profile_male_3.jpg",
     "bio": "Open source advocate and tech enthusiast.",
-    "role": "Staff Writer",
     "socialMedia": [
       {
         "platform": "GitHub",
@@ -61,7 +58,6 @@ const MockUsers = [
     "email": "eva@example.com",
     "profileImage": "assets/images/user-profile/user_profile_female_2.jpg",
     "bio": "Remote work specialist and time management guru.",
-    "role": "Editor",
     "socialMedia": [
       {
         "platform": "Twitter",
@@ -79,7 +75,6 @@ const MockUsers = [
     "email": "frank@example.com",
     "profileImage": "assets/images/user-profile/user_profile_male_4.jpg",
     "bio": "Lifestyle blogger focusing on healthy living.",
-    "role": "Contributor",
     "socialMedia": [
       {
         "platform": "Instagram",
@@ -93,7 +88,6 @@ const MockUsers = [
     "email": "grace@example.com",
     "profileImage": "assets/images/user-profile/user_profile_female_3.jpg",
     "bio": "Mental health advocate and motivational speaker.",
-    "role": "Staff Writer",
     "socialMedia": [
       {
         "platform": "YouTube",
