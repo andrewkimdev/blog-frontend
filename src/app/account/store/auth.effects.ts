@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, exhaustMap, map, tap } from 'rxjs';
@@ -11,6 +12,7 @@ export class AuthEffects {
   constructor(
     private store: Store,
     private actions$: Actions,
+    private router: Router,
     private authService: AuthService,
   ) {
   }
@@ -27,6 +29,13 @@ export class AuthEffects {
       }
     }),
   ));
+
+  rehydrateAuthEffect$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.rehydrateAuthState),
+    tap(({ token, profile }) => {
+      this.router.navigate(['/'])
+    }),
+  ), { dispatch: false });
 
   loginWithEmailPassword$ = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.loginWithEmailPassword),
