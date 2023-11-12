@@ -4,12 +4,11 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-
-const fs = require('fs');
-const path = require('path');
-const authFilePath = path.join(__basedir, 'auth.json');
+const secretKey = require('../../shared/jwt-secret-key');
 const MockUsers = require('../../mock-data/users');
 
+const writeAuthData = require('../../shared/write-auth-data');
+const readAuthData = require('../../shared/read-auth-data');
 const getCurrentUnixTimeInSeconds = require('../../shared/time.helper')
 
 router.post('/signup', async (req, res) => {
@@ -65,7 +64,7 @@ router.post('/login', (req, res) => {
                     aud: 'blog-kbi-web-app',
                     nbf: getCurrentUnixTimeInSeconds(),
                 };
-                const token = jwt.sign(payload, 'secretKey', { expiresIn: '1h'});
+                const token = jwt.sign(payload, secretKey, { expiresIn: '1h'});
                 res.json({ token, profile: userProfile });
             } else {
                 res.status(401).json({ message: 'Invalid credentials' });
@@ -75,18 +74,5 @@ router.post('/login', (req, res) => {
         res.status(401).json({ message: 'Invalid credentials' });
     }
 });
-
-function readAuthData() {
-    if (!fs.existsSync(authFilePath)) {
-        fs.writeFileSync(authFilePath, JSON.stringify([]), 'utf8');
-    }
-    const rawData = fs.readFileSync(authFilePath, 'utf8');
-    console.log('rawData: ' + rawData);
-    return JSON.parse(rawData);
-}
-
-function writeAuthData(data) {
-    fs.writeFileSync(authFilePath, JSON.stringify(data, null, 2));
-}
 
 module.exports = router;
