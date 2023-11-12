@@ -32,7 +32,7 @@ router.post('/signup', async (req, res) => {
            id: userAuth.length + 1,
            username,
            password: hashedPassword,
-           role: ['user'],
+           roles: ['user'],
        };
 
        // Add the new user to the UserAuth array
@@ -66,7 +66,7 @@ router.post('/login', (req, res) => {
                     nbf: getCurrentUnixTimeInSeconds(),
                 };
                 const token = jwt.sign(payload, 'secretKey', { expiresIn: '1h'});
-                res.json({ token, userProfile });
+                res.json({ token, profile: userProfile });
             } else {
                 res.status(401).json({ message: 'Invalid credentials' });
             }

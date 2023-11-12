@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 // 한글 입력 마지막 획 잘리는 이슈 대응
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { AuthEffects } from 'src/app/account/store/auth.effects';
+import { authReducer } from 'src/app/account/store/auth.reducers';
 
 // 3rd Party Vendor Module
 import { CoreModule } from 'src/app/core/core.module';
@@ -42,8 +44,8 @@ import { AppRoutingModule } from './app-routing.module';
     LayoutModule,
     AppRoutingModule,
     // NgRx Modules
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({'authFeatureKey': authReducer}, {}),
+    EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
