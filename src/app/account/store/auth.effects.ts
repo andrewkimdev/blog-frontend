@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { catchError, EMPTY, exhaustMap, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -18,7 +20,13 @@ export class AuthEffects {
     private actions$: Actions,
     private router: Router,
     private authService: AuthService,
+    private snackbar: MatSnackBar,
   ) {
+  }
+
+  showAuthSnackbar(message: string) {
+    const action = 'Dismiss';
+    this.snackbar.open(message, action, { duration: 3000 });
   }
 
   init$ = createEffect(() => this.actions$.pipe(
@@ -28,9 +36,13 @@ export class AuthEffects {
       if (res) {
         const { token, profile } = JSON.parse(res);
 
-        return isTokenInEffectiveTimeframe(token)
-          ? AuthActions.rehydrateAuthState({ token, profile })
-          : AuthActions.tokenNotInEffectiveTimeframe();
+        if (isTokenInEffectiveTimeframe(token)) {
+          const msg = profile.name ? `You are logged in as, ${profile.name}!` : 'Welcome!'
+          this.showAuthSnackbar(msg);
+          return AuthActions.rehydrateAuthState({ token, profile })
+        } else {
+          return AuthActions.tokenNotInEffectiveTimeframe();
+        }
       } else {
         return AuthActions.noOp();
       }
@@ -56,6 +68,8 @@ export class AuthEffects {
     exhaustMap(({ username, password, rememberMe }) =>
       this.authService.loginWithEmailPassword(username, password).pipe(
         tap(({ token, profile }) => {
+          const msg = profile.name ? `You are logged in as, ${profile.name}!` : 'Welcome!'
+          this.showAuthSnackbar(msg);
           if (rememberMe) {
             localStorage.setItem('user', JSON.stringify({ token, profile }));
           }
@@ -84,6 +98,7 @@ export class AuthEffects {
     ofType(AuthActions.logout),
     tap(() => localStorage.removeItem('user')),
     tap(() => {
+      this.showAuthSnackbar('Logged out!');
       this.router.navigate(['/']).then();
     }),
   ), { dispatch: false });
