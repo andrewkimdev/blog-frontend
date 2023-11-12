@@ -12,7 +12,7 @@ import {
 } from 'rxjs';
 
 import { ValidationErrors } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 // 3rd Party Vendor Modules
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -53,9 +53,8 @@ export class PostEditorHomeComponent implements OnInit, AfterViewInit, OnDestroy
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private store: Store,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
   ) {
   }
 
@@ -75,7 +74,7 @@ export class PostEditorHomeComponent implements OnInit, AfterViewInit, OnDestroy
         this.store.dispatch(PostEditorActions.savePost());
         const message = 'Post saved!'
         const action = 'OK';
-        this._snackBar.open(message, action, { duration: 3000 });
+        this.snackBar.open(message, action, { duration: 3000 });
       }),
     ).subscribe();
   }

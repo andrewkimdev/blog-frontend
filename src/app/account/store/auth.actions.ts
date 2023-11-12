@@ -12,7 +12,11 @@ export const noOp = createAction(
 export const rehydrateAuthState = createAction(
   '[Auth] Rehydrate auth status',
   props<{ token: string, profile: UserProfile }>(),
-)
+);
+
+export const tokenNotInEffectiveTimeframe = createAction(
+  '[Auth] Auth token NOT in effective time frame',
+);
 
 export const loginWithEmailPassword = createAction(
   '[Auth] Login with Email/Password',

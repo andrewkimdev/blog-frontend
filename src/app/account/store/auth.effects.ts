@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { catchError, EMPTY, exhaustMap, map, tap } from 'rxjs';
-import { AuthService } from 'src/app/account/auth.service';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+
+import { isTokenInEffectiveTimeframe } from 'src/app/shared/functions';
+
+import { AuthService } from '../auth.service';
+
 import * as AuthActions from './auth.actions';
 
 @Injectable()
@@ -23,7 +27,10 @@ export class AuthEffects {
       const res = localStorage.getItem('user');
       if (res) {
         const { token, profile } = JSON.parse(res);
-        return AuthActions.rehydrateAuthState({ token, profile });
+
+        return isTokenInEffectiveTimeframe(token)
+          ? AuthActions.rehydrateAuthState({ token, profile })
+          : AuthActions.tokenNotInEffectiveTimeframe();
       } else {
         return AuthActions.noOp();
       }
@@ -32,8 +39,15 @@ export class AuthEffects {
 
   rehydrateAuthEffect$ = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.rehydrateAuthState),
-    tap(({ token, profile }) => {
-      this.router.navigate(['/'])
+    tap(() => {
+      this.router.navigate(['/']).then();
+    }),
+  ), { dispatch: false });
+
+  redirectToLogin$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.tokenNotInEffectiveTimeframe),
+    tap(() => {
+      this.router.navigate(['account', 'login']).then();
     }),
   ), { dispatch: false });
 
@@ -58,4 +72,19 @@ export class AuthEffects {
       return EMPTY;
     }),
   ));
+
+  loginSuccess$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.loginWithEmailPasswordSuccess),
+    tap(() => {
+      this.router.navigate(['/']).then();
+    }),
+  ), { dispatch: false });
+
+  logout$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.logout),
+    tap(() => localStorage.removeItem('user')),
+    tap(() => {
+      this.router.navigate(['/']).then();
+    }),
+  ), { dispatch: false });
 }
