@@ -1,9 +1,0 @@
-<ng-container *ngIf="options$ | async as vm">
-    <div *ngIf="vm.show"
-         class="alert alert-app-level alert-container"
-         [ngClass]="'alert-' + vm.mode"
-    >
-        <span>{{ vm.text }}</span>
-        <span (click)="closeAlert()">X</span>
-    </div>
-</ng-container>

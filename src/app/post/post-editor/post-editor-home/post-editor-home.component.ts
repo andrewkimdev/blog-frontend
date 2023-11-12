@@ -102,9 +102,6 @@ export class PostEditorHomeComponent implements OnInit, AfterViewInit, OnDestroy
     if (id && isNew && createdAt) {
       this.store.dispatch(PostEditorActions.createPostSuccess({ id, createdAt }));
     }
-
-    console.log('createdAt: ' + createdAt);
-    console.log('isNew: ' + isNew);
   }
 
   ngOnDestroy(): void {

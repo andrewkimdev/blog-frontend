@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { adminGuard } from './core/guards/admin.guard';
+
 import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { NotAuthorizedComponent } from './core/pages/not-authorized/not-authorized.component';
+import { PageNotFoundComponent } from './core/pages/page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {
@@ -33,7 +36,13 @@ const appRoutes: Routes = [
   {
     path: 'admin',
     title: 'Admin',
+    canActivate: [adminGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+  },
+  {
+    path: 'not-authorized',
+    title: 'Not Authorized',
+    component: NotAuthorizedComponent,
   },
   {
     path: '**',

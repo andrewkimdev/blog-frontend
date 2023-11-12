@@ -5,6 +5,7 @@
 
     <ng-container *ngIf="isLoggedIn; else loggedOut">
         <a mat-icon-button routerLink="/posts/new" matTooltip="Create a new post..."><mat-icon>note_add</mat-icon></a>
+        <a mat-icon-button routerLink="/admin" matTooltip="Admin"><mat-icon>shield_person</mat-icon></a>
         <a mat-icon-button routerLink="/account/logout" matTooltip="Logout"><mat-icon>logout</mat-icon></a>
     </ng-container>
     <ng-template #loggedOut>
