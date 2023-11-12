@@ -2,7 +2,7 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 // 한글 입력 마지막 획 잘리는 이슈 대응
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects'
 
 // Dev Tools
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AuthInterceptor } from 'src/app/core/http-interceptors/auth.interceptor';
 
 // Application Modules
 import { PostsModule } from './post/posts.module';
@@ -53,6 +54,9 @@ import { AppRoutingModule } from './app-routing.module';
       provide: COMPOSITION_BUFFER_MODE,
       useValue: false,
     },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })
