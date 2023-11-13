@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { filter, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -21,7 +22,18 @@ export class PostsManagerComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'category', 'createdAt', 'title', 'author', 'isDraft', 'action'];
 
-  constructor(private store: Store){
+  constructor(
+    private store: Store,
+    private fb: FormBuilder,
+  ){
+  }
+
+  form = this.fb.group({
+    isDraftStates: this.fb.array([])
+  });
+
+  get isDraftStates() {
+    return this.form.get('isDraftStates') as FormArray;
   }
 
   onDeleteClicked(event: MouseEvent, postId: number) {
@@ -39,5 +51,20 @@ export class PostsManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadPostsFromServer());
+    this.posts$.subscribe((posts) => {
+      while(this.isDraftStates.length !== 0) {
+        this.isDraftStates.removeAt(0);
+      }
+
+      posts.forEach((post) => {
+        this.isDraftStates.push(this.fb.control(post.isDraft))
+      });
+    });
+
+    this.form.valueChanges.subscribe(
+      (value) => {
+        console.log(value)
+      }
+    )
   }
 }
