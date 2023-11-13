@@ -6,21 +6,23 @@ import * as AuthActions from './auth.actions';
 export interface AuthState {
   token: string | null;
   profile: UserProfile | null;
+  isLoggedIn: boolean;
 }
 
 const initialState: AuthState = {
   token: null,
   profile: null,
+  isLoggedIn: false,
 }
 
 export const authReducer = createReducer(
   initialState,
-  on(AuthActions.rehydrateAuthState, (state, { token, profile }) =>
-    ({ ...state, token, profile })),
+  on(AuthActions.rehydrateAuthStateSuccess, (state, { token, profile }) =>
+    ({ ...state, token, profile, isLoggedIn: true, })),
   on(AuthActions.loginWithEmailPasswordSuccess, (state, { token, profile }) =>
-    ({ ...state, token, profile })),
+    ({ ...state, token, profile, isLoggedIn: true, })),
   on(AuthActions.tokenNotInEffectiveTimeframe, (state) =>
     ({ ...state, token: null, profile: null, })),
   on(AuthActions.logout, (state) =>
-    ({ ...state, token: null, profile: null, })),
+    ({ ...state, token: null, profile: null, isLoggedIn: false, })),
 );

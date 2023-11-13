@@ -39,7 +39,7 @@ export class AuthEffects {
         if (isTokenInEffectiveTimeframe(token)) {
           const msg = profile.name ? `You are logged in as, ${profile.name}!` : 'Welcome!'
           this.showAuthSnackbar(msg);
-          return AuthActions.rehydrateAuthState({ token, profile })
+          return AuthActions.rehydrateAuthStateSuccess({ token, profile })
         } else {
           return AuthActions.tokenNotInEffectiveTimeframe();
         }
@@ -50,7 +50,7 @@ export class AuthEffects {
   ));
 
   rehydrateAuthEffect$ = createEffect(() => this.actions$.pipe(
-    ofType(AuthActions.rehydrateAuthState),
+    ofType(AuthActions.rehydrateAuthStateSuccess),
     tap(() => {
       this.router.navigate(['/']).then();
     }),

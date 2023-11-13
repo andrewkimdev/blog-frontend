@@ -9,7 +9,7 @@ export const noOp = createAction(
   '[Auth] No operation'
 );
 
-export const rehydrateAuthState = createAction(
+export const rehydrateAuthStateSuccess = createAction(
   '[Auth] Rehydrate auth status',
   props<{ token: string, profile: UserProfile }>(),
 );

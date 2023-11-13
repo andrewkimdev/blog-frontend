@@ -15,8 +15,6 @@ export const selectProfile = createSelector(
 );
 
 export const selectIsLoggedIn = createSelector(
-  selectToken,
-  ((token: string | null): boolean =>
-      token ? isTokenInEffectiveTimeframe(token) : false
-  ),
+  selectAuthFeature,
+  (state: AuthState) => state.isLoggedIn,
 );
