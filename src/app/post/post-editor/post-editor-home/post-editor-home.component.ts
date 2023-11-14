@@ -60,10 +60,13 @@ export class PostEditorHomeComponent implements OnInit, AfterViewInit, OnDestroy
 
   @HostListener('window:keydown', ['$event'])
   handleEditorKeydown(event: KeyboardEvent) {
-    if ((event.ctrlKey || event.metaKey) && event.key === 's') {
-      event.preventDefault();
-      this.savePost();
+    const saveByCtrlS = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        this.savePost();
+      }
     }
+    saveByCtrlS(event);
   }
 
   private savePost() {
