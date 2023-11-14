@@ -43,4 +43,8 @@ export class PostsManagerService {
       })
     )
   }
+
+  updatePublishedStateById(postId: number, isDraft: boolean): Observable<Post> {
+    return this.http.patch<Post>(`${environment.baseUrl}/posts/${postId}`, { isDraft });
+  }
 }

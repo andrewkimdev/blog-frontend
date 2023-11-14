@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, EMPTY, exhaustMap, map } from 'rxjs';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { PostsManagerService } from '../service/posts-manager.service';
@@ -36,4 +37,14 @@ export class PostsManagerEffects {
     )),
     map(({ id }) => PostManagerActions.deletePostByIdAtClient({ id }))
   ));
+
+  setPostAsPublishedAtServer$ = createEffect(() => this.actions$.pipe(
+    ofType(PostManagerActions.publishPost),
+    exhaustMap(({ id }) => this.postsService.updatePublishedStateById(id, false)),
+  ), { dispatch: false });
+
+  setPostAsHidden$ = createEffect(() => this.actions$.pipe(
+    ofType(PostManagerActions.hidePublishedPost),
+    exhaustMap(({ id }) => this.postsService.updatePublishedStateById(id, true)),
+  ), { dispatch: false });
 }
