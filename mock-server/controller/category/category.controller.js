@@ -9,7 +9,7 @@ router.get('/categories', (req, res) => {
 router.post('/categories', (req, res) => {
   const newCategoryName = req.params.newCategoryName;
   // Add sanity check later
-  data.push(newCategoryNamee);
+  data.push(newCategoryName);
   res.status(201).json({name: newCategoryName});
 });
 
