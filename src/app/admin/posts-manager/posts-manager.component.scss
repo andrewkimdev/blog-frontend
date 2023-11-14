@@ -1,13 +1,10 @@
 tr {
   background-color: #fff;
-  transition: background-color 0.3s ease, transform 0.05s ease;
+  transition: background-color 0.3s ease;
   &:hover {
     background-color: #00000011;
-    cursor: pointer;
   }
-  &:active {
-    transform: translate(1px, 1px);
-  }
+
   .trash-can {
     opacity: 0.05;
     transition: opacity 0.3s ease;

@@ -61,6 +61,20 @@ body {
   cursor: pointer;
 }
 
+.highlight-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #333;
+}
+
+.animate-click {
+  // Applicable to elements with attribute of display: block
+  transition: transform 0.05s ease;
+  &:active {
+    transform: translate(1px, 1px);
+  }
+}
+
 .text-no-select {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
