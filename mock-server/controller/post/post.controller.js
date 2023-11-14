@@ -49,6 +49,15 @@ router.post('/posts', jwtParseOnly, ensureUserIdInJwtValid, (req, res) => {
         id: nextId,
         createdAt: getTimeStamp(),
         authorId: userId,
+        author: null,
+        title: '',
+        body: '',
+        category: null,
+        tags: [],
+        mainImage: null,
+        imageIdList: [],
+        isDraft: true,
+        updatedAt: null,
     };
 
     posts.push(newPost);
