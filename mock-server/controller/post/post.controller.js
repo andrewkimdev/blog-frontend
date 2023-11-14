@@ -61,7 +61,7 @@ router.patch('/posts/:id', ensurePostIdExists, jwtParseOnly, ensureUserIdInJwtVa
     const targetPost = posts[targetIndex];
 
     req.body.id = +req.params.id;
-    if (userHasPermissionOnPost(req.body.id, targetPost)) {
+    if (userHasPermissionOnPost(req.user, targetPost)) {
         req.body.updatedAt = getTimeStamp();
 
         posts[targetIndex] = {...targetPost, ...req.body};
