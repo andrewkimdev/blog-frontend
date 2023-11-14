@@ -7,7 +7,7 @@
             </ng-container>
             <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef>Category</th>
-                <td mat-cell *matCellDef="let post">{{ post.category.name }}</td>
+                <td mat-cell *matCellDef="let post">{{ post.category?.name || ''}}</td>
             </ng-container>
             <ng-container matColumnDef="createdAt">
                 <th mat-header-cell *matHeaderCellDef>Created At</th>
