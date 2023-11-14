@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,6 +31,7 @@ const matModules = [
   MatListModule,
   MatProgressSpinnerModule,
   MatSidenavModule,
+  MatSlideToggleModule,
   MatSnackBarModule,
   MatTableModule,
   MatToolbarModule,

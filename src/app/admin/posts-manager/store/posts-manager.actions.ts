@@ -19,3 +19,13 @@ export const deletePostByIdAtClient = createAction(
   '[Post Manager Page] Delete Post at Client',
   props<{ id: number }>(),
 );
+
+export const publishPost = createAction(
+  'Post Manager Page] Make a post published',
+  props<{ id: number }>(),
+);
+
+export const hidePublishedPost = createAction(
+  'Post Manager Page] Hide a published post',
+  props<{ id: number }>(),
+);
