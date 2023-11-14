@@ -49,13 +49,6 @@ export class AuthEffects {
     }),
   ));
 
-  rehydrateAuthEffect$ = createEffect(() => this.actions$.pipe(
-    ofType(AuthActions.rehydrateAuthStateSuccess),
-    tap(() => {
-      this.router.navigate(['/']).then();
-    }),
-  ), { dispatch: false });
-
   redirectToLogin$ = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.tokenNotInEffectiveTimeframe),
     tap(() => {
