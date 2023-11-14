@@ -37,8 +37,6 @@ export class AuthEffects {
         const { token, profile } = JSON.parse(res);
 
         if (isTokenInEffectiveTimeframe(token)) {
-          const msg = profile.name ? `You are logged in as, ${profile.name}!` : 'Welcome!'
-          this.showAuthSnackbar(msg);
           return AuthActions.rehydrateAuthStateSuccess({ token, profile })
         } else {
           return AuthActions.tokenNotInEffectiveTimeframe();
