@@ -20,6 +20,7 @@ import * as PostsAction from './../store/posts.action';
 })
 export class PostsHomeComponent implements OnInit {
   posts$: Observable<Post[]> = this.store.pipe(select(selectPosts)).pipe(
+    map((posts: Post[]) => posts.filter((p: Post) => !p.isDraft)),
     map((posts: Post[]) =>
       posts.map((post: Post) => this.applySanitizedImageUrl(post))
     ),
