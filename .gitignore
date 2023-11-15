@@ -3,6 +3,8 @@
 /mock-server/node_modules
 /mock-server/uploads
 
+/backend/node_modules
+
 # Compiled output
 /dist
 /tmp
