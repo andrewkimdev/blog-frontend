@@ -23,6 +23,9 @@ export const authReducer = createReducer(
     ({ ...state, token, profile, isLoggedIn: true, })),
   on(AuthActions.tokenNotInEffectiveTimeframe, (state) =>
     ({ ...state, token: null, profile: null, })),
+  on(AuthActions.signupWithEmailPasswordSuccess, (state, { signUpResponse }) => {
+    return state; // todo - figure out what info to keep from signupResponse
+  }),
   on(AuthActions.logout, (state) =>
     ({ ...state, token: null, profile: null, isLoggedIn: false, })),
 );

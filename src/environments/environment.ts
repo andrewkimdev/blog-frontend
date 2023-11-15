@@ -5,10 +5,16 @@
 export const environment = {
   production: false,
   atlas: {
-    publicKey: 'btqicxhz',
-    privateKey: '61688d63-6060-40ae-9af1-056d0e687dbe',
+    publicKey: '',
+    privateKey: '',
   },
   baseUrl: 'http://localhost:3000/api/v1',
+  supabase: {
+    SUPABASE_URL: '',
+    SUPABASE_ANON_KEY: '',
+    SUPABASE_SERVICE_ROLE_KEY: '',
+    SUPABASE_DB_URL: '',
+  }
 };
 
 /*

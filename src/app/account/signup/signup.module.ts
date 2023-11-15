@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SignupRoutingModule } from './signup-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { SignupHomeComponent } from './signup-home/signup-home.component';
 
+import { MaterialModule } from '../../shared/lib';
 
+import { SignupRoutingModule } from './signup-routing.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +14,9 @@ import { SignupHomeComponent } from './signup-home/signup-home.component';
   ],
   imports: [
     CommonModule,
-    SignupRoutingModule
+    ReactiveFormsModule,
+    MaterialModule,
+    SignupRoutingModule,
   ]
 })
 export class SignupModule { }

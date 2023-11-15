@@ -1,1 +1,44 @@
-<p>signup-home works!</p>
+<mat-card class="signup-wrapper">
+    <form [formGroup]="form">
+        <mat-card-header>
+            <mat-card-title>Sign Up</mat-card-title>
+            <mat-card-subtitle>For Test</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div>
+                <mat-form-field appearance="fill" class="username-wrapper">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput
+                           type="text"
+                           placeholder="Enter e-mail"
+                           formControlName="username"
+                    />
+                    <mat-error>{{ inputControlError(form.get('username')) }}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="password-wrapper">
+                    <mat-label>Password</mat-label>
+                    <input
+                            matInput
+                            type="password"
+                            placeholder="Enter password"
+                            formControlName="password"
+                    />
+                    <mat-error>{{ inputControlError(form.get('password')) }}</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions class="actions">
+            <button
+                    mat-raised-button
+                    color="primary"
+                    type="button"
+                    (click)="onSignupButtonClicked()"
+                    [disabled]="form.invalid"
+            >Sign up
+            </button>
+        </mat-card-actions>
+    </form>
+</mat-card>

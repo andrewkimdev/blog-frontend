@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserProfile } from 'src/app/shared/types/user-profile.interface';
+import { SignUpResponse, UserProfile } from 'src/app/shared/types';
 
 export const init = createAction(
   '[Auth] Init Login Status'
@@ -46,6 +46,7 @@ export const signupWithEmailPassword = createAction(
 
 export const signupWithEmailPasswordSuccess = createAction(
   '[Auth] Signup with Email/Password Success',
+  props<{ signUpResponse: SignUpResponse}>(),
   // todo - redirect user to login. perhaps save some info at the back?
 );
 

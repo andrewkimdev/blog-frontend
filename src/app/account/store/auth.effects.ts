@@ -85,6 +85,14 @@ export class AuthEffects {
     }),
   ), { dispatch: false });
 
+  signup$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.signupWithEmailPassword),
+    exhaustMap(({ username, password }) =>
+      this.authService.signupWithEmailPassword(username, password),
+    ),
+    map((signUpResponse) => AuthActions.signupWithEmailPasswordSuccess({ signUpResponse})),
+  ));
+
   logout$ = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.logout),
     tap(() => localStorage.removeItem('user')),
