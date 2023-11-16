@@ -27,6 +27,9 @@ export interface SupabaseUser {
   email: string;
   phone: string;
   confirmation_sent_at: string;
+  confirmed_at: string;
+  email_confirmed_at: string;
+  last_sign_in_at: string;
   app_metadata: AppMetadata;
   user_metadata: Record<string, unknown>;
   identities: Identity[];
