@@ -6,11 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
+import { AuthService } from '../auth.service';
 import { isTokenInEffectiveTimeframe } from 'src/app/shared/functions';
 
-import { AuthService } from '../auth.service';
+import { Session } from '@supabase/supabase-js';
+import { SignupResponse } from '../../shared/types';
 
 import * as AuthActions from './auth.actions';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthEffects {
@@ -24,20 +27,16 @@ export class AuthEffects {
   ) {
   }
 
-  showAuthSnackbar(message: string) {
-    const action = 'Dismiss';
-    this.snackbar.open(message, action, { duration: 3000 });
-  }
-
   init$ = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.init),
     map(() => {
-      const res = localStorage.getItem('user');
+      const storageKey = environment.supabase.STORAGE_KEY;
+      const res = localStorage.getItem(storageKey);
       if (res) {
-        const { token, profile } = JSON.parse(res);
+        const session: Session = JSON.parse(res);
 
-        if (isTokenInEffectiveTimeframe(token)) {
-          return AuthActions.rehydrateAuthStateSuccess({ token, profile })
+        if (isTokenInEffectiveTimeframe(session.access_token)) {
+          return AuthActions.rehydrateAuthStateSuccess({ session })
         } else {
           return AuthActions.tokenNotInEffectiveTimeframe();
         }
@@ -57,19 +56,9 @@ export class AuthEffects {
   loginWithEmailPassword$ = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.loginWithEmailPassword),
     exhaustMap(({ username, password, rememberMe }) =>
-      this.authService.loginWithEmailPassword(username, password).pipe(
-        tap(({ token, profile }) => {
-          const msg = profile.name ? `You are logged in as, ${profile.name}!` : 'Welcome!'
-          this.showAuthSnackbar(msg);
-          if (rememberMe) {
-            localStorage.setItem('user', JSON.stringify({ token, profile }));
-          }
-        }),
-      )
-    ),
-    // store credential in localStorage or cookie... if 'rememberMe is true
-    map(({ token, profile }) =>
-      AuthActions.loginWithEmailPasswordSuccess({ token, profile })
+      this.authService.loginWithEmailPassword(username, password)),
+    map(({ user, session }) =>
+      AuthActions.loginWithEmailPasswordSuccess({ user, session })
     ),
     catchError((err) => {
       console.error(err);
@@ -90,15 +79,34 @@ export class AuthEffects {
     exhaustMap(({ username, password }) =>
       this.authService.signupWithEmailPassword(username, password),
     ),
-    map((signUpResponse) => AuthActions.signupWithEmailPasswordSuccess({ signUpResponse})),
+    map((signUpResponse: SignupResponse) => AuthActions.signupWithEmailPasswordSuccess({ signUpResponse })),
+  ));
+
+  signupSuccess$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.signupWithEmailPasswordSuccess),
+    tap((res) => console.log(res)),
+    tap(() => {
+      this.router.navigate(['account', 'login']).then();
+    }),
+    // Alert the user to verify email
+  ), { dispatch: false });
+
+  signupFailure$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.signupWithEmailPasswordFailure),
+    tap(({ msg, code }) => this.showAuthSnackbar(msg)),
   ));
 
   logout$ = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.logout),
-    tap(() => localStorage.removeItem('user')),
+    tap(() => this.authService.logout()),
     tap(() => {
       this.showAuthSnackbar('Logged out!');
       this.router.navigate(['/']).then();
     }),
   ), { dispatch: false });
+
+  private showAuthSnackbar(message: string) {
+    const action = 'Dismiss';
+    this.snackbar.open(message, action, { duration: 3000 });
+  }
 }

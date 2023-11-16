@@ -6,8 +6,7 @@ import { Store } from '@ngrx/store';
 import { jwtDecode } from 'jwt-decode';
 
 import { selectToken } from 'src/app/account/store/auth.selectors';
-
-import { AuthToken } from 'src/app/shared/types';
+import { Session } from '@supabase/supabase-js';
 
 export const adminGuard: CanActivateFn = (route, state) => {
   const store = inject(Store);
@@ -16,9 +15,10 @@ export const adminGuard: CanActivateFn = (route, state) => {
   return store.select(selectToken).pipe(
     map((token) => {
       if (token) {
-        const decodedToken = jwtDecode<AuthToken>(token);
-        console.log(decodedToken.roles)
-        if (decodedToken.roles && decodedToken.roles.includes('admin')) {
+        const decodedToken = jwtDecode<Session>(token);
+        console.log(decodedToken)
+        // todo - change logic to use different role
+        if (decodedToken.user?.email === 'kimbi@cliensoft.com') {
           return true;
         }
       }

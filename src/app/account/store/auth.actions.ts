@@ -1,5 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { SignUpResponse, UserProfile } from 'src/app/shared/types';
+import { Session } from '@supabase/supabase-js';
+
+import { SignupResponse, SupabaseUser } from 'src/app/shared/types';
 
 export const init = createAction(
   '[Auth] Init Login Status'
@@ -11,7 +13,7 @@ export const noOp = createAction(
 
 export const rehydrateAuthStateSuccess = createAction(
   '[Auth] Rehydrate auth status',
-  props<{ token: string, profile: UserProfile }>(),
+  props<{ session: Session }>(),
 );
 
 export const tokenNotInEffectiveTimeframe = createAction(
@@ -25,7 +27,7 @@ export const loginWithEmailPassword = createAction(
 
 export const loginWithEmailPasswordSuccess = createAction(
   '[Auth] Login with Email/Password Success',
-  props<{ token: string, profile: UserProfile }>(),
+  props<{ user: SupabaseUser, session: Session }>(),
 );
 export const loginWithEmailPasswordFailure = createAction(
   '[Auth] Login with Email/Password Failure',
@@ -46,10 +48,10 @@ export const signupWithEmailPassword = createAction(
 
 export const signupWithEmailPasswordSuccess = createAction(
   '[Auth] Signup with Email/Password Success',
-  props<{ signUpResponse: SignUpResponse}>(),
-  // todo - redirect user to login. perhaps save some info at the back?
+  props<{ signUpResponse: SignupResponse }>(),
 );
 
 export const signupWithEmailPasswordFailure = createAction(
   '[Auth] Signup with Email/Password Failure',
+  props<{ code: number, msg: string}>(),
 );

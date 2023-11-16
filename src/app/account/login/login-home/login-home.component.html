@@ -1,53 +1,65 @@
-<mat-card class="login-wrapper">
-    <form [formGroup]="form">
-        <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
-            <mat-card-subtitle>Admin Only</mat-card-subtitle>
-        </mat-card-header>
+<div *ngIf="vm$ | async as vm">
+    <div *ngIf="vm.error">
+        <p><mat-chip-listbox aria-label="errors">
+            <mat-chip-option color="warn">
+                Error code: {{ vm.error.code }}</mat-chip-option>&nbsp;<span>{{ vm.error.msg }}</span>
+        </mat-chip-listbox>
+        </p>
+    </div>
+    <mat-card class="login-wrapper">
+        <form [formGroup]="form">
+            <mat-card-header>
+                <mat-card-title>Login</mat-card-title>
+                <mat-card-subtitle>Admin Only</mat-card-subtitle>
+            </mat-card-header>
 
-        <mat-card-content>
-            <div class="login-group">
-                <mat-form-field appearance="fill" class="username-wrapper">
-                    <mat-label>E-mail</mat-label>
-                    <input matInput
-                           type="text"
-                           placeholder="Enter e-mail"
-                           formControlName="username"
-                    />
-                    <mat-error>{{ inputControlError(form.get('username')) }}</mat-error>
+            <mat-card-content>
+                <div class="login-group">
+                    <mat-form-field appearance="fill" class="username-wrapper">
+                        <mat-label>E-mail</mat-label>
+                        <input matInput
+                               type="text"
+                               placeholder="Enter e-mail"
+                               formControlName="username"
+                        />
+                        <mat-error>{{ inputControlError(form.get('username')) }}</mat-error>
 
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="password-wrapper">
-                    <mat-label>Password</mat-label>
-                    <input
-                        matInput
-                        type="password"
-                        placeholder="Enter password"
-                        formControlName="password"
-                    />
-                <mat-error>{{ inputControlError(form.get('password')) }}</mat-error>
-                </mat-form-field>
-                <mat-checkbox class="remember-me" formControlName="rememberMe">Remember me</mat-checkbox>
-            </div>
-        </mat-card-content>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="password-wrapper">
+                        <mat-label>Password</mat-label>
+                        <input
+                                matInput
+                                type="password"
+                                placeholder="Enter password"
+                                formControlName="password"
+                        />
+                        <mat-error>{{ inputControlError(form.get('password')) }}</mat-error>
+                    </mat-form-field>
+                    <mat-checkbox class="remember-me" formControlName="rememberMe">Remember me</mat-checkbox>
+                </div>
+                <div *ngIf="disableInput(vm)">
+                    Please check your inbox of <mat-chip color="warn">{{vm.email}}</mat-chip> and verify your email.
+                </div>
+            </mat-card-content>
 
-        <mat-card-actions class="actions">
-            <a mat-raised-button
-               color="warn"
-               type="button"
-               routerLink="/account/signup"
-               style="margin-right: 10px;"
-            >
-                Sign Up
-            </a>
-            <button
-                    mat-raised-button
-                    color="primary"
-                    type="button"
-                    (click)="onLoginButtonClicked()"
-                    [disabled]="form.invalid"
-            >Login
-            </button>
-        </mat-card-actions>
-    </form>
-</mat-card>
+            <mat-card-actions class="actions">
+                <a mat-raised-button
+                   color="warn"
+                   type="button"
+                   routerLink="/account/signup"
+                   style="margin-right: 10px;"
+                >
+                    Sign Up
+                </a>
+                <button
+                        mat-raised-button
+                        color="primary"
+                        type="button"
+                        (click)="onLoginButtonClicked()"
+                        [disabled]="form.invalid || disableInput(vm)"
+                >Login
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

@@ -6,6 +6,27 @@ export interface SignupResponse extends AuthBaseResponse {
   // Fields specific to signup, if any
 }
 
+export interface DecodedAuthToken {
+  aud: string;
+  exp: number;
+  iat: number;
+  iss: string;
+  sub: string;
+  email: string;
+  phone: string;
+  app_metadata: AppMetadata;
+  user_metadata: Record<string, unknown>; // Assuming user_metadata can have any structure
+  role: string;
+  aal: string;
+  amr: AuthenticationMethod[];
+  session_id: string;
+}
+
+export interface AuthenticationMethod {
+  method: string;
+  timestamp: number;
+}
+
 export interface Session {
   access_token: string;
   token_type: string;
