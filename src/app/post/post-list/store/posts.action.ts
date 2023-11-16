@@ -14,6 +14,10 @@ export const postsLoadSuccess = createAction(
   props<{ posts: Post[] }>(),
 );
 
+export const postsLoadFailure = createAction(
+  '[Post Page] Posts Load Failure',
+);
+
 export const savePost = createAction(
   '[Posts Page] Save single-post-home to view list',
   props<{ post: Post }>(),

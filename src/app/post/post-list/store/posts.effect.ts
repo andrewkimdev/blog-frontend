@@ -35,6 +35,9 @@ export class PostsEffects {
     exhaustMap(() => this.postsService.getAll().pipe(
       map((posts) => PostsAction.postsLoadSuccess({ posts })),
     )),
-    catchError(() => EMPTY),
+    catchError(() => {
+      this.store.dispatch(PostsAction.postsLoadFailure());
+      return EMPTY;
+    }),
   ));
 }

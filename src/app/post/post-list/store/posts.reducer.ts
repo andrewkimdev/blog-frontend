@@ -4,13 +4,15 @@ import * as PostsAction from './posts.action';
 
 export interface PostsState {
   posts: Post[];
+  error: string | null;
 }
 
-const initialState: PostsState = { posts: [] };
+const initialState: PostsState = { posts: [], error: null };
 
 export const postsReducer = createReducer(
   initialState,
-  on(PostsAction.postsLoadSuccess, (_, { posts }) => ({ posts })),
+  on(PostsAction.postsLoadSuccess, (state, { posts }) => ({ ...state, posts })),
+  on(PostsAction.postsLoadFailure, (state) => ({...state })), // todo - add error state
   on(PostsAction.savePost, savePostHandler),
 );
 
