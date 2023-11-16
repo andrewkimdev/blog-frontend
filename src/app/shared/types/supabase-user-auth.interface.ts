@@ -1,6 +1,23 @@
-export interface SignUpResponse {
+export interface LoginResponse extends AuthBaseResponse {
+  session: Session; // Specific to login
+}
+
+export interface SignupResponse extends AuthBaseResponse {
+  // Fields specific to signup, if any
+}
+
+export interface Session {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  expires_at: number;
+  refresh_token: string;
   user: SupabaseUser;
-  session: Session | null;
+}
+
+export interface AuthBaseResponse {
+  user: SupabaseUser;
+  error: Error | null; // Common error field for both responses
 }
 
 export interface SupabaseUser {
@@ -11,7 +28,7 @@ export interface SupabaseUser {
   phone: string;
   confirmation_sent_at: string;
   app_metadata: AppMetadata;
-  user_metadata: Record<string, unknown>; // Assuming user_metadata can have any structure
+  user_metadata: Record<string, unknown>;
   identities: Identity[];
   created_at: string;
   updated_at: string;
@@ -37,16 +54,4 @@ export interface IdentityData {
   email_verified: boolean;
   phone_verified: boolean;
   sub: string;
-}
-
-// Session interface is not defined in the provided data
-// Assuming its structure or using 'any' if the structure is unknown
-export interface Session {
-  // Define the properties of Session here
-  // Example:
-  // token: string;
-  // expires_at: string;
-  // ...
-  // Or use 'any' if the structure is unknown
-  [key: string]: any;
 }
