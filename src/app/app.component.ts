@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
-import { supabase } from './shared/lib';
 import * as AuthActions from './account/store/auth.actions'
 
 @Component({
@@ -21,25 +20,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.redirectToHomeIfAtRoot();
     this.store.dispatch(AuthActions.init());
-    this.randomThing();
-  }
-
-  private randomThing() {
-    console.log('random');
-    const fetchOrders = async () => {
-      try {
-        let { data: orders, error } = await supabase
-          .from('orders')
-          .select('*');
-
-        if (orders) {
-          console.log(orders);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchOrders();
   }
 
   // AppRoutingModule's redirection has a bug so this is my walk-around solution.

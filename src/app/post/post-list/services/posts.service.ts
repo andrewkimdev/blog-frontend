@@ -1,37 +1,34 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, map, Observable, take } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { catchError, EMPTY, from, map, Observable, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 
-import { Post, User } from 'src/app/shared/types';
-import { environment } from 'src/environments/environment';
+import { supabase } from 'src/app/shared/lib';
+
+import { convertKeysToCamelCase } from 'src/app/shared/functions';
+
+import { Post } from 'src/app/shared/types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
   constructor(
-    private http: HttpClient,
+    private store: Store,
   ) {
   }
 
   getAll(): Observable<Post[]> {
-    const posts$: Observable<Post[]> = this.http.get<Post[]>(`${environment.baseUrl}/posts`);
-    const users$: Observable<User[]> = this.http.get<User[]>(`${environment.baseUrl}/users`);
-
-    return combineLatest([posts$, users$]).pipe(
-      take(1),
-      map(([posts, users]) => {
-        const res: Post[] = posts.map((p: Post) => {
-          const author: User | undefined = users.find((u: User) => u.id === p.authorId);
-          if (author) {
-            p.author = {
-              ...author, socialMedia: author.socialMedia
-            };
-          }
-          return p;
-        });
-        return res.length > 0 ? res : [] as Post[];
-      }),
+    return from(
+      supabase.from('posts')
+        .select('*')
+    ).pipe(
+      map(({ data: posts }) => posts && posts.length > 0 ? posts.map((p) => p) : []),
+      map((posts) => posts.map((p) => convertKeysToCamelCase<Post>(p))),
+      tap((res) => console.log(res)),
+      catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      })
     );
   }
 }

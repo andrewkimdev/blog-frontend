@@ -14,20 +14,20 @@
         </div>
 
         <mat-card-content>
-            <div *ngIf="post.createdAt && post.author as author" class="post-metadata">
-                <div class="author-image-container">
-                    <img [src]="author.profileImage" [alt]="'Profile image of ' + author.name" class="author-image" />
-                </div>
-                <div class="author-details">
-                    <div class="author-name">{{ author.name }}</div>
-                    <div class="additional-info">
-                        <div class="post-category">Category: {{ post.category?.name }}</div>
-                        <div class="post-tags">
-                            <mat-chip *ngFor="let tag of post.tags" class="tag-chip">{{ tag }}</mat-chip>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div *ngIf="post.createdAt && post.author as author" class="post-metadata">-->
+<!--                <div class="author-image-container">-->
+<!--                    <img [src]="author.profileImage" [alt]="'Profile image of ' + author.name" class="author-image" />-->
+<!--                </div>-->
+<!--                <div class="author-details">-->
+<!--                    <div class="author-name">{{ author.name }}</div>-->
+<!--                    <div class="additional-info">-->
+<!--                        <div class="post-category">Category: {{ post.category?.name }}</div>-->
+<!--                        <div class="post-tags">-->
+<!--                            <mat-chip *ngFor="let tag of post.tags" class="tag-chip">{{ tag }}</mat-chip>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <markdown class="markdown-viewer" [data]="post.body" clipboard></markdown>
         </mat-card-content>

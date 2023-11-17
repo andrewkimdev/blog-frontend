@@ -1,16 +1,16 @@
 // Angular Core Modules
 import { Component, inject, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { FormControl } from '@angular/forms';
 
 // 3rd Party Vendor Modules
 import {COMMA, ENTER, SEMICOLON} from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipEditedEvent } from '@angular/material/chips';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Store } from '@ngrx/store';
 
 // State Management
 import * as PostEditorAction from '../../store/post-editor.action';
 import { selectPostTags } from 'src/app/post/post-editor/store/post-editor.selector';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tags',

@@ -4,8 +4,8 @@ import { Post } from '../types';
 export const duplicatePost = (post: Post, args?: {}): Post => {
   return {
     ...post,
+    category: post.category ? { name: post.category.name } : null,
     tags: post.tags?.length > 0 ? [...post.tags] : [],
-    imageIdList: post.imageIdList?.length > 0 ? [...post.imageIdList] : [],
     updatedAt: getCurrentUnixTimeInSeconds(),
     ...args,
   };
