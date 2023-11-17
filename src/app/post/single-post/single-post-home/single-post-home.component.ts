@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-
-import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
-import { Post } from 'src/app/shared/types';
+import { Store } from '@ngrx/store';
+
 
 import { selectSinglePost } from 'src/app/post/single-post/store/post.selector';
-import { environment } from 'src/environments/environment';
 import * as PostAction from '../store/post.action';
+
+import { supabase } from 'src/app/shared/lib';
+
+import { Post } from 'src/app/shared/types';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-single-post-home',
@@ -40,15 +43,12 @@ export class SinglePostHome implements OnInit {
   }
 
   getImageUrl(str: string | null): string {
+
     if (!str) {
       // todo - return a generic main message for the category or other key words.
       return ''
     }
-
-    if (str.startsWith('assets')) {
-      return str;
-    } else {
-      return `${environment.baseUrl}/images/${str}`;
-    }
+    const { data } = supabase.storage.from('images').getPublicUrl(str);
+    return data.publicUrl;
   }
 }

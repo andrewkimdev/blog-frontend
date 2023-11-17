@@ -29,13 +29,11 @@ export class PostsHomeComponent implements OnInit {
   // N.B.: It is ideal to place this in the reducer but DomSanitizer should be run in the DI context.
   // Using 'inject()' produces error when tried.
   private applySanitizedImageUrl(post: Post): Post {
-    const _mainImage = post.mainImage?.startsWith('assets')
-      ? post.mainImage
-      : createImageUrlFromUuid(post.mainImage ?? '', 'html');
+    console.log(post)
+    const _mainImage = createImageUrlFromUuid(post.mainImage ?? '', 'html');
     const mainImage = this.sanitizer.bypassSecurityTrustResourceUrl(_mainImage);
     return duplicatePost(post, { mainImage });
   }
-
   constructor(
     private router: Router,
     private store: Store<PostsState>,

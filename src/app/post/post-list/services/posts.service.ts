@@ -22,6 +22,7 @@ export class PostsService {
       supabase.from('posts')
         .select('*')
     ).pipe(
+      tap((res) => console.log(res)),
       map(({ data: posts }) => posts && posts.length > 0 ? posts.map((p) => p) : []),
       map((posts) => posts.map((p) => convertKeysToCamelCase<Post>(p))),
       tap((res) => console.log(res)),
