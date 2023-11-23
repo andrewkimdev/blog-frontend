@@ -4,18 +4,17 @@
 
 export const environment = {
   production: false,
-  atlas: {
-    publicKey: '',
-    privateKey: '',
-  },
   baseUrl: 'http://localhost:3000/api/v1',
   supabase: {
+    PROJECT_REF: '',
+    STORAGE_KEY: ``,
     SUPABASE_URL: '',
     SUPABASE_ANON_KEY: '',
     SUPABASE_SERVICE_ROLE_KEY: '',
     SUPABASE_DB_URL: '',
   }
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
